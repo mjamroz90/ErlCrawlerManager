@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ErlCrawlerManager:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="ErlCrawlerManagerPack.war">
+      <element id="artifact" artifact-name="ErlCrawlerManager:war exploded" />
+    </root>
+  </artifact>
+</component>

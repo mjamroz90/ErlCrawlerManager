@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_user_info" var="labelUserInfo" />
+    <spring:message code="label_user_login" var="labelUserLogin" />
+    <spring:message code="label_user_firstname" var="labelUserFirstName" />
+    <spring:message code="label_user_lastname" var="labelUserLastName" />
+    <spring:message code="label_user_allowed_to_stop_session" var="allowedToStopSession" />
+    <spring:message code="label_user_allowing_to_stop_session" var="allowingToStopSession" />
+    <spring:url value="/users/" var="showUsersUrl" />
+
+    <c:if test="${not empty message}">
+        <div id="message" class="${message.type}">${message.message}</div>
+    </c:if>
+
+    <h1>${labelUserInfo}</h1>
+
+    <div id="userInfo">
+        <table>
+            <tr>
+                <td>${labelUserLogin}</td>
+                <td>${user.login}</td>
+            </tr>
+            <tr>
+                <td>${labelUserFirstName}</td>
+                <td>${user.firstname}</td>
+            </tr>
+            <tr>
+                <td>${labelUserLastName}</td>
+                <td>${user.lastname}</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3>${allowedToStopSession}</h3>
+    <ul>
+        <c:forEach items="${user.allowedToStopSession}" var="userAllowed">
+            <li><a href="${showUsersUrl}/${userAllowed.id}" > ${userAllowed.login}</a> </li>
+        </c:forEach>
+    </ul>
+    <h3>${allowingToStopSession}</h3>
+    <ul>
+        <c:forEach items="${user.allowingToStopSession}" var="userAllowing">
+            <li><a href="${showUsersUrl}/${userAllowing.id}" >${userAllowing.login} </a></li>
+        </c:forEach>
+    </ul>
+</div>

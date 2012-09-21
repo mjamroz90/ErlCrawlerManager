@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_user_list" var="labelUserList" />
+    <spring:message code="label_user_login" var="labelUserLogin" />
+    <spring:message code="label_user_firstname" var="labelUserFirstName" />
+    <spring:message code="label_user_lastname"  var="labelUserLastName" />
+    <spring:message code="label_user_admin_permissions" var="labelUserAdminPerm" />
+    <spring:url value="/users/" var="showUsersUrl" />
+
+    <script type="text/javascript" >
+    $(function(){
+        $("#list").jqGrid({
+            url : '${showUsersUrl}/listgrid',
+            datatype : 'json',
+            mtype : 'GET',
+            colNames: ['${labelUserLogin}', '${labelUserFirstName}', '${labelUserLastName}', '${labelUserAdminPerm}'],
+            colModel: [
+                {name : 'login', index : 'login', width : 150, align: 'center'},
+                {name : 'firstname', index : 'firstname', width : 100, align : 'center'},
+                {name : 'lastname', index : 'lastname', width : 100, align : 'center'},
+                {name : 'admin', index : 'admin', width : 150, edittype : 'checkbox',
+                    editable: false, formatter:'checkbox', align: 'center'}
+            ],
+            jsonReader : {
+                root :"userData",
+                page : "currentPage",
+                total : "totalPages",
+                records : "totalRecords",
+                repeatitems : false,
+                id: "id"
+             },
+             pager: '#pager',
+             rowNum:10,
+             rowList:[10,20,30],
+             sortname: 'firstname',
+             sortorder: 'asc',
+             viewrecords: true,
+             gridview: true,
+             height: 400,
+             width: 750,
+             caption: '${labelUserList}',
+             onSelectRow: function(id){
+                   document.location.href ="${showUsersUrl}/" + id;
+             }
+           });
+       });
+
+    </script>
+
+    <h2>${labelUserList}</h2>
+
+    <c:if test="${not empty message}">
+        <div id="message" class="${message.type}">${message.message}</div>
+    </c:if>
+
+    <div>
+        <table id="list"><tr><td/></tr></table>
+    </div>
+    <div id="pager"></div>
+
+</div>
