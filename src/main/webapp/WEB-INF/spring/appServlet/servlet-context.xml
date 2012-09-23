@@ -11,10 +11,6 @@
         http://www.springframework.org/schema/faces http://www.springframework.org/schema/faces/spring-faces.xsd">
 
 
-    <!--<beans:import resource="webflow.xml"/>-->
-
-    <annotation-driven/>
-
     <!-- Enables the Spring MVC @Controller programming model -->
 
     <!-- Enable controller method level security -->
@@ -28,9 +24,6 @@
     <!--<faces:resources />-->
 
     <annotation-driven validator="validator"/>
-
-    <!-- Allows for mapping the DispatcherServlet to "/" by forwarding static resource requests to the container's default Servlet -->
-    <!--<default-servlet-handler/>-->
 
     <context:component-scan base-package="pl.edu.agh.ecm.web.controller" />
     <!--<context:component-scan base-package="pl.edu.agh.ecm.web.view" />-->

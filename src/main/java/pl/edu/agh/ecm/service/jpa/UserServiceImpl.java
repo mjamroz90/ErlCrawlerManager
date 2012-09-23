@@ -4,10 +4,13 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.dao.SaltSource;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.ecm.domain.User;
+import pl.edu.agh.ecm.domain.UserDetailsAdapter;
 import pl.edu.agh.ecm.repository.UserRepository;
 import pl.edu.agh.ecm.service.UserService;
 
@@ -30,6 +33,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    SaltSource saltSource;
 
     @PersistenceContext
     EntityManager em;
@@ -45,12 +52,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(readOnly = true)
-    public List<User> findByLogin(String login) {
+    public User findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
 
     @Transactional(readOnly = true)
-    public List<User> findByLoginWithDetail(String login) {
+    public User findByLoginWithDetail(String login) {
         return userRepository.findByLoginWithDetail(login);
     }
 
@@ -64,7 +71,12 @@ public class UserServiceImpl implements UserService {
         return Lists.newArrayList(userRepository.findAllWithDetail());
     }
 
-    public User save(User u) {
+    public User save(User u,String password) {
+        if (password != null){
+           Object salt = saltSource.getSalt(new UserDetailsAdapter(u));
+           String encPassword = passwordEncoder.encodePassword(password,salt);
+           u.setPassword(encPassword);
+        }
         return userRepository.save(u);
     }
 

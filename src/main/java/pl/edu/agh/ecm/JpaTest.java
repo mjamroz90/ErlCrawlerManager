@@ -47,13 +47,13 @@ public class JpaTest {
         //saveUsers(userService);
         List<User> allUsers = userService.findAll();
         List<User> allUsersWithDetail = userService.findAllWithDetail();
-        List<User> usersByLogin = userService.findByLogin("mjamroz");
-        List<User> usersByLoginWithDetail = userService.findByLoginWithDetail("mjamroz");
+        User usersByLogin = userService.findByLogin("mjamroz");
+        User usersByLoginWithDetail = userService.findByLoginWithDetail("mjamroz");
 
         //savePolicies(policyService, userService);
         List<Policy> allPolicies = policyService.findAll();
         List<Policy> foundByUrl = policyService.findByinitUrl("http://www.google.pl");
-        List<Policy> foundCreatedBy = policyService.findBycreatedBy(usersByLogin.get(0).getId());
+        List<Policy> foundCreatedBy = policyService.findBycreatedBy(usersByLogin.getId());
 
         //sessionService.save(crawlSession);
         CrawlSession crawlSession = prepareSession(foundNodes,allUsers.get(0));
@@ -68,20 +68,20 @@ public class JpaTest {
 
         User u = new User("Michal", "Jamroz","mjamroz", "albeniz909");
         u.setAdmin(true);
-        service.save(u);
+        service.save(u,null);
 
         User u1 = new User("wacek", "jakistam", "wjakistam", "haslo");
         u1.setAdmin(false);
-        service.save(u1);
+        service.save(u1,null);
 
         User u2 = new User("kamila", "jakastam", "kjakastam", "haslokam");
         u2.setAdmin(false);
-        service.save(u2);
+        service.save(u2,null);
 
         u.addAllowedToStopSession(u1);
         u.addAllowedToStopSession(u2);
         u.addAllowingToStopSession(u1);
-        service.save(u);
+        service.save(u,null);
 
         return u;
     }

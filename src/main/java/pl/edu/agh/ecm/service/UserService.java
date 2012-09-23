@@ -19,15 +19,15 @@ public interface UserService {
 
     public User findByIdWithDetail(Long id);
 
-    public List<User> findByLogin(String firstName);
+    public User findByLogin(String login);
 
-    public List<User> findByLoginWithDetail(String firstName);
+    public User findByLoginWithDetail(String login);
 
     public List<User> findAll();
 
     public List<User> findAllWithDetail();
 
-    public User save(User u);
+    public User save(User u,String password);
 
     public Page<User> findAllByPage(Pageable pageable);
 

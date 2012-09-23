@@ -56,8 +56,8 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    @NotEmpty(message="Login {validation.NotEmpty.message}")
-    @Size(min=3, max=45, message="Login {validation.Size.message}")
+    @NotEmpty(message="{validation.NotEmpty.message}")
+    @Size(min=3, max=45, message="{validation.Size.message}")
     @Column(name = "login")
     public String getLogin() {
         return login;
@@ -67,8 +67,7 @@ public class User implements Serializable {
         this.login = login;
     }
 
-    @NotEmpty(message="Password {validation.NotEmpty.message}")
-    @Size(min=5, max=45, message="Password {validation.Size.message}")
+    @NotEmpty(message="{validation.NotEmpty.message}")
     @Column(name = "password")
     public String getPassword() {
         return password;
@@ -89,7 +88,7 @@ public class User implements Serializable {
 
     @Column(name = "firstname")
     //@NotEmpty(message="Firstname {validation.NotEmpty.message}")
-    @Size(min=1, max=45, message="FirstName {validation.Size.message}")
+    @Size(min = 0,max=45, message="{validation.Size.message}")
     public String getFirstname() {
         return firstname;
     }
@@ -100,7 +99,7 @@ public class User implements Serializable {
 
     @Column(name = "lastname")
     //@NotEmpty(message = "Lastname {validation.NotEmpty.message}")
-    @Size(min = 1,max = 45, message = "LastName {validation.Size.message}")
+    @Size(min = 0, max = 45, message = "{validation.Size.message}")
     public String getLastname() {
         return lastname;
     }

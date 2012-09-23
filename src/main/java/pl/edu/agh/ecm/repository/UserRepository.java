@@ -23,9 +23,9 @@ public interface UserRepository extends PagingAndSortingRepository<User,Long> {
 
     @Query("select distinct u from User u left join fetch u.allowedToStopSession a left join fetch " +
      "u.allowingToStopSession b where u.login = :name")
-    public List<User> findByLoginWithDetail(@Param("name") String name);
+    public User findByLoginWithDetail(@Param("name") String name);
 
-    public List<User> findByLogin(String name);
+    public User findByLogin(String name);
 
     @Query("select distinct u from User u left join fetch u.allowedToStopSession a left join fetch " +
             " u.allowingToStopSession b ")
