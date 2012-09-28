@@ -34,4 +34,9 @@ public class SecurityController {
                 messageSource.getMessage("label_user_login_failure", new Object[]{},locale)));
         return "users/login";
     }
+
+    @RequestMapping(value = "/access-denied")
+    public String accessDenied(Model uiModel){
+        return "security/access-denied";
+    }
 }
