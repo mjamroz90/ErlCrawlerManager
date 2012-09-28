@@ -52,6 +52,10 @@ public class UserDetailsAdapter implements UserDetails {
         this.password = password;
     }
 
+    public Long getId(){
+        return user.getId();
+    }
+
     @Override
     public String getPassword() {
         return password;

@@ -87,7 +87,6 @@ public class User implements Serializable {
     }
 
     @Column(name = "firstname")
-    //@NotEmpty(message="Firstname {validation.NotEmpty.message}")
     @Size(min = 0,max=45, message="{validation.Size.message}")
     public String getFirstname() {
         return firstname;
@@ -98,7 +97,6 @@ public class User implements Serializable {
     }
 
     @Column(name = "lastname")
-    //@NotEmpty(message = "Lastname {validation.NotEmpty.message}")
     @Size(min = 0, max = 45, message = "{validation.Size.message}")
     public String getLastname() {
         return lastname;

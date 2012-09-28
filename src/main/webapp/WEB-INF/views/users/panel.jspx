@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     xmlns:sec="http://www.springframework.org/security/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_user_panel" var="labelUserPanel"/>
+    <spring:message code="label_user_login" var="labelUserLogin" />
+    <spring:message code="label_user_firstname" var="labelUserFirstName" />
+    <spring:message code="label_user_lastname" var="labelUserLastName" />
+    <spring:message code="label_user_password" var="labelUserPassword" />
+    <spring:message code="label_user_reenter_password" var="labelUserRePassword" />
+    <spring:message code="label_user_save" var="labelUserSave" />
+    <spring:message code="label_user_reset" var="labelUserReset" />
+
+
+    <h2 align="center">${labelUserPanel}</h2>
+    <div id="userInfo">
+        <form:form modelAttribute="user" id="userEditForm" method="post" action="?updateUser">
+            <c:if test="${not empty message}">
+                <div id="message" class="${message.type}">${message.message}</div>
+            </c:if>
+
+            <form:label path="login">
+                ${labelUserLogin}*
+            </form:label>
+            <form:input path="login"/>
+            <div>
+                <form:errors path="login" cssClass="error"/>
+            </div>
+            <p/>
+
+            <form:label path="firstname">
+                ${labelUserFirstName}
+            </form:label>
+            <form:input path="firstname" />
+            <div>
+                <form:errors path="firstname" cssClass="error" />
+            </div>
+            <p/>
+
+            <form:label path="lastname">
+                ${labelUserLastName}
+            </form:label>
+            <form:input path="lastname" />
+            <div>
+                <form:errors path="lastname" cssClass="error" />
+            </div>
+            <p/>
+
+            <form:label path="password">
+                ${labelUserPassword}*
+            </form:label>
+            <div>
+                <form:password path="password" cssClass="error" />
+            </div>
+            <div><form:errors path="password" cssClass="error" /></div>
+            <p/>
+
+            <form:label path="confirmPassword">
+                ${labelUserRePassword}*
+            </form:label>
+            <div>
+                <form:password path="confirmPassword" cssClass="error" />
+            </div>
+            <p/>
+
+            <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <span class="ui-button-text">${labelUserSave}</span>
+            </button>
+            <button type="reset" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <span class="ui-button-text">${labelUserReset}</span>
+            </button>
+
+        </form:form>
+    </div>
+
+    <c:set var="adminRole" value="ROLE_ADMIN" />
+
+    <sec:authorize access="hasRole('${adminRole}')" >
+        <h2><spring:message code="label_nonAdmin_users" /></h2>
+        <div id="nonAdminUsers">
+            <!--<form:form id="giveAdminCredentialsForm" commandName="nonAdminUsers"-->
+            <!--method="post" action="?adminCredentials">-->
+
+                <table class="nonAdminUsersTable">
+                    <thead>
+                    <tr>
+                        <th>${labelUserLogin}</th>
+                        <th><spring:message code="label_user_admin_permissions" /></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${nonAdminUsers}" var="nonAdminUser" varStatus="status">
+                        <tr>
+                            <td>${nonAdminUser.login}</td>
+                            <td><input type="checkbox" id="${nonAdminUser.login}" value="off" /></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+                <p/>
+
+                <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                    <span class="ui-button-text">${labelUserSave}</span>
+                </button>
+
+            <!--</form:form>-->
+        </div>
+    </sec:authorize>
+
+</div>

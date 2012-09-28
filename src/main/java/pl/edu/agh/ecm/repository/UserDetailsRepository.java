@@ -1,4 +1,4 @@
-package pl.edu.agh.ecm.service;
+package pl.edu.agh.ecm.repository;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,7 +7,7 @@ package pl.edu.agh.ecm.service;
  * Time: 17:27
  * To change this template use File | Settings | File Templates.
  */
-public interface EcmUserDetailsService {
+public interface UserDetailsRepository {
 
     public String findPasswordByUserLogin(String userLogin);
 

@@ -11,6 +11,7 @@
 
     <import resource="security-context.xml"/>
 
-    <!--<context:component-scan base-package="pl.edu.agh.ecm.service.jpa" />-->
+    <import resource="crawler-context.xml" />
+    <context:component-scan base-package="pl.edu.agh.ecm.repository" />
 
 </beans>

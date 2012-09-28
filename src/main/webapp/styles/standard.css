@@ -414,3 +414,30 @@ fieldset th {
 	height: 11px;
 	width: 16px;
 }
+
+.nonAdminUsersTable {
+    background: #EEEEEE;
+    margin: 2px 0 0 0;
+    border: 2px solid #BBBBBB;
+    border-collapse: collapse;
+    width: 30%;
+    border-radius: 10px;
+}
+
+.loginForm{
+    margin-left: 35%;
+    margin-bottom: 30%;
+    width: 30%;
+    background: #EEEEEE;
+    border: 2px solid #BBBBBB;
+    border-collapse: collapse;
+    display: block;
+}
+
+.addNodeForm{
+    margin-right: 10%;
+    margin-top: 0px;
+    width : 40%;
+    background: #EEEEEE;
+    border-radius: 10px
+}

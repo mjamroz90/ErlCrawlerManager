@@ -1,5 +1,7 @@
 package pl.edu.agh.ecm.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pl.edu.agh.ecm.domain.Node;
 
 import java.util.List;
@@ -20,6 +22,10 @@ public interface NodeService {
     public List<Node> findByName(String name);
 
     public List<Node> findByAddress(String address);
+
+    public Node findByNameAndAddress(String name, String address);
+
+    public Page<Node> findByPage(Pageable pageable);
 
     public Node save(Node node);
 

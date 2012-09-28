@@ -1,0 +1,12 @@
+
+module Orber {
+interface InitialReferences {
+  typedef string ObjectId;
+  typedef sequence <ObjectId> ObjectIdList; 
+
+  Object get(in ObjectId id);
+
+  ObjectIdList list();
+
+};
+};

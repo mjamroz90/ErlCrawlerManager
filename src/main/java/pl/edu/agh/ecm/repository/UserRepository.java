@@ -31,4 +31,6 @@ public interface UserRepository extends PagingAndSortingRepository<User,Long> {
             " u.allowingToStopSession b ")
     public List<User> findAllWithDetail();
 
+    @Query("select distinct u from User u where u.admin = false")
+    public List<User> findAllNonAdmins();
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:sec="http://www.springframework.org/security/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_node_name" var="labelNodeName" />
+    <spring:message code="label_node_address" var="labelNodeAddress" />
+    <spring:message code="label_node_listing" var="labelNodeListing" />
+    <spring:message code="label_node_accessible" var="labelNodeAccess" />
+    <spring:message code="label_node_save" var="labelNodeSave" />
+
+    <spring:url value="/nodes/" var="showNodesUrl" />
+
+    <script type="text/javascript">
+        $(function(){
+            $("#list").jqGrid({
+                url : '${showNodesUrl}/listgrid',
+                datatype : 'json',
+                mtype : 'GET',
+                colNames : ['${labelNodeName}','${labelNodeAddress}', '${labelNodeAccess}'],
+                colModel : [
+                    {name : 'name', index : 'name', width : '150', align : 'center'},
+                    {name : 'address', index : 'address', width : '150', align : 'center'},
+                    {name : 'accessible', index : 'accessible', width : '100', align : 'center'}
+                ],
+                jsonReader :
+                {
+                    root : 'nodeData',
+                    page : 'currentPage',
+                    total : "totalPages",
+                    records : "totalRecords",
+                    repeatitems : false,
+                    id: "id"
+                },
+                pager: '#pager',
+                rowNum:10,
+                rowList:[5,10,15],
+                sortname: 'name',
+                sortorder: 'asc',
+                viewrecords: true,
+                gridview: true,
+                height: 300,
+                width: 750,
+                caption: '${labelNodeListing}'
+            });
+        });
+
+    </script>
+
+
+    <c:if test="${not empty message}">
+        <div id="message" class="${message.type}">${message.message}</div>
+    </c:if>
+
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <h2><spring:message code="label_node_new_node" /></h2>
+        <div id="addNodeForm" class="addNodeForm">
+            <form:form modelAttribute="newNode" id="addNodeForm" method="post" action="?addNode">
+                <form:label path="name">
+                    ${labelNodeName}*
+                </form:label>
+                <form:input path="name"/>
+                <div>
+                    <form:errors path="name" cssClass="error"/>
+                </div>
+                <p/>
+
+                <form:label path="address">
+                    ${labelNodeAddress}*
+                </form:label>
+                <form:input path="address"/>
+                <div>
+                    <form:errors path="address" cssClass="error" />
+                </div>
+                <p/>
+
+                <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                    <span class="ui-button-text">${labelNodeSave}</span>
+                </button>
+            </form:form>
+        </div>
+    </sec:authorize>
+
+    <h2>${labelNodeListing}</h2>
+    <div>
+        <table id="list"><tr><td/></tr></table>
+    </div>
+    <div id="pager" />
+
+
+
+</div>

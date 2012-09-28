@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * @author Clarence
- *
- */
 public class UserGrid {
 
 	private int totalPages;

@@ -1,9 +1,8 @@
-package pl.edu.agh.ecm.service.jpa;
+package pl.edu.agh.ecm.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import pl.edu.agh.ecm.service.EcmUserDetailsService;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,7 +13,7 @@ import pl.edu.agh.ecm.service.EcmUserDetailsService;
  */
 
 @Repository
-public class JdbcUserDetailsService implements EcmUserDetailsService {
+public class JdbcUserDetailsRepository implements UserDetailsRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

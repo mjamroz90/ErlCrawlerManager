@@ -17,10 +17,10 @@
     </c:if>
 
     <security:authorize access="isAnonymous()" >
-        <div id="login">
+        <h2><spring:message code="label_user_login_ask" /> </h2>
+        <div id="login" class="loginForm">
             <form name="loginForm" method="post" action="${loginUrl}">
                 <table>
-                    <caption alig="left">${labelLogin}</caption>
                     <tr>
                         <td>${labelLogin}</td>
                         <td><input type="text" name="j_username" /></td>
@@ -30,7 +30,13 @@
                         <td><input type="password" name="j_password" /></td>
                     </tr>
                     <tr>
-                        <td colspan="2" align="center"><input name="submit" type="submit" value="Login"/></td>
+                        <td colspan="2" align="center">
+                            <input type="checkbox" name="_spring_security_remember_me"/>
+                            <spring:message code="label_user_remember_me" /><br/>
+                            <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                                <span class="ui-button-text">Log In</span>
+                            </button>
+                        </td>
                     </tr>
                 </table>
             </form>

@@ -44,8 +44,8 @@ public class Node implements Serializable {
     }
 
     @Column(name = "address")
-    @NotEmpty(message = "Node address {validation.NotEmpty.message}")
-    @Size(min=3, max=45, message="Node address {validation.Size.message}")
+    @NotEmpty(message = "{validation.NotEmpty.message}")
+    @Size(min=3, max=45, message="{validation.Size.message}")
     public String getAddress() {
         return address;
     }
@@ -55,8 +55,8 @@ public class Node implements Serializable {
     }
 
     @Column(name = "name")
-    @NotEmpty(message = "Node name {validation.NotEmpty.message}")
-    @Size(min=3, max=45, message="Node name {validation.Size.message}")
+    @NotEmpty(message = "{validation.NotEmpty.message}")
+    @Size(min=3, max=45, message="{validation.Size.message}")
     public String getName() {
         return name;
     }
@@ -65,6 +65,11 @@ public class Node implements Serializable {
         this.name = name;
     }
 
+    @Override
+    @Transient
+    public String toString(){
+       return name + '@' + address;
+    }
 //    @ManyToMany
 //    @JoinTable(name = "ecm_sessions_nodes",
 //            joinColumns = @JoinColumn(name = "node_id"),

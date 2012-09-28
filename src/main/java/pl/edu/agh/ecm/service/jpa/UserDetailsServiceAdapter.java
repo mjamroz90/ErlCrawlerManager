@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.ecm.domain.User;
 import pl.edu.agh.ecm.domain.UserDetailsAdapter;
-import pl.edu.agh.ecm.service.EcmUserDetailsService;
+import pl.edu.agh.ecm.repository.UserDetailsRepository;
 import pl.edu.agh.ecm.service.UserService;
 
 /**
@@ -26,7 +26,7 @@ public class UserDetailsServiceAdapter implements UserDetailsService {
     @Autowired
     UserService userService;
     @Autowired
-    EcmUserDetailsService ecmUserDetailsService;
+    UserDetailsRepository userDetailsRepository;
 
     @Override
     public UserDetails loadUserByUsername(String userLogin) throws UsernameNotFoundException {
@@ -36,7 +36,7 @@ public class UserDetailsServiceAdapter implements UserDetailsService {
             throw new UsernameNotFoundException("No such user: "+ userLogin);
         }
         UserDetailsAdapter userDetailsAdapter = new UserDetailsAdapter(user);
-        String password = ecmUserDetailsService.findPasswordByUserLogin(userLogin);
+        String password = userDetailsRepository.findPasswordByUserLogin(userLogin);
         userDetailsAdapter.setPassword(password);
 
         return userDetailsAdapter;

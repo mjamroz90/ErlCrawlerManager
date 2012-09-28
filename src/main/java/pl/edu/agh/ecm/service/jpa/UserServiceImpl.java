@@ -84,4 +84,9 @@ public class UserServiceImpl implements UserService {
     public Page<User> findAllByPage(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
+
+    @Override
+    public List<User> findAllNonAdmins() {
+        return userRepository.findAllNonAdmins();
+    }
 }

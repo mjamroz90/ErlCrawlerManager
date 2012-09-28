@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<project name="Corba Lab" default="build">
+
+    <target name="clean" description="remove intermediate files">
+        <delete dir="src/main/java/pl/edu/agh/ecm/crawler/generated" />
+    </target>
+
+	<target name="idl" description="generate interface files">
+		<exec executable="idlj">
+			<arg line="-fall -td src/main/java -pkgTranslate RemoteManager pl.edu.agh.ecm.crawler.generated.RemoteManager src/main/idl/RemoteManager.idl"/>
+		</exec>
+        <exec executable="idlj">
+            <arg line="-fall -td src/main/java -pkgTranslate Orber pl.edu.agh.ecm.crawler.generated.Orber src/main/idl/InitialReferences.idl" />
+        </exec>
+	</target>
+
+	<target name="compile" depends="idl" description="compile the Java source code to class files">
+		<mkdir dir="bin" />
+		<javac srcdir="src/" destdir="bin/" debug="on" debuglevel="lines,vars,source" />
+	</target>
+
+	<target name="build" depends="idl,compile" description="generate interface and compile everything">
+	</target>
+
+</project>
