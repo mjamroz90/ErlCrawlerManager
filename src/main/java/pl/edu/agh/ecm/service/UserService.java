@@ -32,4 +32,5 @@ public interface UserService {
     public Page<User> findAllByPage(Pageable pageable);
 
     public List<User> findAllNonAdmins();
+
 }

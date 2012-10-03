@@ -86,7 +86,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> findAllNonAdmins() {
         return userRepository.findAllNonAdmins();
     }
+
 }

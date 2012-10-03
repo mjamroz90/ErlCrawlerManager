@@ -2,6 +2,9 @@ package pl.edu.agh.ecm.web.controller;
 
 import com.google.common.collect.Lists;
 import com.sun.corba.se.pept.transport.ContactInfo;
+import org.apache.commons.collections.FactoryUtils;
+import org.apache.commons.collections.keyvalue.DefaultKeyValue;
+import org.apache.commons.collections.list.LazyList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,10 +22,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.webflow.execution.RequestContext;
 import pl.edu.agh.ecm.domain.User;
+import pl.edu.agh.ecm.domain.UserDetailsAdapter;
 import pl.edu.agh.ecm.service.UserService;
-import pl.edu.agh.ecm.web.form.Message;
-import pl.edu.agh.ecm.web.form.UserForm;
-import pl.edu.agh.ecm.web.form.UserGrid;
+import pl.edu.agh.ecm.web.form.*;
 import pl.edu.agh.ecm.web.util.UrlUtil;
 
 
@@ -116,7 +119,7 @@ public class UserController {
         if (bindingResult.hasErrors()){
             uiModel.addAttribute("message", new Message("error",
                     messageSource.getMessage("label_user_registration_failure", new Object[]{}, locale)));
-            uiModel.addAttribute("user", userForm);
+            uiModel.addAttribute("userForm", userForm);
             return "users/register";
         }
 
@@ -133,11 +136,17 @@ public class UserController {
     @RequestMapping(value = "/{id}/panel",method = RequestMethod.GET)
     public String showPanel(@PathVariable("id")Long id, Model uiModel){
 
-        User user = userService.findById(id);
+        User user = userService.findByIdWithDetail(id);
+        List<User> notAllowedToStopSession = getNotAllowedToStopSession(user);
         List<User> nonAdminUsers = userService.findAllNonAdmins();
+
+        UserAllowToStopSessionForm userStopSessionForm = new UserAllowToStopSessionForm(notAllowedToStopSession);
+        UserCollectionForm collectionForm = new UserCollectionForm(nonAdminUsers);
         UserForm userForm = toUserForm(user);
-        uiModel.addAttribute("user", userForm);
-        uiModel.addAttribute("nonAdminUsers",nonAdminUsers);
+        uiModel.addAttribute("userForm", userForm);
+        uiModel.addAttribute("user",user);
+        uiModel.addAttribute("userStopSessionForm",userStopSessionForm);
+        uiModel.addAttribute("userCollectionForm",collectionForm);
         return "users/panel";
     }
 
@@ -166,12 +175,40 @@ public class UserController {
         return "redirect:/users/"+ UrlUtil.encodeUrlPathSegment(user.getId().toString(),request);
     }
 
-    @RequestMapping(value = "/{id}/panel",params = "adminCredentials", method = RequestMethod.POST)
-    public String giveAdminCredentials(@PathVariable("id")Long id, @ModelAttribute("nonAdminUsers") List<User> nonAdminUsers,
-                                       Model uiModel,HttpServletRequest request,RedirectAttributes redirectAttributes,Locale locale){
+    @RequestMapping(value = "/{id}/panel",params = "allowToStopSession", method = RequestMethod.POST)
+    public String allowToStopSession(@PathVariable("id")Long id, @ModelAttribute("userStopSessionForm")
+        UserAllowToStopSessionForm userStopSessionForm,Model uiModel,HttpServletRequest request,
+                                          RedirectAttributes redirectAttributes,Locale locale)
+    {
+        User user = userService.findByIdWithDetail(id);
+        user = addAllowedToStopSession(userStopSessionForm,user);
+        userService.save(user,null);
 
-       int size = nonAdminUsers.size();
-       return null;
+        redirectAttributes.addFlashAttribute("message",new Message("success",
+                messageSource.getMessage("label_user_adding_allowed_success",new Object[]{},locale)));
+        return "redirect:/users/"+UrlUtil.encodeUrlPathSegment(user.getId().toString(),request)+"/panel";
+    }
+
+    @RequestMapping(value = "/{id}/panel", params = "giveAdminPermissions", method = RequestMethod.POST)
+    public String giveAdminPermissions(@PathVariable("id")Long id, @ModelAttribute("userForm")UserForm userForm,
+                                       Model uiModel,HttpServletRequest request, RedirectAttributes redirectAttributes,Locale locale){
+
+        User user = userService.findById(id);
+        user.setAdmin(userForm.isAdmin());
+        userService.save(user,null);
+        Message displayedMessage;
+        if (user.isAdmin()){
+            displayedMessage = new Message("success",
+                    messageSource.getMessage("label_user_give_admin_success",new String[]{user.getLogin()},locale));
+        }
+        else{
+            displayedMessage =  new Message("success",
+                    messageSource.getMessage("label_user_evict_admin_success",new String[]{user.getLogin()},locale));
+        }
+        redirectAttributes.addFlashAttribute("message",displayedMessage);
+
+        UserDetailsAdapter loggedUser = (UserDetailsAdapter)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return "redirect:/users/"+UrlUtil.encodeUrlPathSegment(loggedUser.getId().toString(),request)+"/panel";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -212,6 +249,7 @@ public class UserController {
         userForm.setPassword(user.getPassword());
         userForm.setLastname(user.getLastname());
         userForm.setLogin(user.getLogin());
+        userForm.setAdmin(user.isAdmin());
         return userForm;
     }
 
@@ -240,5 +278,27 @@ public class UserController {
                 }
             }
         }
+    }
+
+    private User addAllowedToStopSession(UserAllowToStopSessionForm form,User user){
+
+        for (UserEntry keyValue : form.getUsers()){
+            if (keyValue.isAllowed()){
+                User allowedUser = userService.findByLogin(keyValue.getLogin());
+                user.addAllowedToStopSession(allowedUser);
+            }
+        }
+        return user;
+    }
+
+    private List<User> getNotAllowedToStopSession(User user){
+        List<User> allUsers = userService.findAll();
+        List<User> result = new ArrayList<User>();
+        for (User u : allUsers){
+            if (!user.isAllowedToStopSession(u.getLogin()) && !(u.getLogin().equals(user.getLogin()))){
+                result.add(u);
+            }
+        }
+        return result;
     }
 }

@@ -16,11 +16,26 @@
     <spring:message code="label_user_reenter_password" var="labelUserRePassword" />
     <spring:message code="label_user_save" var="labelUserSave" />
     <spring:message code="label_user_reset" var="labelUserReset" />
+    <spring:message code="label_user_allowed_to_stop_session" var="allowedToStopSession" />
+    <spring:message code="label_user_allowing_to_stop_session" var="allowingToStopSession" />
+    <spring:url value="/users" var="usersUrl" />
+
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <div id="adminRole">
+            <form:form modelAttribute="userForm" action="?giveAdminPermissions">
+                <form:label path="admin"><spring:message code="label_user_admin_permissions" /></form:label>
+                <form:checkbox path="admin" value="${userForm.admin}" />
+                <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                    <span class="ui-button-text">${labelUserSave}</span>
+                </button>
+            </form:form>
+        </div>
+    </sec:authorize>
 
 
     <h2 align="center">${labelUserPanel}</h2>
     <div id="userInfo">
-        <form:form modelAttribute="user" id="userEditForm" method="post" action="?updateUser">
+        <form:form modelAttribute="userForm" id="userEditForm" method="post" action="?updateUser">
             <c:if test="${not empty message}">
                 <div id="message" class="${message.type}">${message.message}</div>
             </c:if>
@@ -79,37 +94,58 @@
         </form:form>
     </div>
 
-    <c:set var="adminRole" value="ROLE_ADMIN" />
+    <div id="stopSessionPermissions">
+        <h3>${allowedToStopSession}</h3>
+        <ul>
+            <c:forEach items="${user.allowedToStopSession}" var="userAllowed">
+                <li>${userAllowed}</li>
+            </c:forEach>
+        </ul>
 
-    <sec:authorize access="hasRole('${adminRole}')" >
-        <h2><spring:message code="label_nonAdmin_users" /></h2>
-        <div id="nonAdminUsers">
-            <!--<form:form id="giveAdminCredentialsForm" commandName="nonAdminUsers"-->
-            <!--method="post" action="?adminCredentials">-->
+        <h3>${allowingToStopSession}</h3>
+        <ul>
+            <c:forEach items="${user.allowingToStopSession}" var="userAllowing">
+                <li>${userAllowing}</li>
+            </c:forEach>
+        </ul>
 
-                <table class="nonAdminUsersTable">
-                    <thead>
+        <h3><spring:message code="label_user_allow_to_stop_session" /></h3>
+        <form:form id="allowToStopSessionForm" modelAttribute="userStopSessionForm"
+                   method="post" action="?allowToStopSession">
+
+            <table class="notAllowedToStopSession">
+                <thead>
+                <tr>
+                    <th>${labelUserLogin}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${userStopSessionForm.users}" var="users" varStatus="status">
                     <tr>
-                        <th>${labelUserLogin}</th>
-                        <th><spring:message code="label_user_admin_permissions" /></th>
+                        <td><form:input path="users[${status.index}].login" readonly="true" /></td>
+                        <td><form:checkbox path="users[${status.index}].allowed"  /></td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${nonAdminUsers}" var="nonAdminUser" varStatus="status">
-                        <tr>
-                            <td>${nonAdminUser.login}</td>
-                            <td><input type="checkbox" id="${nonAdminUser.login}" value="off" /></td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                <p/>
+                </c:forEach>
+                </tbody>
+            </table>
+            <p/>
 
-                <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-                    <span class="ui-button-text">${labelUserSave}</span>
-                </button>
+            <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <span class="ui-button-text">${labelUserSave}</span>
+            </button>
 
-            <!--</form:form>-->
+        </form:form>
+    </div>
+
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <div id="nonAdminUsers">
+            <h2><spring:message code="label_nonAdmin_users" /></h2>
+            <ul>
+                <c:forEach items="${userCollectionForm.users}" var="nonAdminUser">
+                    <li><a href="${usersUrl}/${nonAdminUser.id}/panel" >${nonAdminUser.login}</a></li>
+                </c:forEach>
+            </ul>
         </div>
     </sec:authorize>
 

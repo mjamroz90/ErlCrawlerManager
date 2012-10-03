@@ -33,10 +33,9 @@ public class CrawlerConnector {
 
     public CrawlerConnector(){}
 
-    public CrawlerConnector(String remoteManagerAddress,int remoteManagerPort)
-            throws org.omg.CosNaming.NamingContextPackage.InvalidName, InvalidName, NotFound, CannotProceed {
+    public CrawlerConnector(String remoteManagerAddress,int remoteManagerPort){
         try{
-        initManagerServer(remoteManagerAddress,remoteManagerPort);
+            initManagerServer(remoteManagerAddress,remoteManagerPort);
         }
         catch (Exception e)
         {}
@@ -61,8 +60,14 @@ public class CrawlerConnector {
     }
 
     public boolean pingNode(String nodeName){
-        StringHolder holder = new StringHolder();
-        return remoteManagerServer.pingNode(nodeName,holder);
+        if (remoteManagerServer != null){
+            StringHolder holder = new StringHolder();
+            return remoteManagerServer.pingNode(nodeName,holder);
+        }
+        else{
+            return false;
+        }
+
     }
 
     public String getRemoteManagerAddress() {

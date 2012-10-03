@@ -415,7 +415,7 @@ fieldset th {
 	width: 16px;
 }
 
-.nonAdminUsersTable {
+.notAllowedToStopSession {
     background: #EEEEEE;
     margin: 2px 0 0 0;
     border: 2px solid #BBBBBB;

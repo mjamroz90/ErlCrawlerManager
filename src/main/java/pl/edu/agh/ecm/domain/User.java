@@ -141,4 +141,27 @@ public class User implements Serializable {
         getAllowingToStopSession().add(u);
     }
 
+    @Override
+    @Transient
+    public String toString(){
+        StringBuffer buff = new StringBuffer(login);
+        if (firstname != null && firstname.length() > 0 && lastname != null && lastname.length() > 0){
+            buff.append(" , ");
+            buff.append(firstname);
+            buff.append(" ");
+            buff.append(lastname);
+        }
+        return buff.toString();
+    }
+
+    @Transient
+    public boolean isAllowedToStopSession(String login){
+
+        for (User u : allowedToStopSession){
+            if (u.getLogin().equals(login)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
