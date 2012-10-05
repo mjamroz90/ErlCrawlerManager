@@ -26,7 +26,7 @@
             <intercept-url pattern="/resources/styles/**" access="permitAll" />
             <intercept-url pattern="/resources/scripts/**" access="permitAll" />
             <intercept-url pattern="/resources/jqgrid/**" access="permitAll" />
-            <intercept-url pattern="/users/register" method="POST" access="isAnonymous()" />
+            <intercept-url pattern="/users/register" access="isAnonymous()" />
             <intercept-url pattern="/users/login" method="GET" access="isAnonymous()" />
             <intercept-url pattern="/users/*" method="GET" access="isAuthenticated()" />
             <intercept-url pattern="/nodes" method="GET" access="isAuthenticated()" />

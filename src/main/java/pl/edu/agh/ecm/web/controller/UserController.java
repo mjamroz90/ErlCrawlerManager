@@ -19,8 +19,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.servlet.mvc.AbstractController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.webflow.execution.RequestContext;
+import pl.edu.agh.ecm.crawler.CrawlerConnector;
 import pl.edu.agh.ecm.domain.User;
 import pl.edu.agh.ecm.domain.UserDetailsAdapter;
 import pl.edu.agh.ecm.service.UserService;
@@ -28,6 +31,7 @@ import pl.edu.agh.ecm.web.form.*;
 import pl.edu.agh.ecm.web.util.UrlUtil;
 
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -54,6 +58,9 @@ public class UserController {
 
     @Autowired
     private MessageSource messageSource;
+
+    @Autowired
+    private CrawlerConnector crawlerConnector;
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model uiModel){
@@ -136,23 +143,12 @@ public class UserController {
     @RequestMapping(value = "/{id}/panel",method = RequestMethod.GET)
     public String showPanel(@PathVariable("id")Long id, Model uiModel){
 
-        User user = userService.findByIdWithDetail(id);
-        List<User> notAllowedToStopSession = getNotAllowedToStopSession(user);
-        List<User> nonAdminUsers = userService.findAllNonAdmins();
-
-        UserAllowToStopSessionForm userStopSessionForm = new UserAllowToStopSessionForm(notAllowedToStopSession);
-        UserCollectionForm collectionForm = new UserCollectionForm(nonAdminUsers);
-        UserForm userForm = toUserForm(user);
-        uiModel.addAttribute("userForm", userForm);
-        uiModel.addAttribute("user",user);
-        uiModel.addAttribute("userStopSessionForm",userStopSessionForm);
-        uiModel.addAttribute("userCollectionForm",collectionForm);
-        return "users/panel";
+        return preparePanelUiModel(id,uiModel);
     }
 
     @RequestMapping(value = "/{id}/panel",params = "updateUser",method = RequestMethod.POST)
     public String updateUser(@PathVariable("id")Long id,
-                             @ModelAttribute("user") @Valid UserForm userForm,BindingResult bindingResult,
+                             @ModelAttribute("userForm") @Valid UserForm userForm,BindingResult bindingResult,
                              Model uiModel,HttpServletRequest request, RedirectAttributes redirectAttributes,Locale locale){
 
         validateUserLogin(userForm.getLogin(),bindingResult,id);
@@ -161,7 +157,7 @@ public class UserController {
         if (bindingResult.hasErrors()){
             uiModel.addAttribute("message", new Message("error",
                     messageSource.getMessage("label_user_update_failed", new Object[]{}, locale)));
-            uiModel.addAttribute("user", userForm);
+            preparePanelUiModel(id,uiModel,userForm,null);
             return "users/panel";
         }
 
@@ -209,6 +205,24 @@ public class UserController {
 
         UserDetailsAdapter loggedUser = (UserDetailsAdapter)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return "redirect:/users/"+UrlUtil.encodeUrlPathSegment(loggedUser.getId().toString(),request)+"/panel";
+    }
+
+    @RequestMapping(value = "/{id}/panel", params = "setConnectorParams", method = RequestMethod.POST)
+    public String setConnectorParams(@PathVariable("id")Long id, @ModelAttribute("crawlerConnector") @Valid
+    CrawlerConnector connector,BindingResult result,Model uiModel,HttpServletRequest request, RedirectAttributes attributes,Locale locale)
+    {
+        if (result.hasErrors()){
+            preparePanelUiModel(id,uiModel,null,connector);
+            uiModel.addAttribute("connectorMessage",new Message("error",
+                    messageSource.getMessage("label_connector_settings_failure",new Object[]{},locale)));
+            return "users/panel";
+        }
+
+        crawlerConnector.setRemoteManagerAddress(connector.getRemoteManagerAddress());
+        crawlerConnector.setRemoteManagerPort(connector.getRemoteManagerPort());
+        crawlerConnector.initManagerServer();
+
+        return "redirect:/users/"+UrlUtil.encodeUrlPathSegment(id.toString(),request)+"/panel";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -300,5 +314,38 @@ public class UserController {
             }
         }
         return result;
+    }
+
+    private String preparePanelUiModel(Long id, Model uiModel){
+        return preparePanelUiModel(id,uiModel,null,null);
+    }
+
+    private String preparePanelUiModel(Long id,Model uiModel, UserForm userForm,CrawlerConnector connector){
+
+        User user = userService.findByIdWithDetail(id);
+        List<User> notAllowedToStopSession = getNotAllowedToStopSession(user);
+        List<User> nonAdminUsers = userService.findAllNonAdmins();
+
+        UserAllowToStopSessionForm userStopSessionForm = new UserAllowToStopSessionForm(notAllowedToStopSession);
+        UserCollectionForm collectionForm = new UserCollectionForm(nonAdminUsers);
+        if (userForm != null){
+            uiModel.addAttribute("userForm", userForm);
+        }
+        else{
+            uiModel.addAttribute("userForm", toUserForm(user));
+        }
+        uiModel.addAttribute("user",user);
+        uiModel.addAttribute("userStopSessionForm",userStopSessionForm);
+        uiModel.addAttribute("userCollectionForm",collectionForm);
+        if (connector == null){
+            CrawlerConnector newConnector = new CrawlerConnector();
+            newConnector.setRemoteManagerAddress(crawlerConnector.getRemoteManagerAddress());
+            newConnector.setRemoteManagerPort(crawlerConnector.getRemoteManagerPort());
+            uiModel.addAttribute("crawlerConnector", newConnector);
+        }
+        else{
+            uiModel.addAttribute("crawlerConnector",connector);
+        }
+        return "users/panel";
     }
 }

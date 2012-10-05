@@ -26,7 +26,8 @@
                 colModel : [
                     {name : 'name', index : 'name', width : '150', align : 'center'},
                     {name : 'address', index : 'address', width : '150', align : 'center'},
-                    {name : 'accessible', index : 'accessible', width : '100', align : 'center'}
+                    {name : 'accessible', index : 'accessible', width : '100',
+                        align : 'center', edittype : 'image', formatter : imageFormatter, sortable: 'false' }
                 ],
                 jsonReader :
                 {
@@ -49,6 +50,15 @@
                 caption: '${labelNodeListing}'
             });
         });
+        function imageFormatter(cellvalue, options, rowObject){
+
+            if (cellvalue == true ){
+                return '<img src='/ecm/resources/styles/messages/success.png' />';
+            }
+            else{
+                return '<img src='/ecm/resources/styles/messages/error.png' />';
+            }
+        };
 
     </script>
 

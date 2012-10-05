@@ -25,7 +25,7 @@
             <form:form modelAttribute="userForm" action="?giveAdminPermissions">
                 <form:label path="admin"><spring:message code="label_user_admin_permissions" /></form:label>
                 <form:checkbox path="admin" value="${userForm.admin}" />
-                <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <button type="submit" class="ui-button">
                     <span class="ui-button-text">${labelUserSave}</span>
                 </button>
             </form:form>
@@ -34,11 +34,12 @@
 
 
     <h2 align="center">${labelUserPanel}</h2>
-    <div id="userInfo">
+    <c:if test="${not empty message}">
+        <div id="message" class="${message.type}">${message.message}</div>
+    </c:if>
+
+    <div id="userInfo" class="panelComponent">
         <form:form modelAttribute="userForm" id="userEditForm" method="post" action="?updateUser">
-            <c:if test="${not empty message}">
-                <div id="message" class="${message.type}">${message.message}</div>
-            </c:if>
 
             <form:label path="login">
                 ${labelUserLogin}*
@@ -94,7 +95,7 @@
         </form:form>
     </div>
 
-    <div id="stopSessionPermissions">
+    <div id="stopSessionPermissions" class="panelComponent">
         <h3>${allowedToStopSession}</h3>
         <ul>
             <c:forEach items="${user.allowedToStopSession}" var="userAllowed">
@@ -139,13 +140,44 @@
     </div>
 
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <div id="nonAdminUsers">
+        <div id="nonAdminUsers" class="panelComponent">
             <h2><spring:message code="label_nonAdmin_users" /></h2>
             <ul>
                 <c:forEach items="${userCollectionForm.users}" var="nonAdminUser">
                     <li><a href="${usersUrl}/${nonAdminUser.id}/panel" >${nonAdminUser.login}</a></li>
                 </c:forEach>
             </ul>
+        </div>
+
+        <div id="crawlerConnectorParams" class="panelComponent">
+
+            <c:if test="${not empty connectorMessage}">
+                <div id="connectorMessage" class="${connectorMessage.type}">${connectorMessage.message}</div>
+            </c:if>
+            <h2><spring:message code="label_connector_params_title" /></h2>
+            <form:form modelAttribute="crawlerConnector" method="post" action="?setConnectorParams">
+                <form:label path="remoteManagerAddress">
+                    Host:
+                </form:label>
+                <form:input path="remoteManagerAddress" />
+                <div>
+                    <form:errors path="remoteManagerAddress" cssClass="error"/>
+                </div>
+                <p/>
+
+                <form:label path="remoteManagerPort">
+                    Port:
+                </form:label>
+                <form:input path="remoteManagerPort" />
+                <div>
+                    <form:errors path="remoteManagerPort" cssClass="error" />
+                </div>
+                <p/>
+
+                <button type="submit" class="ui-button">
+                    <span class="ui-button-text">${labelUserSave}</span>
+                </button>
+            </form:form>
         </div>
     </sec:authorize>
 

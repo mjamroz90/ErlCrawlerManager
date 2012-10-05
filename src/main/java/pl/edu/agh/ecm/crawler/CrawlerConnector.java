@@ -1,5 +1,7 @@
 package pl.edu.agh.ecm.crawler;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CORBA.StringHolder;
@@ -8,12 +10,15 @@ import org.omg.CosNaming.NamingContext;
 import org.omg.CosNaming.NamingContextHelper;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
+import org.springframework.format.annotation.NumberFormat;
 import pl.edu.agh.ecm.crawler.generated.Orber.InitialReference;
 import pl.edu.agh.ecm.crawler.generated.Orber.InitialReferences;
 import pl.edu.agh.ecm.crawler.generated.Orber.InitialReferencesHelper;
 import pl.edu.agh.ecm.crawler.generated.RemoteManager.RemoteManagerServer;
 import pl.edu.agh.ecm.crawler.generated.RemoteManager.RemoteManagerServerHelper;
+import pl.edu.agh.ecm.web.util.IPDomain;
 
+import javax.validation.constraints.NotNull;
 import java.net.Authenticator;
 import java.net.SocketPermission;
 
@@ -35,6 +40,8 @@ public class CrawlerConnector {
 
     public CrawlerConnector(String remoteManagerAddress,int remoteManagerPort){
         try{
+            this.remoteManagerAddress = remoteManagerAddress;
+            this.remoteManagerPort = remoteManagerPort;
             initManagerServer(remoteManagerAddress,remoteManagerPort);
         }
         catch (Exception e)
@@ -59,6 +66,16 @@ public class CrawlerConnector {
         remoteManagerServer = RemoteManagerServerHelper.narrow(nameCompRef);
     }
 
+    public boolean initManagerServer(){
+        try{
+            initManagerServer(this.remoteManagerAddress,this.remoteManagerPort);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
     public boolean pingNode(String nodeName){
         if (remoteManagerServer != null){
             StringHolder holder = new StringHolder();
@@ -70,6 +87,8 @@ public class CrawlerConnector {
 
     }
 
+    @NotEmpty(message = "{validation.NotEmpty.message}")
+    @IPDomain(message = "{ipdomain.validation.message}")
     public String getRemoteManagerAddress() {
         return remoteManagerAddress;
     }
@@ -78,6 +97,8 @@ public class CrawlerConnector {
         this.remoteManagerAddress = remoteManagerAddress;
     }
 
+    @NotNull(message = "{validation.NotEmpty.message}")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     public int getRemoteManagerPort() {
         return remoteManagerPort;
     }

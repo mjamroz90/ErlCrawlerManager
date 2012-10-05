@@ -52,8 +52,8 @@ public class Policy implements Serializable {
     }
 
     @Column(name = "init_url")
-    @NotEmpty(message = "Init Address {validation.NotEmpty.message}")
-    @URL(message = "")
+    @NotEmpty(message = "{validation.NotEmpty.message}")
+    @URL(message = "{url.validation.message}")
     public String getInitUrl() {
         return initUrl;
     }

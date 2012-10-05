@@ -427,11 +427,9 @@ fieldset th {
 .loginForm{
     margin-left: 35%;
     margin-bottom: 30%;
-    width: 30%;
+    width: 40%;
     background: #EEEEEE;
-    border: 2px solid #BBBBBB;
-    border-collapse: collapse;
-    display: block;
+    border-radius: 15px
 }
 
 .addNodeForm{
@@ -440,4 +438,11 @@ fieldset th {
     width : 40%;
     background: #EEEEEE;
     border-radius: 10px
+}
+
+.panelComponent{
+    margin-left: 10%;
+    width: 40%;
+    background: #EEEEEE;
+    border-radius: 15px
 }

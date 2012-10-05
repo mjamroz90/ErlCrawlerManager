@@ -46,7 +46,7 @@ public class CrawlParams implements Serializable {
     }
 
     @Column(name = "max_process_count")
-    @NotNull(message = "Max process count {validation.NotEmpty.message}")
+    @NotNull(message = "{validation.NotEmpty.message}")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Max(value = 250)
     public Integer getMaxProcessCount() {
