@@ -2,27 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_dbunit_dbunit_2_4_8.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_1_9_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/service/jpa/AbstractServiceImplTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/test/config/ControllerTestConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/test/config/ServiceTestConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/test/listener/ServiceTestExecutionListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/controller/AbstractControllerTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/controller/UserControllerTest.java" />
-      <change type="DELETED" beforePath="C:\Users\Michal\IdeaProjects\ErlCrawlerManager\src\test\resources\datasource-tx-jpa-test.xml" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Michal\IdeaProjects\ErlCrawlerManager\.idea\libraries\Maven__commons_collections_commons_collections_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" />
-      <change type="MOVED" beforePath="C:\Users\Michal\IdeaProjects\ErlCrawlerManager\.idea\libraries\Maven__org_springframework_spring_test_3_0_6_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_3_1_0_RELEASE.xml" />
-      <change type="MOVED" beforePath="C:\Users\Michal\IdeaProjects\ErlCrawlerManager\src\test\resources\schema.sql" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/ErlCrawlerManager_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/ErlCrawlerManager_war_exploded.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ErlCrawlerManager.iml" afterPath="$PROJECT_DIR$/ErlCrawlerManager.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/web/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/web/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/datasource-tx-jpa.xml" afterPath="$PROJECT_DIR$/src/main/resources/datasource-tx-jpa.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
     </list>
     <ignored path="ErlCrawlerManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1462,7 +1442,11 @@
       <created>1349438033074</created>
       <updated>1349438033074</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Zaimplementowane 2 testy controllera, oraz szkielet testów servic'e - ów.">
+      <created>1349635471163</created>
+      <updated>1349635471163</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1553,7 +1537,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dorobiona kontrolka do ustawienia parametrów connectora, poprawione błędy w USerController" />
+    <option name="LAST_COMMIT_MESSAGE" value="Zaimplementowane 2 testy controllera, oraz szkielet testów servic'e - ów." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1572,6 +1556,7 @@
     <MESSAGE value="Dodane security." />
     <MESSAGE value="Możliwość nadawania praw admina dla użytkowników, oraz dodawania do listy pozwoleń." />
     <MESSAGE value="Dorobiona kontrolka do ustawienia parametrów connectora, poprawione błędy w USerController" />
+    <MESSAGE value="Zaimplementowane 2 testy controllera, oraz szkielet testów servic'e - ów." />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
