@@ -136,7 +136,7 @@ public class UserController {
 
         User user = toUser(userForm);
         //TODO: pamiętac o constraint unique(firstname, lastname).
-        userService.save(user,user.getPassword());
+        user = userService.save(user,user.getPassword());
         return "redirect:/users/"+ UrlUtil.encodeUrlPathSegment(user.getId().toString(),request);
     }
 
@@ -246,7 +246,7 @@ public class UserController {
     }
 
 
-    private User toUser(UserForm userForm){
+    public User toUser(UserForm userForm){
         User user = new User();
         user.setPassword(userForm.getPassword());
         user.setFirstname(userForm.getFirstname());
@@ -256,7 +256,7 @@ public class UserController {
         return user;
     }
 
-    private UserForm toUserForm(User user){
+    public UserForm toUserForm(User user){
 
         UserForm userForm = new UserForm();
         userForm.setFirstname(user.getFirstname());

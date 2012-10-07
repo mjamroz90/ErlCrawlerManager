@@ -4,11 +4,11 @@
 CREATE  TABLE IF NOT EXISTS `ecm_users` (
   `ID` INT NOT NULL AUTO_INCREMENT ,
   `login` varchar(45) NOT NULL ,
-  `password` VARCHAR(45) NOT NULL ,
+  `password` VARCHAR(200) NOT NULL ,
   `is_admin` BINARY NULL DEFAULT 0 ,
   `firstname` VARCHAR(45) NULL ,
   `lastname` VARCHAR(45) NULL ,
-  UNIQUE UQ_USER_1 (`firstname`, `lastname`),
+  UNIQUE UQ_login(`login`),
   PRIMARY KEY (`ID`) );
 
 
