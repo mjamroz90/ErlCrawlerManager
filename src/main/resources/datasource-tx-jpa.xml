@@ -16,7 +16,6 @@
         <!--<jdbc:script location="classpath:test-data.sql"/>    -->
     <!--</jdbc:embedded-database>-->
 
-
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="emf"/>
     </bean>
@@ -59,5 +58,6 @@
             <property name="password" value="aywjhfak"/>
         </bean>
     </beans>
+
 
 </beans>

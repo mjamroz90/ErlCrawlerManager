@@ -5,7 +5,7 @@ CREATE  TABLE IF NOT EXISTS `ecm_users` (
   `ID` INT NOT NULL AUTO_INCREMENT ,
   `login` varchar(45) NOT NULL ,
   `password` VARCHAR(200) NOT NULL ,
-  `is_admin` BINARY NULL DEFAULT 0 ,
+  `is_admin` BOOL NULL DEFAULT 0 ,
   `firstname` VARCHAR(45) NULL ,
   `lastname` VARCHAR(45) NULL ,
   UNIQUE UQ_login(`login`),
