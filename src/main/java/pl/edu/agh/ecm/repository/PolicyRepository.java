@@ -17,9 +17,12 @@ import java.util.List;
  */
 public interface PolicyRepository extends CrudRepository<Policy,Long> {
 
-    @Query("select distinct p from Policy p fetch all properties where p.initUrl = :initUrl")
-    public List<Policy> findByinitUrl(@Param("initUrl") String initUrl);
-
     @Query("select distinct p from Policy p fetch all properties where p.createdBy.id = :userId")
     public List<Policy> findBycreatedBy(@Param("userId") Long userId);
+
+    @Query("select distinct p from Policy p left join fetch p.initUrls a where p.id = :id")
+    public Policy findByIdWithDetail(@Param("id")Long id );
+
+    @Query("select distinct p from Policy p left join fetch p.initUrls a")
+    public List<Policy> findAllWithDetails();
 }

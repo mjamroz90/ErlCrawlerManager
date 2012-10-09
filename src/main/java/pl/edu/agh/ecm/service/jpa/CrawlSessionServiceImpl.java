@@ -1,6 +1,7 @@
 package pl.edu.agh.ecm.service.jpa;
 
 import com.google.common.collect.Lists;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import pl.edu.agh.ecm.domain.CrawlSession;
 import pl.edu.agh.ecm.repository.CrawlSessionRepository;
 import pl.edu.agh.ecm.service.CrawlSessionService;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -58,6 +60,9 @@ public class CrawlSessionServiceImpl implements CrawlSessionService {
     }
 
     public CrawlSession save(CrawlSession session) {
+        if (session.getStarted() == null){
+            session.setStarted(new DateTime(Calendar.getInstance().getTime()));
+        }
         return crawlSessionRepository.save(session);
     }
 }

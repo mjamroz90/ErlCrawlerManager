@@ -15,11 +15,13 @@ public interface PolicyService  {
 
     public Policy findById(Long id);
 
-    public List<Policy> findByinitUrl(String initUrl);
+    public Policy findByIdWithDetails(Long id);
 
     public List<Policy> findBycreatedBy(Long userId);
 
     public List<Policy> findAll();
+
+    public List<Policy> findAllWithDetails();
 
     public Policy save(Policy policy);
 

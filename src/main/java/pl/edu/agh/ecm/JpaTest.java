@@ -52,7 +52,6 @@ public class JpaTest {
 
         //savePolicies(policyService, userService);
         List<Policy> allPolicies = policyService.findAll();
-        List<Policy> foundByUrl = policyService.findByinitUrl("http://www.google.pl");
         List<Policy> foundCreatedBy = policyService.findBycreatedBy(usersByLogin.getId());
 
         //sessionService.save(crawlSession);
@@ -100,19 +99,19 @@ public class JpaTest {
 
     public static void savePolicies(PolicyService policyService,UserService userService){
 
-        User created = userService.findAll().get(0);
-        CrawlParams crawlParams = new CrawlParams(25, 1000);
-
-        Policy policy = new Policy("http://www.google.pl",2,3,created);
-        policy.setCrawlParams(crawlParams);
-        Policy policy1 = new Policy("http://www.nowyekran.pl",3,4,created);
-        policy1.setCrawlParams(new CrawlParams(25,1233));
-        Policy policy2 = new Policy("http://www.prokapitalizm.pl",1,3,created);
-        policy2.setCrawlParams(new CrawlParams(25,12334));
-
-        policyService.save(policy);
-        policyService.save(policy1);
-        policyService.save(policy2);
+//        User created = userService.findAll().get(0);
+//        CrawlParams crawlParams = new CrawlParams(25, 1000);
+//
+//        Policy policy = new Policy("http://www.google.pl",2,3,created);
+//        policy.setCrawlParams(crawlParams);
+//        Policy policy1 = new Policy("http://www.nowyekran.pl",3,4,created);
+//        policy1.setCrawlParams(new CrawlParams(25,1233));
+//        Policy policy2 = new Policy("http://www.prokapitalizm.pl",1,3,created);
+//        policy2.setCrawlParams(new CrawlParams(25,12334));
+//
+//        policyService.save(policy);
+//        policyService.save(policy1);
+//        policyService.save(policy2);
     }
 
     public static void listUsers(List<User> users){
@@ -137,9 +136,7 @@ public class JpaTest {
 
     public static Policy preparePolicy(User startedBy)
     {
-        Policy policy = new Policy("http://www.google.pl",2,3,startedBy);
-        policy.setCrawlParams(new CrawlParams(20,20));
-
+        Policy policy = new Policy(10,200,startedBy);
         return policy;
     }
 

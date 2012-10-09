@@ -33,8 +33,8 @@ public class PolicyServiceImpl implements PolicyService {
     }
 
     @Transactional(readOnly = true)
-    public List<Policy> findByinitUrl(String initUrl) {
-       return policyRepository.findByinitUrl(initUrl);
+    public Policy findByIdWithDetails(Long id) {
+        return policyRepository.findByIdWithDetail(id);
     }
 
     @Transactional(readOnly = true)
@@ -45,6 +45,11 @@ public class PolicyServiceImpl implements PolicyService {
     @Transactional(readOnly = true)
     public List<Policy> findAll() {
         return Lists.newArrayList(policyRepository.findAll());
+    }
+
+    @Transactional
+    public List<Policy> findAllWithDetails() {
+        return policyRepository.findAllWithDetails();
     }
 
     public Policy save(Policy policy) {

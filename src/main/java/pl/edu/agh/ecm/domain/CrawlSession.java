@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -29,7 +30,7 @@ public class CrawlSession implements Serializable {
     private Policy policy;
     private Node domainManagerNode;
     private Node remoteManagerServerNode;
-    private Set<Node> nodes;
+    private Set<Node> nodes = new HashSet<Node>();
 
     public CrawlSession(){}
 

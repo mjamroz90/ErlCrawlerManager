@@ -5,10 +5,13 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,20 +26,18 @@ import java.io.Serializable;
 public class Policy implements Serializable {
 
     private Long id;
-    private String initUrl;
-    private Integer width;
-    private Integer depth;
     private User createdBy;
-    private Integer validityTime;
-    private CrawlParams crawlParams;
+    private Integer defaultValidityTime;
+    private Integer maxProcessCount;
+    private Integer bufferSize;
+    private Set<InitUrl> initUrls = new HashSet<InitUrl>();
 
     public Policy(){}
 
-    public Policy(String initUrl,int width, int depth, User createdBy){
+    public Policy(Integer maxProcessCount,Integer bufferSize, User createdBy){
 
-        this.initUrl = initUrl;
-        this.width = width;
-        this.depth = depth;
+        this.maxProcessCount = maxProcessCount;
+        this.bufferSize = bufferSize;
         this.createdBy = createdBy;
     }
 
@@ -51,41 +52,6 @@ public class Policy implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "init_url")
-    @NotEmpty(message = "{validation.NotEmpty.message}")
-    @URL(message = "{url.validation.message}")
-    public String getInitUrl() {
-        return initUrl;
-    }
-
-    public void setInitUrl(String initUrl) {
-        this.initUrl = initUrl;
-    }
-
-    @Column(name = "width")
-    @NotNull(message = "Crawl width {validation.NotEmpty.message}")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value = 0)
-    public Integer getWidth() {
-        return width;
-    }
-
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    @Column(name = "depth")
-    @NotNull(message = "Crawl depth {validation.NotEmpty.message}")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value = 0)
-    public Integer getDepth() {
-        return depth;
-    }
-
-    public void setDepth(Integer depth) {
-        this.depth = depth;
-    }
-
     @ManyToOne
     @JoinColumn(name = "created_by")
     public User getCreatedBy() {
@@ -96,23 +62,53 @@ public class Policy implements Serializable {
         this.createdBy = createdBy;
     }
 
-    @Column(name = "validity_time")
+    @Column(name = "default_validity_time")
     @NumberFormat(style = NumberFormat.Style.NUMBER)
-    public Integer getValidityTime() {
-        return validityTime;
+    @Min(value = 0)
+    public Integer getDefaultValidityTime() {
+        return defaultValidityTime;
     }
 
-    public void setValidityTime(Integer validityTime) {
-        this.validityTime = validityTime;
+    public void setDefaultValidityTime(Integer validityTime) {
+        this.defaultValidityTime = validityTime;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "crawl_params_id")
-    public CrawlParams getCrawlParams() {
-        return crawlParams;
+    @Column(name = "max_process_count")
+    @NotNull(message = "{validation.NotEmpty.message}")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Max(value = 250)
+    @Min(value = 1)
+    public Integer getMaxProcessCount() {
+        return maxProcessCount;
     }
 
-    public void setCrawlParams(CrawlParams crawlParams) {
-        this.crawlParams = crawlParams;
+    public void setMaxProcessCount(Integer maxProcessCount) {
+        this.maxProcessCount = maxProcessCount;
+    }
+
+    @Column(name = "buffer_size")
+    @NotNull(message = "{validation.NotEmpty.message}")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Max(value = 20000)
+    @Min(value = 1)
+    public Integer getBufferSize() {
+        return bufferSize;
+    }
+
+    public void setBufferSize(Integer bufferSize) {
+        this.bufferSize = bufferSize;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "policy")
+    public Set<InitUrl> getInitUrls() {
+        return initUrls;
+    }
+
+    public void setInitUrls(Set<InitUrl> initUrls) {
+        this.initUrls = initUrls;
+    }
+
+    public void addInitUrl(InitUrl initUrl){
+        getInitUrls().add(initUrl);
     }
 }
