@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
         http://www.springframework.org/schema/faces http://www.springframework.org/schema/faces/spring-faces.xsd">
 
-
+    <beans:import resource="webflow.xml" />
     <!-- Enables the Spring MVC @Controller programming model -->
 
     <!-- Enable controller method level security -->
@@ -21,13 +21,9 @@
 
     <default-servlet-handler/>
 
-    <!--<faces:resources />-->
-
     <annotation-driven validator="validator"/>
 
     <context:component-scan base-package="pl.edu.agh.ecm.web.controller" />
-    <!--<context:component-scan base-package="pl.edu.agh.ecm.web.view" />-->
-    <!--<context:component-scan base-package="pl.edu.agh.ecm"/>-->
 
     <!-- register "global" interceptor beans to apply to all registered HandlerMappings -->
     <interceptors>
@@ -69,6 +65,7 @@ resource bundle localizes all application specific messages such as entity names
             <beans:list>
                 <beans:value>/WEB-INF/layouts/layouts.xml</beans:value>
                 <beans:value>/WEB-INF/views/**/views.xml</beans:value>
+                <beans:value>/WEB-INF/flows/**/views.xml</beans:value>
             </beans:list>
         </beans:property>
     </beans:bean>
@@ -84,12 +81,5 @@ resource bundle localizes all application specific messages such as entity names
         <beans:property name="validationMessageSource" ref="messageSource"/>
     </beans:bean>
 
-    <!--<beans:bean class="org.springframework.faces.webflow.JsfFlowHandlerAdapter">-->
-        <!--<beans:property name="flowExecutor" ref="flowExecutor" />-->
-    <!--</beans:bean>-->
-
-    <!--<beans:bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">-->
-        <!--<beans:property name="flowRegistry" ref="flowRegistry" />-->
-    <!--</beans:bean>-->
 
 </beans:beans>

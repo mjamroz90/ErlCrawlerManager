@@ -28,4 +28,6 @@ public interface CrawlSessionRepository extends CrudRepository<CrawlSession,Long
     @Query("select distinct s from CrawlSession s left join fetch s.nodes n where s.finishedBy.id = :userId")
     public List<CrawlSession> findByUserFinishedWithDetail(@Param("userId") Long userId);
 
+    @Query("select distinct s from CrawlSession s where s.finished is null ")
+    public CrawlSession getRunningSession();
 }

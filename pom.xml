@@ -294,15 +294,6 @@
             <url>http://repository.primefaces.org</url>
             <layout>default</layout>
         </repository>
-
-        <repository>
-            <id>
-                org.springframework.security.taglibs.facelets
-            </id>
-            <url>
-                http://spring-security-facelets-taglib.googlecode.com/svn/repo/
-            </url>
-        </repository>
     </repositories>
 
     <build>

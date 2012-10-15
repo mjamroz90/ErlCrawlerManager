@@ -23,4 +23,5 @@ public interface NodeRepository extends PagingAndSortingRepository<Node,Long> {
 
     @Query("select distinct n from Node n where n.name = :name and n.address = :address")
     public Node findByNameAndAddress(@Param("name")String name,@Param("address") String address);
+
 }

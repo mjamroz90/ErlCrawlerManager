@@ -65,4 +65,10 @@ public class CrawlSessionServiceImpl implements CrawlSessionService {
         }
         return crawlSessionRepository.save(session);
     }
+
+    @Transactional(readOnly = true)
+    public CrawlSession getRunningSession() {
+
+        return crawlSessionRepository.getRunningSession();
+    }
 }

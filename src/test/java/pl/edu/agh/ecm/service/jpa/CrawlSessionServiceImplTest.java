@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import org.hibernate.type.ListType;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.edu.agh.ecm.domain.CrawlSession;
 import pl.edu.agh.ecm.domain.Node;
@@ -65,26 +66,60 @@ public class CrawlSessionServiceImplTest extends AbstractServiceImplTest {
     public void testFindById() throws Exception {
 
         CrawlSession crawlSession = crawlSessionService.save(crawlSessions.get(0));
+        Assert.assertNotNull(crawlSession.getId());
+        CrawlSession fetchedCrawlSession = crawlSessionService.findById(crawlSession.getId());
+        Assert.assertEquals(fetchedCrawlSession.getId(),crawlSession.getId());
+        Assert.assertEquals(fetchedCrawlSession.getStartedBy().getId(),crawlSession.getStartedBy().getId());
     }
 
     @Test
     public void testFindByIdWithDetail() throws Exception {
 
+        CrawlSession crawlSession = crawlSessionService.save(crawlSessions.get(0));
+        Assert.assertNotNull(crawlSession.getId());
+        CrawlSession fetchedCrawlSession = crawlSessionService.findById(crawlSession.getId());
+        Assert.assertEquals(fetchedCrawlSession.getId(),crawlSession.getId());
+        Assert.assertEquals(fetchedCrawlSession.getStartedBy().getId(),crawlSession.getStartedBy().getId());
+        Assert.assertNotNull(fetchedCrawlSession.getNodes());
     }
 
     @Test
     public void testFindAll() throws Exception {
 
+        List<CrawlSession> sessions = crawlSessionService.findAll();
+        Assert.assertEquals(sessions.size(),0);
+        CrawlSession session = crawlSessionService.save(crawlSessions.get(0));
+        List<CrawlSession> sessions1 = crawlSessionService.findAll();
+        Assert.assertNotNull(sessions1);
+        Assert.assertEquals(sessions1.size(),1);
+        Assert.assertEquals(sessions1.get(0).getId(),session.getId());
     }
 
     @Test
     public void testFindAllWithDetail() throws Exception {
 
+        List<CrawlSession> sessions = crawlSessionService.findAll();
+        Assert.assertEquals(sessions.size(),0);
+        CrawlSession session = crawlSessionService.save(crawlSessions.get(0));
+        List<CrawlSession> sessions1 = crawlSessionService.findAll();
+        Assert.assertNotNull(sessions1);
+        Assert.assertEquals(sessions1.size(),1);
+        Assert.assertEquals(sessions1.get(0).getId(),session.getId());
+        for (CrawlSession session1 : sessions1){
+            Assert.assertNotNull(session1.getStartedBy());
+        }
     }
 
     @Test
     public void testFindByUserStartedWithDetail() throws Exception {
 
+        CrawlSession crawlSession = crawlSessionService.save(crawlSessions.get(0));
+        List<CrawlSession> foundSessions = crawlSessionService.findByUserStartedWithDetail(user.getId());
+        Assert.assertNotNull(foundSessions);
+        Assert.assertEquals(foundSessions.size(),1);
+        Assert.assertEquals(crawlSession.getId(),foundSessions.get(0).getId());
+        Assert.assertEquals(crawlSession.getStartedBy().getId(),foundSessions.get(0).getStartedBy().getId());
+        Assert.assertNotNull(foundSessions.get(0).getNodes());
     }
 
     @Test
@@ -111,5 +146,16 @@ public class CrawlSessionServiceImplTest extends AbstractServiceImplTest {
         for (Node node : crawlSessionList1.get(0).getNodes()){
             Assert.assertNotNull(node.getId());
         }
+    }
+
+    @Test
+    public void testGetRunningSession() throws Exception{
+
+        CrawlSession crawlSession = crawlSessionService.getRunningSession();
+        Assert.assertNull(crawlSession);
+        CrawlSession savedSession = crawlSessionService.save(crawlSessions.get(0));
+        CrawlSession crawlSession1 = crawlSessionService.getRunningSession();
+        Assert.assertNotNull(crawlSession1);
+        Assert.assertEquals(crawlSession1.getId(),savedSession.getId());
     }
 }

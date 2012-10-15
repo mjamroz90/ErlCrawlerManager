@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+      http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+       start-state="isCrawlSessionStartedActionState">
+
+    <action-state id="isCrawlSessionStartedActionState">
+       <evaluate expression="crawlSessionActions.isAnySessionStarted"/>
+       <transition on="running" to="sessionRunningState"/>
+       <transition on="stopped" to="defineNodesForm" />
+    </action-state>
+
+    <view-state id="defineNodesForm" view="defineNodesForm">
+        <!--<on-render>-->
+            <!--<evaluate expression="defineNodesFormAction.setupForm"/>-->
+        <!--</on-render>-->
+        <transition on="next" to="launchCrawlerActionState">
+            <evaluate expression="crawlSessionActions.putNodesIntoSession" />
+        </transition>
+    </view-state>
+
+    <action-state id="launchCrawlerActionState">
+        <!--<evaluate expression="crawlSessionActions.launchCrawler" />-->
+    </action-state>
+
+    <end-state id="sessionRunningState" />
+</flow>

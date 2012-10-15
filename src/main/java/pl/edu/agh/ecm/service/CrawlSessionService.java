@@ -27,4 +27,5 @@ public interface CrawlSessionService {
 
     public CrawlSession save(CrawlSession session);
 
+    public CrawlSession getRunningSession();
 }

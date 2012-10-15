@@ -114,7 +114,7 @@
         <form:form id="allowToStopSessionForm" modelAttribute="userStopSessionForm"
                    method="post" action="?allowToStopSession">
 
-            <table class="notAllowedToStopSession">
+            <table class="entryTable">
                 <thead>
                 <tr>
                     <th>${labelUserLogin}</th>
