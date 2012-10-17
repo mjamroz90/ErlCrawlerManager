@@ -1,23 +1,23 @@
 package pl.edu.agh.ecm.webflow.action;
 
-import org.apache.tiles.context.MapEntry;
 import org.springframework.webflow.action.MultiAction;
-import org.springframework.webflow.core.collection.AttributeMap;
 import org.springframework.webflow.core.collection.ParameterMap;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.RequestContext;
+import pl.edu.agh.ecm.crawler.CrawlerConnector;
 import pl.edu.agh.ecm.domain.CrawlSession;
 import pl.edu.agh.ecm.domain.Node;
 import pl.edu.agh.ecm.service.CrawlSessionService;
 import pl.edu.agh.ecm.service.NodeService;
 import pl.edu.agh.ecm.webflow.forms.DefineNodesForm;
 import pl.edu.agh.ecm.webflow.forms.NodeEntry;
+import pl.edu.agh.ecm.webflow.forms.StartAppsResultOnNode;
+import pl.edu.agh.ecm.webflow.forms.StartCrawlerResults;
 
-import java.lang.reflect.MalformedParameterizedTypeException;
-import java.security.PrivilegedActionException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,6 +32,7 @@ public class CrawlSessionActions extends MultiAction {
 
     private CrawlSessionService crawlSessionService;
     private NodeService nodeService;
+    private CrawlerConnector crawlerConnector;
 
     public void setNodeService(NodeService nodeService) {
         this.nodeService = nodeService;
@@ -39,6 +40,10 @@ public class CrawlSessionActions extends MultiAction {
 
     public void setCrawlSessionService(CrawlSessionService crawlSessionService) {
         this.crawlSessionService = crawlSessionService;
+    }
+
+    public void setCrawlerConnector(CrawlerConnector crawlerConnector){
+        this.crawlerConnector = crawlerConnector;
     }
 
     public Event isAnySessionStarted(RequestContext requestContext){
@@ -54,12 +59,6 @@ public class CrawlSessionActions extends MultiAction {
 
     }
 
-    public Event launchCrawler(RequestContext context){
-        ParameterMap parameterMap = context.getRequestParameters();
-        DefineNodesForm defineNodesForm = (DefineNodesForm)context.getFlowScope().get("defineNodesForm");
-        return success();
-    }
-
     public Event putNodesIntoSession(RequestContext context){
 
         ParameterMap parameterMap = context.getRequestParameters();
@@ -67,6 +66,15 @@ public class CrawlSessionActions extends MultiAction {
         String domainManagerNode = parameterMap.get("domainManagerNode");
         CrawlSession crawlSession = initSessionWithNodes(domainManagerNode,nodeEntries);
         context.getFlowScope().put("crawlSession",crawlSession);
+        return success();
+    }
+
+    public Event launchCrawler(RequestContext context){
+        CrawlSession crawlSession =(CrawlSession)context.getFlowScope().get("crawlSession",CrawlSession.class);
+        //W tym momencie, w obiekcie sesji mamy pola domainManagerNode, oraz nodes
+        String[][] firstConfig = ActionUtils.sessionNodesToProperties(crawlSession);
+        StartCrawlerResults crawlerResults = startCrawlerOnNode(firstConfig,crawlSession);
+        context.getFlowScope().put("appsView",crawlerResults);
         return success();
     }
 
@@ -108,5 +116,21 @@ public class CrawlSessionActions extends MultiAction {
         }
 
         return crawlSession;
+    }
+
+    private StartCrawlerResults startCrawlerOnNode(String[][] properties,CrawlSession crawlSession){
+
+        StartCrawlerResults crawlerResults = new StartCrawlerResults();
+        Set<Node> nodeList = crawlSession.getNodes();
+        for (Node node : nodeList){
+            String nodeName = node.toString();
+            String[][] result = crawlerConnector.startCrawlerOnNode(nodeName,properties);
+            StartAppsResultOnNode resultOnNode =
+                    ActionUtils.getStartAppsResultOnNode(nodeName,
+                            result,crawlerConnector);
+            crawlerResults.addStartAppsResultOnNode(resultOnNode);
+        }
+        crawlerResults.setCanGoToNextStep(crawlSession.getDomainManagerNode().toString());
+        return crawlerResults;
     }
 }

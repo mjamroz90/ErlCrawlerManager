@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:message code="label_session_apps_view" var="labelAppsView" />
+    <spring:url var="successImg" value="/resources/styles/messages/success.png" />
+    <spring:url var="errorImg" value="/resources/styles/messages/error.png" />
+
+    <h2>${labelAppsView}</h2>
+    <div id="appsView">
+        <table class="entryTable">
+            <thead>
+                <tr>
+                    <th><spring:message code="label_node_name" /></th>
+                    <th>cache</th>
+                    <th>crawl_event</th>
+                    <th>domain_manager</th>
+                    <th>session_manager</th>
+                </tr>
+            </thead>
+            <tbody>
+                  <c:forEach items="${appsView.startAppsResultOnNodes}" var="startResult" varStatus="status">
+                     <tr>
+                         <td>${startResult.nodeName}</td>
+                         <td>
+                             <c:choose>
+                                 <c:when test="${startResult.cacheStarted}">
+                                     <img src="${successImg}"/>
+                                 </c:when>
+                                 <c:otherwise>
+                                     <img src="${errorImg}" />
+                                 </c:otherwise>
+                             </c:choose>
+                         </td>
+                         <td>
+                             <c:choose>
+                                 <c:when test="${startResult.crawlEventStarted}">
+                                     <img src="${successImg}"/>
+                                 </c:when>
+                                 <c:otherwise>
+                                     <img src="${errorImg}" />
+                                 </c:otherwise>
+                             </c:choose>
+                         </td>
+                         <td>
+                             <c:choose>
+                                 <c:when test="${startResult.domainManagerStarted}">
+                                     <img src="${successImg}"/>
+                                 </c:when>
+                                 <c:otherwise>
+                                     <img src="${errorImg}" />
+                                 </c:otherwise>
+                             </c:choose>
+                         </td>
+                         <td>
+                             <c:choose>
+                                 <c:when test="${startResult.sessionManagerStarted}">
+                                     <img src="${successImg}"/>
+                                 </c:when>
+                                 <c:otherwise>
+                                     <img src="${errorImg}" />
+                                 </c:otherwise>
+                             </c:choose>
+                         </td>
+                     </tr>
+                  </c:forEach>
+            </tbody>
+        </table>
+        <p/>
+
+
+    </div>
+
+</div>

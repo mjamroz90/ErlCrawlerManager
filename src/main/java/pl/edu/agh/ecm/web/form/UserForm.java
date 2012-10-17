@@ -13,9 +13,9 @@ import javax.validation.constraints.Size;
  * To change this template use File | Settings | File Templates.
  */
 
-@ScriptAssert(lang = "javascript",
-              script = "_this.confirmPassword.equals(_this.password)",
-              message = "password.mismatch.message" )
+//@ScriptAssert(lang = "javascript",
+//              script = "_this.confirmPassword.equals(_this.password)",
+//              message = "password.mismatch.message" )
 public class UserForm {
 
     private String login;

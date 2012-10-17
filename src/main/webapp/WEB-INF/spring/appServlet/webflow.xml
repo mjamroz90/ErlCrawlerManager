@@ -34,6 +34,7 @@
     <bean id="crawlSessionActions" class="pl.edu.agh.ecm.webflow.action.CrawlSessionActions">
         <property name="crawlSessionService" ref="crawlSessionService" />
         <property name="nodeService" ref="nodeService" />
+        <property name="crawlerConnector" ref="crawlerConnector" />
     </bean>
 
     <!--<bean id="defineNodesFormAction" class="org.springframework.webflow.action.FormAction">-->

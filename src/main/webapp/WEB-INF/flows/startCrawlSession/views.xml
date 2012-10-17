@@ -4,4 +4,8 @@
     <definition extends="default" name="defineNodesForm">
         <put-attribute name="body" value="/WEB-INF/flows/startCrawlSession/defineNodesForm.jspx" />
     </definition>
+
+    <definition extends="default" name="displayAppsView">
+        <put-attribute name="body" value="/WEB-INF/flows/startCrawlSession/displayAppsView.jspx" />
+    </definition>
 </tiles-definitions>

@@ -21,8 +21,12 @@
     </view-state>
 
     <action-state id="launchCrawlerActionState">
-        <!--<evaluate expression="crawlSessionActions.launchCrawler" />-->
+        <evaluate expression="crawlSessionActions.launchCrawler" />
+        <transition on="success" to="displayAppsView" />
     </action-state>
 
+    <view-state id="displayAppsView" view="displayAppsView">
+
+    </view-state>
     <end-state id="sessionRunningState" />
 </flow>

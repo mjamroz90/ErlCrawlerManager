@@ -87,6 +87,33 @@ public class CrawlerConnector {
 
     }
 
+    public String[][] startCrawlerOnNode(String nodeName,String[][] properties){
+
+        try{
+            String[][] result = remoteManagerServer.startCrawlerOnNode(nodeName,properties);
+            return result;
+        }
+        catch (Exception e){
+            return new String[][]{
+                    {CrawlerAppsNames.crawlEventApp,"error"},
+                    {CrawlerAppsNames.domainManagerApp,"error"},
+                    {CrawlerAppsNames.cacheApp,"error"},
+                    {CrawlerAppsNames.sessionManagerApp,"error"}
+            };
+        }
+    }
+
+    public boolean pingApp(String nodeName,String appName){
+
+        try{
+            StringHolder holder = new StringHolder();
+            return remoteManagerServer.pingApp(nodeName,appName,holder);
+        }
+        catch (Exception e){
+            return true;
+        }
+    }
+
     @NotEmpty(message = "{validation.NotEmpty.message}")
     @IPDomain(message = "{ipdomain.validation.message}")
     public String getRemoteManagerAddress() {
