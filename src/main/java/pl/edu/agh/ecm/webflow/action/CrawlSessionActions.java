@@ -1,5 +1,7 @@
 package pl.edu.agh.ecm.webflow.action;
 
+import org.joda.time.DateTime;
+import org.springframework.binding.validation.ValidationContext;
 import org.springframework.webflow.action.MultiAction;
 import org.springframework.webflow.core.collection.ParameterMap;
 import org.springframework.webflow.execution.Event;
@@ -9,10 +11,7 @@ import pl.edu.agh.ecm.domain.CrawlSession;
 import pl.edu.agh.ecm.domain.Node;
 import pl.edu.agh.ecm.service.CrawlSessionService;
 import pl.edu.agh.ecm.service.NodeService;
-import pl.edu.agh.ecm.webflow.forms.DefineNodesForm;
-import pl.edu.agh.ecm.webflow.forms.NodeEntry;
-import pl.edu.agh.ecm.webflow.forms.StartAppsResultOnNode;
-import pl.edu.agh.ecm.webflow.forms.StartCrawlerResults;
+import pl.edu.agh.ecm.webflow.forms.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +45,14 @@ public class CrawlSessionActions extends MultiAction {
         this.crawlerConnector = crawlerConnector;
     }
 
+    public CrawlSessionForm initCrawlSessionForm(){
+        CrawlSessionForm form = new CrawlSessionForm();
+        form.setNewInitUrl(new InitUrlForm());
+        form.setCurrentTime(DateTime.now());
+        ValidationContext validationContext = null;
+        return form;
+    }
+
     public Event isAnySessionStarted(RequestContext requestContext){
 
         if (crawlSessionService.getRunningSession() == null){
@@ -57,6 +64,12 @@ public class CrawlSessionActions extends MultiAction {
             return new Event(this,"running");
         }
 
+    }
+
+    public void addInitUrlToCrawlSession(CrawlSessionForm crawlSessionForm){
+
+        InitUrlForm initUrlForm = crawlSessionForm.getNewInitUrl();
+        crawlSessionForm.getInitUrlFormList().add(initUrlForm);
     }
 
     public Event putNodesIntoSession(RequestContext context){

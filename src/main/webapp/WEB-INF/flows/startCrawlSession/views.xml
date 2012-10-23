@@ -8,4 +8,8 @@
     <definition extends="default" name="displayAppsView">
         <put-attribute name="body" value="/WEB-INF/flows/startCrawlSession/displayAppsView.jspx" />
     </definition>
+
+    <definition extends="default" name="defineSessionParams">
+        <put-attribute name="body" value="/WEB-INF/flows/startCrawlSession/defineSessionParams.jspx" />
+    </definition>
 </tiles-definitions>

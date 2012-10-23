@@ -11,9 +11,10 @@
     <spring:message code="label_session_apps_view" var="labelAppsView" />
     <spring:url var="successImg" value="/resources/styles/messages/success.png" />
     <spring:url var="errorImg" value="/resources/styles/messages/error.png" />
+    <c:set value="${flowExecutionUrl}&amp;_eventId=next" var="nextStepUrl" />
 
     <h2>${labelAppsView}</h2>
-    <div id="appsView">
+    <div id="appsView" class="panelComponent">
         <table class="entryTable">
             <thead>
                 <tr>
@@ -73,8 +74,13 @@
             </tbody>
         </table>
         <p/>
-
-
     </div>
 
+    <div id="actionsPanel" style="margin-left:10%;margin-right:10%;background: #EEEEEE;border-radius: 5px ">
+        <div id="nextLink" style="text-align: right">
+            <a href="${nextStepUrl}">
+                <spring:message code="label_session_next" />
+            </a>
+        </div>
+    </div>
 </div>

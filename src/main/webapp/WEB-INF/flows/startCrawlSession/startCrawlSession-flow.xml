@@ -12,9 +12,6 @@
     </action-state>
 
     <view-state id="defineNodesForm" view="defineNodesForm">
-        <!--<on-render>-->
-            <!--<evaluate expression="defineNodesFormAction.setupForm"/>-->
-        <!--</on-render>-->
         <transition on="next" to="launchCrawlerActionState">
             <evaluate expression="crawlSessionActions.putNodesIntoSession" />
         </transition>
@@ -26,7 +23,17 @@
     </action-state>
 
     <view-state id="displayAppsView" view="displayAppsView">
-
+        <transition on="next" to="defineSessionParams">
+            <evaluate expression="crawlSessionActions.initCrawlSessionForm()" result="flowScope.crawlSessionForm"/>
+        </transition>
     </view-state>
-    <end-state id="sessionRunningState" />
+
+    <view-state id="defineSessionParams" view="defineSessionParams" model="crawlSessionForm">
+        <transition on="addInitUrl" validate="true">
+            <evaluate expression="crawlSessionActions.addInitUrlToCrawlSession(flowScope.crawlSessionForm)" />
+        </transition>
+    </view-state>
+
+    <end-state id="sessionRunningState" >
+    </end-state>
 </flow>

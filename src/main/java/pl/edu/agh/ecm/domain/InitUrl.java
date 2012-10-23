@@ -50,8 +50,8 @@ public class InitUrl {
     }
 
     @Column(name = "address")
-    @NotEmpty(message = "{validation.NotEmpty.message}")
-    @URL(message = "{url.validation.message}")
+//    @NotEmpty(message = "{validation.NotEmpty.message}")
+//    @URL(message = "{url.validation.message}")
     public String getAddress() {
         return address;
     }
@@ -61,9 +61,9 @@ public class InitUrl {
     }
 
     @Column(name = "width")
-    @NotNull(message = "{validation.NotEmpty.message}")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value = 0)
+//    @NotNull(message = "{validation.NotEmpty.message}")
+//    @NumberFormat(style = NumberFormat.Style.NUMBER)
+//    @Min(value = 0)
     public Integer getWidth() {
         return width;
     }
@@ -73,9 +73,9 @@ public class InitUrl {
     }
 
     @Column(name = "depth")
-    @NotNull(message = "Crawl depth {validation.NotEmpty.message}")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value = 0)
+//    @NotNull(message = "{validation.NotEmpty.message}")
+//    @NumberFormat(style = NumberFormat.Style.NUMBER)
+//    @Min(value = 0)
     public Integer getDepth() {
         return depth;
     }
@@ -85,8 +85,8 @@ public class InitUrl {
     }
 
     @Column(name = "validity_time")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value = 0)
+//    @NumberFormat(style = NumberFormat.Style.NUMBER)
+//    @Min(value = 0)
     public Integer getValidityTime() {
         return validityTime;
     }

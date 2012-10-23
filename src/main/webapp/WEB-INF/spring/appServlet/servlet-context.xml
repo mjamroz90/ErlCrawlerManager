@@ -42,14 +42,6 @@ resource bundle localizes all application specific messages such as entity names
     <beans:bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver" id="localeResolver"
                 p:cookieName="locale"/>
 
-    <!--<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="urlBasedViewResolver">-->
-        <!--<beans:property name="viewClass" value="org.springframework.faces.mvc.JsfView" />-->
-        <!--<beans:property name="prefix" value="/WEB-INF/views/" />-->
-        <!--<beans:property name="suffix" value=".xhtml" />-->
-    <!--</beans:bean>-->
-
-
-
     <!--<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
                 <!--id="internalResourceViewResolver">-->
         <!--<beans:property name="prefix" value="/WEB-INF/views/" />-->

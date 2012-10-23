@@ -9,7 +9,7 @@
     <jsp:output omit-xml-declaration="yes"/>
 
     <div id="defineNodesForm" class="panelComponent">
-        <h3><spring:message code="label_node_listing" /></h3>
+        <h3 align="center"><spring:message code="label_node_listing" /></h3>
         <form:form modelAttribute="defineNodesForm"  action="${flowExecutionUrl}">
 
             <table class="entryTable">
