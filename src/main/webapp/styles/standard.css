@@ -424,6 +424,13 @@ fieldset th {
     border-radius: 10px;
 }
 
+table.entryTable th{
+    width: 100px;
+}
+table.entryTable th.first{
+    width: auto;
+}
+
 .loginForm{
     margin-left: 35%;
     margin-bottom: 30%;
@@ -445,4 +452,8 @@ fieldset th {
     width: 40%;
     background: #EEEEEE;
     border-radius: 15px
+}
+
+#initUrls.panelComponent #sessionParams.panelComponent{
+    width: 60%;
 }

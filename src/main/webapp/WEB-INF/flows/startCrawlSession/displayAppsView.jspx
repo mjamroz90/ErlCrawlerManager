@@ -18,7 +18,7 @@
         <table class="entryTable">
             <thead>
                 <tr>
-                    <th><spring:message code="label_node_name" /></th>
+                    <th class="first"><spring:message code="label_node_name" /></th>
                     <th>cache</th>
                     <th>crawl_event</th>
                     <th>domain_manager</th>
@@ -73,7 +73,6 @@
                   </c:forEach>
             </tbody>
         </table>
-        <p/>
     </div>
 
     <div id="actionsPanel" style="margin-left:10%;margin-right:10%;background: #EEEEEE;border-radius: 5px ">

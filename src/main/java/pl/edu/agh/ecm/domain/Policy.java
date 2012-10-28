@@ -27,7 +27,7 @@ public class Policy implements Serializable {
 
     private Long id;
     private User createdBy;
-    private Integer defaultValidityTime;
+    private Long defaultValidityTime;
     private Integer maxProcessCount;
     private Integer bufferSize;
     private Set<InitUrl> initUrls = new HashSet<InitUrl>();
@@ -63,21 +63,21 @@ public class Policy implements Serializable {
     }
 
     @Column(name = "default_validity_time")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Min(value = 0)
-    public Integer getDefaultValidityTime() {
+//    @NumberFormat(style = NumberFormat.Style.NUMBER)
+//    @Min(value = 0)
+    public Long getDefaultValidityTime() {
         return defaultValidityTime;
     }
 
-    public void setDefaultValidityTime(Integer validityTime) {
+    public void setDefaultValidityTime(Long validityTime) {
         this.defaultValidityTime = validityTime;
     }
 
     @Column(name = "max_process_count")
-    @NotNull(message = "{validation.NotEmpty.message}")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Max(value = 250)
-    @Min(value = 1)
+//    @NotNull(message = "{validation.NotEmpty.message}")
+//    @NumberFormat(style = NumberFormat.Style.NUMBER)
+//    @Max(value = 250)
+//    @Min(value = 1)
     public Integer getMaxProcessCount() {
         return maxProcessCount;
     }
@@ -87,10 +87,10 @@ public class Policy implements Serializable {
     }
 
     @Column(name = "buffer_size")
-    @NotNull(message = "{validation.NotEmpty.message}")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
-    @Max(value = 20000)
-    @Min(value = 1)
+//    @NotNull(message = "{validation.NotEmpty.message}")
+//    @NumberFormat(style = NumberFormat.Style.NUMBER)
+//    @Max(value = 20000)
+//    @Min(value = 1)
     public Integer getBufferSize() {
         return bufferSize;
     }

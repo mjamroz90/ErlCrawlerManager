@@ -25,12 +25,12 @@ public class InitUrl {
     private String address;
     private Integer width;
     private Integer depth;
-    private Integer validityTime;
+    private Long validityTime;
     private Policy policy;
 
     public InitUrl(){}
 
-    public InitUrl(String address,Integer width, Integer depth,Integer validityTime){
+    public InitUrl(String address,Integer width, Integer depth,Long validityTime){
 
         this.address = address;
         this.width = width;
@@ -87,11 +87,11 @@ public class InitUrl {
     @Column(name = "validity_time")
 //    @NumberFormat(style = NumberFormat.Style.NUMBER)
 //    @Min(value = 0)
-    public Integer getValidityTime() {
+    public Long getValidityTime() {
         return validityTime;
     }
 
-    public void setValidityTime(Integer validityTime) {
+    public void setValidityTime(Long validityTime) {
         this.validityTime = validityTime;
     }
 

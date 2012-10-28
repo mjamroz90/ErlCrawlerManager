@@ -9,13 +9,14 @@
     <jsp:output omit-xml-declaration="yes"/>
 
     <script type="text/javascript">
+        var pickerObject = {
+            hourMax : 4320,
+            minuteMax : 59,
+            timeFormat: 'h:mm'
+        };
         $(function(){
-            $('#validityDate').timepicker({
-               hourMax : 4320,
-               minuteMax : 59,
-               timeFormat: 'h:mm'
-               //dateFormat: 'yyyy:MM:dd'
-            });
+            $('#validityDate').timepicker(pickerObject);
+            $('#defaultValidityDate').timepicker(pickerObject);
         });
     </script>
 
@@ -32,51 +33,96 @@
        <h3 align="center"><spring:message code="label_session_add_init_url" /></h3>
        <form:form modelAttribute="crawlSessionForm.newInitUrl" action="${flowExecutionUrl}">
 
-               <form:label path="address">
-                   <spring:message code="label_session_address"/>*
-               </form:label>
-               <form:input path="address"/>
-               <div>
-                   <form:errors path="address" cssClass="error"/>
-               </div>
-               <p/>
+               <p>
+                   <form:label path="address">
+                       <spring:message code="label_session_address"/>*
+                   </form:label>
+                   <form:input path="address"/>
+                   <div>
+                       <form:errors path="address" cssClass="error"/>
+                   </div>
+               </p>
 
-               <form:label path="width">
-                   <spring:message code="label_session_width" />*
-               </form:label>
-               <form:input path="width"/>
-               <div>
-                   <form:errors path="width" cssClass="error"/>
-               </div>
-               <p/>
+               <p>
+                   <form:label path="width">
+                       <spring:message code="label_session_width" />*
+                   </form:label>
+                   <form:input path="width"/>
+                   <div>
+                       <form:errors path="width" cssClass="error"/>
+                   </div>
+               </p>
 
-               <form:label path="depth">
-                   <spring:message code="label_session_depth"/>*
-               </form:label>
-               <form:input path="depth"/>
-               <div>
-                   <form:errors path="depth" cssClass="error"/>
-               </div>
-               <p/>
+               <p>
+                   <form:label path="depth">
+                       <spring:message code="label_session_depth"/>*
+                   </form:label>
+                   <form:input path="depth"/>
+                   <div>
+                       <form:errors path="depth" cssClass="error"/>
+                   </div>
+               </p>
 
-               <form:label path="validityDate">
-                   <spring:message code="label_session_valid_after" />*
-               </form:label>
-               <form:input path="validityDate" id="validityDate" />
-               <div>
-                   <form:errors path="validityDate" cssClass="error"/>
-               </div>
-               <p/>
-
-               <button type="submit" class="ui-button" align="center" name="_eventId_addInitUrl">
-                   <span class="ui-button-text">
-                       <spring:message code="label_session_add_init_url" />
-                   </span>
-               </button>
-
+               <p>
+                   <form:label path="validityDate">
+                       <spring:message code="label_session_valid_after" />*
+                   </form:label>
+                   <form:input path="validityDate" id="validityDate" />
+                   <div>
+                       <form:errors path="validityDate" cssClass="error"/>
+                   </div>
+               </p>
+               <p style="text-align: center;">
+                   <button type="submit" class="ui-button" name="_eventId_addInitUrl">
+                       <span class="ui-button-text">
+                           <spring:message code="label_session_add_init_url" />
+                       </span>
+                   </button>
+               </p>
        </form:form>
+
     </div>
 
+    <div id="sessionParams" class="panelComponent">
+        <h3 align="center"><spring:message code="label_session_other_params"/></h3>
+        <form:form modelAttribute="crawlSessionForm.policy" action="${flowExecutionUrl}">
+            <p>
+                <form:label path="maxProcessCount">
+                    <spring:message code="label_session_maxProcessCount"/>
+                </form:label>
+                <form:input path="maxProcessCount"/>
+                <div>
+                    <form:errors path="maxProcessCount" cssClass="error"/>
+                </div>
+            </p>
 
+            <p>
+                <form:label path="bufferSize">
+                    <spring:message code="label_session_bufferSize" />
+                </form:label>
+                <form:input path="bufferSize"/>
+                <div>
+                    <form:errors path="bufferSize" cssClass="error"/>
+                </div>
+            </p>
+
+            <p>
+                <form:label path="defaultValidityDate">
+                    <spring:message code="label_session_defaultValidityTime" />
+                </form:label>
+                <form:input path="defaultValidityDate" id="defaultValidityDate"/>
+                <div>
+                    <form:errors path="defaultValidityDate" cssClass="error"/>
+                </div>
+            </p>
+            <p style="text-align: center;">
+                <button type="submit" class="ui-button" name="_eventId_startSession">
+                    <span class="ui-button-text">
+                        <spring:message code="label_session_startSession"/>
+                    </span>
+                </button>
+            </p>
+        </form:form>
+    </div>
 
 </div>

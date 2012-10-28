@@ -1,6 +1,7 @@
 package pl.edu.agh.ecm.webflow.forms;
 
 import org.joda.time.DateTime;
+import pl.edu.agh.ecm.domain.Policy;
 
 import javax.validation.Valid;
 import java.io.Serializable;
@@ -19,6 +20,16 @@ public class CrawlSessionForm implements Serializable {
     private List<InitUrlForm> initUrlFormList = new ArrayList<InitUrlForm>();
     private InitUrlForm newInitUrl;
     private DateTime currentTime;
+    private PolicyForm policy;
+
+    @Valid
+    public PolicyForm getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(PolicyForm policy) {
+        this.policy = policy;
+    }
 
     public List<InitUrlForm> getInitUrlFormList() {
         return initUrlFormList;

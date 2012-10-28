@@ -11,9 +11,13 @@
        <transition on="stopped" to="defineNodesForm" />
     </action-state>
 
-    <view-state id="defineNodesForm" view="defineNodesForm">
+    <view-state id="defineNodesForm" view="defineNodesForm" model="defineNodesForm">
+        <on-render>
+            <evaluate expression="crawlSessionActions.initDefineNodesForm()"
+                      result="flowScope.defineNodesForm" />
+        </on-render>
         <transition on="next" to="launchCrawlerActionState">
-            <evaluate expression="crawlSessionActions.putNodesIntoSession" />
+            <evaluate expression="crawlSessionActions.putNodesIntoSession(flowScope.defineNodesForm,flowRequestContext)" />
         </transition>
     </view-state>
 
@@ -32,7 +36,12 @@
         <transition on="addInitUrl" validate="true">
             <evaluate expression="crawlSessionActions.addInitUrlToCrawlSession(flowScope.crawlSessionForm)" />
         </transition>
+        <transition on="startSession" validate="true" to="startCrawlSession"/>
     </view-state>
+
+    <action-state id="startCrawlSession">
+        <evaluate expression="crawlSessionActions.startCrawlSession"/>
+    </action-state>
 
     <end-state id="sessionRunningState" >
     </end-state>

@@ -4,6 +4,10 @@ import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormat;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.format.annotation.NumberFormat;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,11 +27,11 @@ public class InitUrlForm implements Serializable {
     private String address;
     private Integer width;
     private Integer depth;
-    private DateTime validityDate;
+    private Period validityDate;
 
     public InitUrlForm(){}
 
-    public InitUrlForm(String address, Integer width, Integer depth, DateTime validityDate) {
+    public InitUrlForm(String address, Integer width, Integer depth, Period validityDate) {
         this.address = address;
         this.width = width;
         this.depth = depth;
@@ -66,22 +70,25 @@ public class InitUrlForm implements Serializable {
         this.depth = depth;
     }
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
     @NotNull(message = "{validation.NotEmpty.message}")
-    public DateTime getValidityDate() {
+    public Period getValidityDate() {
         return validityDate;
     }
 
-    public void setValidityDate(DateTime validityDate) {
+    public void setValidityDate(Period validityDate) {
         this.validityDate = validityDate;
     }
 
     public String getValidityTimeString(){
         String validityDateString = "";
+        PeriodFormatter periodFormatter = new PeriodFormatterBuilder()
+                .appendHours()
+                .appendSeparator(":")
+                .appendMinutes().minimumPrintedDigits(2)
+                .toFormatter();
         if (validityDate != null){
            validityDateString  =
-                   org.joda.time.format.DateTimeFormat.forPattern("H:mm").print(validityDate);
+                   periodFormatter.print(validityDate);
         }
         return validityDateString;
     }

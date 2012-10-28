@@ -2,13 +2,13 @@ package pl.edu.agh.ecm.webflow.action;
 
 import org.joda.time.DateTime;
 import org.springframework.binding.validation.ValidationContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.webflow.action.MultiAction;
 import org.springframework.webflow.core.collection.ParameterMap;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.RequestContext;
 import pl.edu.agh.ecm.crawler.CrawlerConnector;
-import pl.edu.agh.ecm.domain.CrawlSession;
-import pl.edu.agh.ecm.domain.Node;
+import pl.edu.agh.ecm.domain.*;
 import pl.edu.agh.ecm.service.CrawlSessionService;
 import pl.edu.agh.ecm.service.NodeService;
 import pl.edu.agh.ecm.webflow.forms.*;
@@ -45,19 +45,23 @@ public class CrawlSessionActions extends MultiAction {
         this.crawlerConnector = crawlerConnector;
     }
 
+    public DefineNodesForm initDefineNodesForm(){
+
+        DefineNodesForm form = new DefineNodesForm(nodeService.findAll());
+        return form;
+    }
+
     public CrawlSessionForm initCrawlSessionForm(){
         CrawlSessionForm form = new CrawlSessionForm();
         form.setNewInitUrl(new InitUrlForm());
+        form.setPolicy(new PolicyForm());
         form.setCurrentTime(DateTime.now());
-        ValidationContext validationContext = null;
         return form;
     }
 
     public Event isAnySessionStarted(RequestContext requestContext){
 
         if (crawlSessionService.getRunningSession() == null){
-            DefineNodesForm nodesForm = new DefineNodesForm(nodeService.findAll());
-            requestContext.getFlowScope().put("defineNodesForm",nodesForm);
             return new Event(this,"stopped");
         }
         else{
@@ -66,20 +70,27 @@ public class CrawlSessionActions extends MultiAction {
 
     }
 
+    public Event startCrawlSession(RequestContext context){
+
+        CrawlSessionForm crawlSessionForm = (CrawlSessionForm)context.getFlowScope().get("crawlSessionForm");
+        CrawlSession crawlSession = (CrawlSession)context.getFlowScope().get("crawlSession");
+        fillCrawlSessionObject(crawlSessionForm,crawlSession);
+        return success();
+    }
+
     public void addInitUrlToCrawlSession(CrawlSessionForm crawlSessionForm){
 
         InitUrlForm initUrlForm = crawlSessionForm.getNewInitUrl();
-        crawlSessionForm.getInitUrlFormList().add(initUrlForm);
+        crawlSessionForm.getInitUrlFormList().add(
+                new InitUrlForm(initUrlForm.getAddress(),initUrlForm.getWidth(),
+                        initUrlForm.getDepth(),initUrlForm.getValidityDate()
+                ));
     }
 
-    public Event putNodesIntoSession(RequestContext context){
-
-        ParameterMap parameterMap = context.getRequestParameters();
-        List<NodeEntry> nodeEntries = getNodeEntriesFromParamMap(parameterMap);
-        String domainManagerNode = parameterMap.get("domainManagerNode");
-        CrawlSession crawlSession = initSessionWithNodes(domainManagerNode,nodeEntries);
+    public void putNodesIntoSession(DefineNodesForm defineNodesForm,RequestContext context){
+        CrawlSession crawlSession = initSessionWithNodes(defineNodesForm.getDomainManagerNode(),
+                defineNodesForm.getNodeEntryList());
         context.getFlowScope().put("crawlSession",crawlSession);
-        return success();
     }
 
     public Event launchCrawler(RequestContext context){
@@ -91,27 +102,7 @@ public class CrawlSessionActions extends MultiAction {
         return success();
     }
 
-    private List<NodeEntry> getNodeEntriesFromParamMap(ParameterMap parameterMap){
 
-        Map<String,String> stringMap = parameterMap.asMap();
-        List<NodeEntry> result = new ArrayList<NodeEntry>();
-        Pattern nodeNamePattern = Pattern.compile("(nodeEntryList\\[[0-9]+\\])\\.nodeName");
-
-        for (Map.Entry<String,String> entry : stringMap.entrySet()){
-            Matcher matcher = nodeNamePattern.matcher(entry.getKey());
-            if (matcher.find()){
-                String nodeName = entry.getValue();
-                String paramNamePrefix = matcher.group(1);
-                String nodeUsedStr = stringMap.get(paramNamePrefix+".used");
-                Boolean nodeUsed = new Boolean(nodeUsedStr);
-
-                NodeEntry nodeEntry = new NodeEntry(nodeName,nodeUsed);
-                result.add(nodeEntry);
-            }
-        }
-
-        return result;
-    }
 
     private CrawlSession initSessionWithNodes(String domainManagerNode,List<NodeEntry> nodeEntryList){
 
@@ -145,5 +136,35 @@ public class CrawlSessionActions extends MultiAction {
         }
         crawlerResults.setCanGoToNextStep(crawlSession.getDomainManagerNode().toString());
         return crawlerResults;
+    }
+
+    private void fillCrawlSessionObject(CrawlSessionForm crawlSessionForm,CrawlSession session){
+
+        PolicyForm policyForm = crawlSessionForm.getPolicy();
+        User currentUser = ((UserDetailsAdapter)
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+        Policy sessionPolicy = new Policy(policyForm.getMaxProcessCount(),
+                policyForm.getBufferSize(),currentUser);
+
+        Long time = policyForm.getDefaultValidityDate().toStandardDuration().getMillis();
+        sessionPolicy.setDefaultValidityTime(time);
+        List<InitUrlForm> initUrlFormList = crawlSessionForm.getInitUrlFormList();
+        for (InitUrlForm initUrlForm : initUrlFormList){
+            InitUrl initUrl = getInitUrlFromForm(initUrlForm);
+            initUrl.setPolicy(sessionPolicy);
+            sessionPolicy.addInitUrl(initUrl);
+        }
+        session.setPolicy(sessionPolicy);
+    }
+
+    private InitUrl getInitUrlFromForm(InitUrlForm initUrlForm){
+
+        InitUrl initUrl = new InitUrl();
+        initUrl.setAddress(initUrlForm.getAddress());
+        initUrl.setWidth(initUrlForm.getWidth());
+        initUrl.setDepth(initUrlForm.getDepth());
+        Long time = initUrlForm.getValidityDate().toStandardDuration().getMillis();
+        initUrl.setValidityTime(time);
+        return initUrl;
     }
 }

@@ -14,7 +14,7 @@ public class ApplicationConversionService extends DefaultConversionService {
     @Override
     protected void addDefaultConverters(){
         super.addDefaultConverters();
-        addConverter(new DateTimeConverter());
+        addConverter(new PeriodTimeConverter());
     }
 
 }

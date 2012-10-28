@@ -40,6 +40,10 @@ public class UserDetailsAdapter implements UserDetails {
         return authorities;
     }
 
+    public User getUser(){
+        return user;
+    }
+
     public String getFirstname(){
         return user.getFirstname();
     }
