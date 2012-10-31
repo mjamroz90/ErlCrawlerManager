@@ -41,9 +41,6 @@
     <bean id="periodTimeConverter" class="pl.edu.agh.ecm.webflow.converters.PeriodTimeConverter" />
     <bean id="conversionService" class="pl.edu.agh.ecm.webflow.converters.ApplicationConversionService" />
 
-    <!--<bean id="defineNodesFormAction" class="org.springframework.webflow.action.FormAction">-->
-        <!--<property name="formObjectClass"  value="pl.edu.agh.ecm.webflow.forms.DefineNodesForm" />-->
-    <!--</bean>-->
 
     <bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
         <property name="viewResolvers" ref="tilesViewResolver" />

@@ -1,8 +1,11 @@
 package pl.edu.agh.ecm.webflow.action;
 
 import org.joda.time.DateTime;
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.binding.message.MessageContext;
 import org.springframework.binding.validation.ValidationContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.webflow.action.EventFactorySupport;
 import org.springframework.webflow.action.MultiAction;
 import org.springframework.webflow.core.collection.ParameterMap;
 import org.springframework.webflow.execution.Event;
@@ -49,6 +52,24 @@ public class CrawlSessionActions extends MultiAction {
 
         DefineNodesForm form = new DefineNodesForm(nodeService.findAll());
         return form;
+    }
+
+    public Event validateDefineNodesForm(DefineNodesForm defineNodesForm,MessageContext messageContext){
+
+        boolean foundMarkedNode = false;
+        for (NodeEntry nodeEntry : defineNodesForm.getNodeEntryList()){
+            if (nodeEntry.isUsed()){
+                foundMarkedNode = true;
+            }
+        }
+        if (!foundMarkedNode){
+            messageContext.addMessage(new MessageBuilder().error().source("nodeEntryList")
+                    .code("label_session_node_unmarked").build());
+            return error();
+        }
+        else{
+            return success();
+        }
     }
 
     public CrawlSessionForm initCrawlSessionForm(){

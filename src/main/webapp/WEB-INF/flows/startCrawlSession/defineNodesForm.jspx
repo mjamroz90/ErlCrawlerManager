@@ -12,31 +12,38 @@
         <h3 align="center"><spring:message code="label_node_listing" /></h3>
         <form:form modelAttribute="defineNodesForm"  action="${flowExecutionUrl}">
 
-            <table class="entryTable">
-               <thead>
-                    <tr>
-                        <th><spring:message code="label_node_name" /></th>
-                        <th></th>
-                    </tr>
-               </thead>
-               <tbody>
-                    <c:forEach items="${defineNodesForm.nodeEntryList}" var="nodeEntryList" varStatus="status">
+            <p>
+                <table class="entryTable">
+                   <thead>
                         <tr>
-                            <td><form:input path="nodeEntryList[${status.index}].nodeName" readonly="true" /></td>
-                            <td><form:checkbox path="nodeEntryList[${status.index}].used" /></td>
+                            <th><spring:message code="label_node_name" /></th>
+                            <th></th>
                         </tr>
-                    </c:forEach>
-               </tbody>
-            </table>
-            <p/>
-          <!--<input type="submit" name="_eventId_next" value="Next"/>-->
+                   </thead>
+                   <tbody>
+                        <c:forEach items="${defineNodesForm.nodeEntryList}" var="nodeEntryList" varStatus="status">
+                            <tr>
+                                <td><form:input path="nodeEntryList[${status.index}].nodeName" readonly="true" /></td>
+                                <td><form:checkbox path="nodeEntryList[${status.index}].used" /></td>
+                            </tr>
+                        </c:forEach>
+                   </tbody>
+                </table>
+            </p>
+
+            <p>
+                <div>
+                    <form:errors path="nodeEntryList" cssClass="error" />
+                </div>
+            </p>
+
            <form:label path="domainManagerNode">Domain Manager Node:</form:label>
            <form:select path="domainManagerNode" items="${defineNodesForm.nodeNames}" />
-           <p style="text-align: center;"/>
-
-          <button type="submit" class="ui-button" name="_eventId_next">
-                <span class="ui-button-text">Next</span>
-          </button>
+           <p style="text-align: center;">
+              <button type="submit" class="ui-button" name="_eventId_next">
+                    <span class="ui-button-text">Next</span>
+              </button>
+           </p>
         </form:form>
     </div>
 

@@ -17,6 +17,7 @@
                       result="flowScope.defineNodesForm" />
         </on-render>
         <transition on="next" to="launchCrawlerActionState">
+            <evaluate expression="crawlSessionActions.validateDefineNodesForm(flowScope.defineNodesForm,messageContext)" />
             <evaluate expression="crawlSessionActions.putNodesIntoSession(flowScope.defineNodesForm,flowRequestContext)" />
         </transition>
     </view-state>
