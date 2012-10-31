@@ -48,8 +48,11 @@ resource bundle localizes all application specific messages such as entity names
         <!--<beans:property name="suffix" value=".xhtml" />-->
     <!--</beans:bean>-->
 
-    <beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="tilesViewResolver">
-        <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+    <!--<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="tilesViewResolver">-->
+        <!--<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />-->
+    <!--</beans:bean>-->
+    <beans:bean class="org.springframework.js.ajax.AjaxUrlBasedViewResolver" id="tilesViewResolver">
+        <beans:property name="viewClass" value="org.springframework.webflow.mvc.view.FlowAjaxTilesView"/>
     </beans:bean>
 
     <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">

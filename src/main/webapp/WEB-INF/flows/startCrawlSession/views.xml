@@ -10,6 +10,11 @@
     </definition>
 
     <definition extends="default" name="defineSessionParams">
-        <put-attribute name="body" value="/WEB-INF/flows/startCrawlSession/defineSessionParams.jspx" />
+        <put-attribute name="body" value="session.params" />
     </definition>
+
+    <definition name="session.params" template="/WEB-INF/flows/startCrawlSession/defineSessionParams.jspx">
+       <put-attribute name="initUrlsForm" value="/WEB-INF/flows/startCrawlSession/initUrlsForm.jspx"/>
+    </definition>
+
 </tiles-definitions>

@@ -276,7 +276,7 @@ public class UserController {
     private void validateUserLogin(String userLogin, Errors errors,Long id){
         User user;
         if ((user = userService.findByLogin(userLogin)) != null){
-            if (user.getId() != id){
+            if (!user.getId().equals(id)){
                 errors.rejectValue("login", "label_user_duplicate_login", new String[]{userLogin}, null);
             }
         }

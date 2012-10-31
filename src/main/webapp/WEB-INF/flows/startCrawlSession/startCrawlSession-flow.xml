@@ -36,6 +36,7 @@
     <view-state id="defineSessionParams" view="defineSessionParams" model="crawlSessionForm">
         <transition on="addInitUrl" validate="true">
             <evaluate expression="crawlSessionActions.addInitUrlToCrawlSession(flowScope.crawlSessionForm)" />
+            <render fragments="initUrlsForm" />
         </transition>
         <transition on="startSession" validate="true" to="startCrawlSession"/>
     </view-state>
