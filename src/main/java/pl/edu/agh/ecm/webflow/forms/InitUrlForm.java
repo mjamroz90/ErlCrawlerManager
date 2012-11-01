@@ -11,6 +11,8 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.format.annotation.NumberFormat;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.edu.agh.ecm.web.util.TimeUtils;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -80,17 +82,7 @@ public class InitUrlForm implements Serializable {
     }
 
     public String getValidityTimeString(){
-        String validityDateString = "";
-        PeriodFormatter periodFormatter = new PeriodFormatterBuilder()
-                .appendHours()
-                .appendSeparator(":")
-                .appendMinutes().minimumPrintedDigits(2)
-                .toFormatter();
-        if (validityDate != null){
-           validityDateString  =
-                   periodFormatter.print(validityDate);
-        }
-        return validityDateString;
+       return TimeUtils.getPeriodTimeAsString(validityDate);
     }
 
     @Override

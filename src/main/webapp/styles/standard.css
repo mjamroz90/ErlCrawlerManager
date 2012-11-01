@@ -431,6 +431,12 @@ table.entryTable th.first{
     width: auto;
 }
 
+table#paramsConfirmation.entryTable td{
+    width: auto;
+    text-align: center;
+}
+
+
 .loginForm{
     margin-left: 35%;
     margin-bottom: 30%;
@@ -455,5 +461,9 @@ table.entryTable th.first{
 }
 
 #initUrls.panelComponent #sessionParams.panelComponent{
-    width: 60%;
+    width: 70%;
+}
+
+.button-link{
+
 }

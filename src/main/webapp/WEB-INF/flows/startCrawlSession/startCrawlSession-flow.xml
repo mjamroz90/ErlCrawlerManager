@@ -36,14 +36,22 @@
     <view-state id="defineSessionParams" view="defineSessionParams" model="crawlSessionForm">
         <transition on="addInitUrl" validate="true">
             <evaluate expression="crawlSessionActions.addInitUrlToCrawlSession(flowScope.crawlSessionForm)" />
-            <render fragments="initUrlsForm" />
         </transition>
-        <transition on="startSession" validate="true" to="startCrawlSession"/>
+        <transition on="startSession" validate="true" to="confirmSessionParams">
+            <evaluate expression="crawlSessionActions.validatePolicyForm(flowScope.crawlSessionForm,messageContext)"/>
+            <evaluate expression="crawlSessionActions.prepareSessionObject"/>
+        </transition>
     </view-state>
 
-    <action-state id="startCrawlSession">
-        <evaluate expression="crawlSessionActions.startCrawlSession"/>
-    </action-state>
+    <view-state id="confirmSessionParams" view="confirmSessionParams">
+        <transition on="confirm" to="sessionRunningState">
+            <evaluate expression="crawlSessionActions.startCrawlSession"/>
+        </transition>
+    </view-state>
+
+    <!--<action-state id="startCrawlSession">-->
+        <!--<evaluate expression="crawlSessionActions.startCrawlSession"/>-->
+    <!--</action-state>-->
 
     <end-state id="sessionRunningState" >
     </end-state>

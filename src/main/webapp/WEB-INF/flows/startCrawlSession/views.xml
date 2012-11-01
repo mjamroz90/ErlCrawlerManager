@@ -17,4 +17,7 @@
        <put-attribute name="initUrlsForm" value="/WEB-INF/flows/startCrawlSession/initUrlsForm.jspx"/>
     </definition>
 
+    <definition name="confirmSessionParams" extends="default">
+        <put-attribute name="body" value="/WEB-INF/flows/startCrawlSession/confirmSessionParams.jspx"/>
+    </definition>
 </tiles-definitions>

@@ -1,8 +1,11 @@
 package pl.edu.agh.ecm.domain;
 
+import com.mysql.jdbc.TimeUtil;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
+import org.joda.time.Period;
 import org.springframework.format.annotation.NumberFormat;
+import pl.edu.agh.ecm.web.util.TimeUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -110,5 +113,10 @@ public class Policy implements Serializable {
 
     public void addInitUrl(InitUrl initUrl){
         getInitUrls().add(initUrl);
+    }
+
+    @Transient
+    public String getDefaultValidityTimeAsString(){
+        return TimeUtils.getTimeLongAsString(defaultValidityTime);
     }
 }

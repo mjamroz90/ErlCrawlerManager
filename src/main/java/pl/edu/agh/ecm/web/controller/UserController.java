@@ -165,7 +165,9 @@ public class UserController {
         redirectAttributes.addFlashAttribute("message",new Message("success",
                 messageSource.getMessage("label_user_update_success",new Object[]{},locale)));
 
+        User oldUser = userService.findById(id);
         User user = toUser(userForm);
+        user.setAdmin(oldUser.isAdmin());
         user.setId(id);
         userService.save(user,user.getPassword());
         return "redirect:/users/"+ UrlUtil.encodeUrlPathSegment(user.getId().toString(),request);

@@ -15,6 +15,7 @@ import pl.edu.agh.ecm.domain.*;
 import pl.edu.agh.ecm.service.CrawlSessionService;
 import pl.edu.agh.ecm.service.NodeService;
 import pl.edu.agh.ecm.webflow.forms.*;
+import pl.edu.agh.ecm.webflow.validators.PolicyFormValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,11 @@ public class CrawlSessionActions extends MultiAction {
     private CrawlSessionService crawlSessionService;
     private NodeService nodeService;
     private CrawlerConnector crawlerConnector;
+    private PolicyFormValidator policyFormValidator;
+
+    public void setPolicyFormValidator(PolicyFormValidator policyFormValidator) {
+        this.policyFormValidator = policyFormValidator;
+    }
 
     public void setNodeService(NodeService nodeService) {
         this.nodeService = nodeService;
@@ -52,6 +58,21 @@ public class CrawlSessionActions extends MultiAction {
 
         DefineNodesForm form = new DefineNodesForm(nodeService.findAll());
         return form;
+    }
+
+    public Event validatePolicyForm(CrawlSessionForm crawlSessionForm, MessageContext messageContext){
+        PolicyForm policyForm = crawlSessionForm.getPolicy();
+        if (policyFormValidator.validatePolicyForm(policyForm,messageContext) == true){
+            return success();
+        }
+        else{
+            return error();
+        }
+    }
+
+    public Event startCrawlSession(RequestContext requestContext){
+       CrawlSession crawlSession = (CrawlSession)requestContext.getFlowScope().get("crawlSession");
+        return success();
     }
 
     public Event validateDefineNodesForm(DefineNodesForm defineNodesForm,MessageContext messageContext){
@@ -91,11 +112,12 @@ public class CrawlSessionActions extends MultiAction {
 
     }
 
-    public Event startCrawlSession(RequestContext context){
+    public Event prepareSessionObject(RequestContext context){
 
         CrawlSessionForm crawlSessionForm = (CrawlSessionForm)context.getFlowScope().get("crawlSessionForm");
         CrawlSession crawlSession = (CrawlSession)context.getFlowScope().get("crawlSession");
         fillCrawlSessionObject(crawlSessionForm,crawlSession);
+        context.getFlowScope().put("crawlSession",crawlSession);
         return success();
     }
 
@@ -175,6 +197,7 @@ public class CrawlSessionActions extends MultiAction {
             initUrl.setPolicy(sessionPolicy);
             sessionPolicy.addInitUrl(initUrl);
         }
+        session.setStartedBy(currentUser);
         session.setPolicy(sessionPolicy);
     }
 

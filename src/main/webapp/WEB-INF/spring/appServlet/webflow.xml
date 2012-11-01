@@ -36,10 +36,17 @@
         <property name="crawlSessionService" ref="crawlSessionService" />
         <property name="nodeService" ref="nodeService" />
         <property name="crawlerConnector" ref="crawlerConnector" />
+        <property name="policyFormValidator" ref="policyFormValidator" />
     </bean>
 
     <bean id="periodTimeConverter" class="pl.edu.agh.ecm.webflow.converters.PeriodTimeConverter" />
     <bean id="conversionService" class="pl.edu.agh.ecm.webflow.converters.ApplicationConversionService" />
+    <bean id="policyFormValidator" class="pl.edu.agh.ecm.webflow.validators.PolicyFormValidator">
+        <property name="maxBufferSize" value="20000"/>
+        <property name="minBufferSize" value="1"/>
+        <property name="maxProcessCountVal" value="150"/>
+        <property name="minProcessCountVal" value="1"/>
+    </bean>
 
 
     <bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">

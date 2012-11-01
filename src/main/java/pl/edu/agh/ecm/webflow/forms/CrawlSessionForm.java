@@ -22,7 +22,6 @@ public class CrawlSessionForm implements Serializable {
     private DateTime currentTime;
     private PolicyForm policy;
 
-    @Valid
     public PolicyForm getPolicy() {
         return policy;
     }
