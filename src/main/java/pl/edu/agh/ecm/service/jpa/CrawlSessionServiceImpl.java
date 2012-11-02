@@ -71,4 +71,8 @@ public class CrawlSessionServiceImpl implements CrawlSessionService {
 
         return crawlSessionRepository.getRunningSession();
     }
+
+    public void delete(CrawlSession crawlSession) {
+        crawlSessionRepository.delete(crawlSession);
+    }
 }

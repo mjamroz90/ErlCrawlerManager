@@ -41,11 +41,17 @@
             <evaluate expression="crawlSessionActions.validatePolicyForm(flowScope.crawlSessionForm,messageContext)"/>
             <evaluate expression="crawlSessionActions.prepareSessionObject"/>
         </transition>
+        <transition on="back" to="defineNodesForm" validate="false">
+            <evaluate expression="crawlSessionActions.clearNodes(flowRequestContext)" />
+        </transition>
     </view-state>
 
     <view-state id="confirmSessionParams" view="confirmSessionParams">
         <transition on="confirm" to="sessionRunningState">
             <evaluate expression="crawlSessionActions.startCrawlSession"/>
+        </transition>
+        <transition on="back" to="defineSessionParams" validate="false">
+            <evaluate expression="crawlSessionActions.clearSessionParams(flowRequestContext)" />
         </transition>
     </view-state>
 
@@ -53,6 +59,6 @@
         <!--<evaluate expression="crawlSessionActions.startCrawlSession"/>-->
     <!--</action-state>-->
 
-    <end-state id="sessionRunningState" >
+    <end-state id="sessionRunningState" view="redirect:/users">
     </end-state>
 </flow>

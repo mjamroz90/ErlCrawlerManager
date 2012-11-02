@@ -103,6 +103,18 @@ public class CrawlerConnector {
         }
     }
 
+    public String[][] startSessionOnNode(String nodeName,String[][] properties){
+        try{
+            String[][] result = remoteManagerServer.startSessionOnNode(nodeName,properties);
+            return result;
+        }
+        catch (Exception e){
+            return new String[][]{
+                    {CrawlerAppsNames.schedulerApp,"error"}
+            };
+        }
+    }
+
     public boolean pingApp(String nodeName,String appName){
 
         try{
@@ -110,7 +122,7 @@ public class CrawlerConnector {
             return remoteManagerServer.pingApp(nodeName,appName,holder);
         }
         catch (Exception e){
-            return true;
+            return false;
         }
     }
 

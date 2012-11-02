@@ -223,22 +223,6 @@
             <version>2.3.0.RELEASE</version>
         </dependency>
 
-        <!-- JSF 2 and Primefaces -->
-        <!--<dependency>-->
-            <!--<groupId>com.sun.faces</groupId>-->
-            <!--<artifactId>jsf-api</artifactId>-->
-            <!--<version>${jsf-version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.sun.faces</groupId>-->
-            <!--<artifactId>jsf-impl</artifactId>-->
-            <!--<version>${jsf-version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.primefaces</groupId>-->
-            <!--<artifactId>primefaces</artifactId>-->
-            <!--<version>3.4</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -286,15 +270,6 @@
         </dependency>
 
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>prime-repo</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>http://repository.primefaces.org</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
 
     <build>
         <plugins>

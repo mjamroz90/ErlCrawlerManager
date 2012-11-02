@@ -37,6 +37,7 @@
         <property name="nodeService" ref="nodeService" />
         <property name="crawlerConnector" ref="crawlerConnector" />
         <property name="policyFormValidator" ref="policyFormValidator" />
+        <property name="messageSource" ref="messageSource" />
     </bean>
 
     <bean id="periodTimeConverter" class="pl.edu.agh.ecm.webflow.converters.PeriodTimeConverter" />

@@ -13,5 +13,5 @@ public class CrawlerAppsNames {
     public static final String crawlEventApp = "crawl_event";
     public static final String domainManagerApp = "domain_manager";
     public static final String sessionManagerApp = "session_manager";
-
+    public static final String schedulerApp = "scheduler";
 }

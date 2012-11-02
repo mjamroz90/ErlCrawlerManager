@@ -4,6 +4,8 @@ import org.joda.time.DateTime;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.binding.validation.ValidationContext;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.webflow.action.EventFactorySupport;
 import org.springframework.webflow.action.MultiAction;
@@ -14,13 +16,11 @@ import pl.edu.agh.ecm.crawler.CrawlerConnector;
 import pl.edu.agh.ecm.domain.*;
 import pl.edu.agh.ecm.service.CrawlSessionService;
 import pl.edu.agh.ecm.service.NodeService;
+import pl.edu.agh.ecm.web.form.Message;
 import pl.edu.agh.ecm.webflow.forms.*;
 import pl.edu.agh.ecm.webflow.validators.PolicyFormValidator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,6 +37,11 @@ public class CrawlSessionActions extends MultiAction {
     private NodeService nodeService;
     private CrawlerConnector crawlerConnector;
     private PolicyFormValidator policyFormValidator;
+    private MessageSource messageSource;
+
+    public void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     public void setPolicyFormValidator(PolicyFormValidator policyFormValidator) {
         this.policyFormValidator = policyFormValidator;
@@ -72,7 +77,18 @@ public class CrawlSessionActions extends MultiAction {
 
     public Event startCrawlSession(RequestContext requestContext){
        CrawlSession crawlSession = (CrawlSession)requestContext.getFlowScope().get("crawlSession");
-        return success();
+       crawlSession = crawlSessionService.save(crawlSession);
+       StartCrawlerResults startSessionResults = startSessionOnNodes(crawlSession);
+       if (startSessionResults.isSessionStartedSuccessfully()){
+            return success();
+       }
+       else{
+            Locale locale = LocaleContextHolder.getLocale();
+            requestContext.getViewScope().put("message",new Message("error",
+                    messageSource.getMessage("label_session_start_failure",new Object[]{},locale )));
+            crawlSessionService.delete(crawlSession);
+            return error();
+       }
     }
 
     public Event validateDefineNodesForm(DefineNodesForm defineNodesForm,MessageContext messageContext){
@@ -145,7 +161,18 @@ public class CrawlSessionActions extends MultiAction {
         return success();
     }
 
+    public void clearNodes(RequestContext context){
+        CrawlSession crawlSession = (CrawlSession)context.getFlowScope().get("crawlSession");
+        crawlSession.setDomainManagerNode(null);
+        crawlSession.getNodes().clear();
+    }
 
+    public void clearSessionParams(RequestContext context){
+        CrawlSessionForm crawlSessionForm = (CrawlSessionForm)context.getFlowScope().get("crawlSessionForm");
+        CrawlSession crawlSession = (CrawlSession)context.getFlowScope().get("crawlSession");
+        crawlSessionForm.clearAll();
+        crawlSession.setPolicy(new Policy());
+    }
 
     private CrawlSession initSessionWithNodes(String domainManagerNode,List<NodeEntry> nodeEntryList){
 
@@ -161,8 +188,32 @@ public class CrawlSessionActions extends MultiAction {
                 crawlSession.addNode(nodeObj);
             }
         }
-
+        String address = crawlerConnector.getRemoteManagerAddress();
+        Node remoteManagerNode = nodeService.findByAddress(address).get(0);
+        crawlSession.setRemoteManagerServerNode(remoteManagerNode);
         return crawlSession;
+    }
+
+    private StartCrawlerResults startSessionOnNodes(CrawlSession crawlSession){
+        String[][] domainManagerConf = ActionUtils.sessionToProperties(crawlSession,true);
+        String[][] ordinaryConf = ActionUtils.sessionToProperties(crawlSession,false);
+        Set<Node> nodeList = crawlSession.getNodes();
+        StartCrawlerResults result = new StartCrawlerResults();
+
+        for (Node node : nodeList){
+            String nodeName = node.toString();
+            String[][] startSessionresult = null;
+            if (nodeName.equals(crawlSession.getDomainManagerNode().toString())){
+                startSessionresult = crawlerConnector.startSessionOnNode(nodeName,domainManagerConf);
+            }
+            else{
+                startSessionresult = crawlerConnector.startSessionOnNode(nodeName,ordinaryConf);
+            }
+            StartAppsResultOnNode resultOnNode = ActionUtils.getStartSchedulerResultOnNode(nodeName,startSessionresult);
+            result.addStartAppsResultOnNode(resultOnNode);
+        }
+        result.setSessionStartStatus();
+        return result;
     }
 
     private StartCrawlerResults startCrawlerOnNode(String[][] properties,CrawlSession crawlSession){
@@ -197,6 +248,7 @@ public class CrawlSessionActions extends MultiAction {
             initUrl.setPolicy(sessionPolicy);
             sessionPolicy.addInitUrl(initUrl);
         }
+        //session.setRemoteManagerServerNode(remoteManagerNode);
         session.setStartedBy(currentUser);
         session.setPolicy(sessionPolicy);
     }

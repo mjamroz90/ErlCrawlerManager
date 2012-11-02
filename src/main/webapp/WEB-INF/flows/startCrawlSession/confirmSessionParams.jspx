@@ -8,6 +8,11 @@
     <jsp:output omit-xml-declaration="yes"/>
 
     <h2><spring:message code="label_session_overall" /></h2>
+
+    <c:if test="${not empty message}">
+        <div id="message" class="${message.type}">${message.message}</div>
+    </c:if>
+
     <div id="paramsConfirmation">
         <p>
             <table class="entryTable">

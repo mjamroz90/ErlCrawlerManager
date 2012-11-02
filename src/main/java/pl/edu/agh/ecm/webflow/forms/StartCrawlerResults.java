@@ -14,6 +14,7 @@ import java.util.List;
 public class StartCrawlerResults implements Serializable {
 
     private boolean canGoToNextStep;
+    private boolean sessionStartedSuccessfully;
     private List<StartAppsResultOnNode> startAppsResultOnNodes = new ArrayList<StartAppsResultOnNode>();
 
     public void addStartAppsResultOnNode(StartAppsResultOnNode resultOnNode){
@@ -45,11 +46,29 @@ public class StartCrawlerResults implements Serializable {
         }
     }
 
+    public void setSessionStartStatus(){
+        sessionStartedSuccessfully = true;
+        for (StartAppsResultOnNode resultOnNode : startAppsResultOnNodes){
+            if (!resultOnNode.isSchedulerStarted()){
+                sessionStartedSuccessfully = false;
+                return;
+            }
+        }
+    }
+
     public boolean isCanGoToNextStep() {
         return canGoToNextStep;
     }
 
     public void setCanGoToNextStep(boolean canGoToNextStep) {
         this.canGoToNextStep = canGoToNextStep;
+    }
+
+    public boolean isSessionStartedSuccessfully() {
+        return sessionStartedSuccessfully;
+    }
+
+    public void setSessionStartedSuccessfully(boolean sessionStartedSuccessfully) {
+        this.sessionStartedSuccessfully = sessionStartedSuccessfully;
     }
 }

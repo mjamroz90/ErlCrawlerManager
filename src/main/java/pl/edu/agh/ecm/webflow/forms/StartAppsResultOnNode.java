@@ -16,6 +16,15 @@ public class StartAppsResultOnNode implements Serializable {
     private boolean domainManagerStarted;
     private boolean crawlEventStarted;
     private boolean sessionManagerStarted;
+    private boolean schedulerStarted;
+
+    public boolean isSchedulerStarted() {
+        return schedulerStarted;
+    }
+
+    public void setSchedulerStarted(boolean schedulerStarted) {
+        this.schedulerStarted = schedulerStarted;
+    }
 
     public StartAppsResultOnNode(){}
 

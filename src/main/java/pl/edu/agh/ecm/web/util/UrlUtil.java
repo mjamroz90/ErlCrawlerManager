@@ -1,6 +1,4 @@
-/**
- * Created on Dec 12, 2011
- */
+
 package pl.edu.agh.ecm.web.util;
 
 import org.springframework.web.util.UriUtils;

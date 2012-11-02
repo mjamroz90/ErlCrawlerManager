@@ -45,7 +45,7 @@ CREATE  TABLE IF NOT EXISTS `ecm_stop_session_permissions` (
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `ecm_policies` (
   `ID` INT NOT NULL AUTO_INCREMENT ,  
-  `default_validity_time` INT NULL ,
+  `default_validity_time` BIGINT NULL ,
   `created_by` INT NULL ,
   `buffer_size` INT NOT NULL ,
   `max_process_count` INT NOT NULL ,  
@@ -117,7 +117,7 @@ CREATE  TABLE IF NOT EXISTS `ecm_init_urls` (
   `width` INT NOT NULL ,
   `depth` INT NOT NULL ,
   `policy_id` INT NOT NULL ,
-  `validity_time` INT NOT NULL ,
+  `validity_time` BIGINT NOT NULL ,
   PRIMARY KEY (`ID`) ,  
   CONSTRAINT `FK_initurls_policies`
     FOREIGN KEY (`policy_id` )

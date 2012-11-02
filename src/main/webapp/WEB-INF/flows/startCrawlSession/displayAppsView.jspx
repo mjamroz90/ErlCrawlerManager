@@ -75,11 +75,15 @@
         </table>
     </div>
 
-    <div id="actionsPanel" style="margin-left:10%;margin-right:10%;background: #EEEEEE;border-radius: 5px ">
-        <div id="nextLink" style="text-align: right">
-            <a href="${nextStepUrl}">
-                <spring:message code="label_session_next" />
-            </a>
-        </div>
+    <div id="actionsPanel" style="margin-left:10%;width: 40% ;background: #EEEEEE;border-radius: 5px;height: auto; ">
+            <p style="text-align: center;">
+                <button class="ui-button-text">
+                    <a href="${nextStepUrl}">
+                        <span class="ui-button-text">
+                            <spring:message code="label_session_next" />
+                        </span>
+                    </a>
+                </button>
+            </p>
     </div>
 </div>

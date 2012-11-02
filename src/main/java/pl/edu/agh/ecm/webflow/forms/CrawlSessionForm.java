@@ -54,4 +54,10 @@ public class CrawlSessionForm implements Serializable {
     public void setNewInitUrl(InitUrlForm newInitUrl) {
         this.newInitUrl = newInitUrl;
     }
+
+    public void clearAll(){
+        initUrlFormList.clear();
+        newInitUrl = new InitUrlForm();
+        policy = new PolicyForm();
+    }
 }
