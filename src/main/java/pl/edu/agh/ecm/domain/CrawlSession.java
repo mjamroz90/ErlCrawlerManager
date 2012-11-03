@@ -77,7 +77,7 @@ public class CrawlSession implements Serializable {
     }
 
     @Column(name = "finished")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     public DateTime getFinished() {
         return finished;

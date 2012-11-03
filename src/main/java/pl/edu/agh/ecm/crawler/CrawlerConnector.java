@@ -16,6 +16,8 @@ import pl.edu.agh.ecm.crawler.generated.Orber.InitialReferences;
 import pl.edu.agh.ecm.crawler.generated.Orber.InitialReferencesHelper;
 import pl.edu.agh.ecm.crawler.generated.RemoteManager.RemoteManagerServer;
 import pl.edu.agh.ecm.crawler.generated.RemoteManager.RemoteManagerServerHelper;
+import pl.edu.agh.ecm.domain.CrawlSession;
+import pl.edu.agh.ecm.domain.Node;
 import pl.edu.agh.ecm.web.util.IPDomain;
 
 import javax.validation.constraints.NotNull;
@@ -120,6 +122,25 @@ public class CrawlerConnector {
         try{
             StringHolder holder = new StringHolder();
             return remoteManagerServer.pingApp(nodeName,appName,holder);
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean stopSession(boolean crawlerAlso,CrawlSession crawlSession){
+        try{
+            for (Node node : crawlSession.getNodes()){
+                StringHolder holder = new StringHolder();
+                boolean pingResult = remoteManagerServer.pingApp(node.toString(),CrawlerAppsNames.schedulerApp,holder);
+                if (pingResult == true){
+                    remoteManagerServer.stopSessionOnNode(node.toString());
+                }
+                if (crawlerAlso){
+                    remoteManagerServer.stopCrawlerOnNode(node.toString());
+                }
+            }
+            return true;
         }
         catch (Exception e){
             return false;

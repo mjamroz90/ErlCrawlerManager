@@ -1,16 +1,27 @@
 package pl.edu.agh.ecm.web.controller;
 
 import com.google.common.collect.Lists;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.edu.agh.ecm.crawler.CrawlerConnector;
 import pl.edu.agh.ecm.domain.CrawlSession;
+import pl.edu.agh.ecm.domain.User;
+import pl.edu.agh.ecm.domain.UserDetailsAdapter;
 import pl.edu.agh.ecm.service.CrawlSessionService;
 import pl.edu.agh.ecm.web.form.CrawlSessionGrid;
+import pl.edu.agh.ecm.web.form.Message;
+
+import java.util.Locale;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,6 +37,12 @@ public class CrawlSessionController {
 
     @Autowired
     private CrawlSessionService crawlSessionService;
+
+    @Autowired
+    private CrawlerConnector crawlerConnector;
+
+    @Autowired
+    private MessageSource messageSource;
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model uiModel){
@@ -72,8 +89,52 @@ public class CrawlSessionController {
     public String show(@PathVariable("id")Long id,Model uiModel){
 
         CrawlSession crawlSession = crawlSessionService.findByIdWithDetail(id);
+        return fillSessionModel(crawlSession,uiModel);
+    }
+
+    @RequestMapping(value = "/{id}",params = "stopSession", method = RequestMethod.GET)
+    public String stopSession(@PathVariable("id")Long id,Model uiModel,RedirectAttributes attributes,Locale locale){
+
+        CrawlSession crawlSession = crawlSessionService.findByIdWithDetail(id);
+        boolean stopResult = crawlerConnector.stopSession(true,crawlSession);
+        User loggedUser = ((UserDetailsAdapter)SecurityContextHolder.getContext().
+                getAuthentication().getPrincipal()).getUser();
+
+        if (stopResult == true){
+            attributes.addFlashAttribute("message",new Message("success",
+                    messageSource.getMessage("label_session_stop_success",new Object[]{},locale)));
+            crawlSession.setFinishedBy(loggedUser);
+            crawlSession.setFinished(DateTime.now());
+            crawlSessionService.save(crawlSession);
+            return "redirect:/sessions";
+        }
+        else{
+            uiModel.addAttribute("message",new Message("error",
+                    messageSource.getMessage("label_session_stop_failed",new Object[]{},locale)));
+            return fillSessionModel(crawlSession,uiModel);
+        }
+
+    }
+
+    private String fillSessionModel(CrawlSession crawlSession,Model uiModel){
         uiModel.addAttribute("crawlSession",crawlSession);
+        uiModel.addAttribute("allowedToStopSession",isAllowedToStopSession(crawlSession));
         return "sessions/show";
+    }
+
+    private boolean isAllowedToStopSession(CrawlSession crawlSession){
+
+        UserDetailsAdapter userDetails = (UserDetailsAdapter)SecurityContextHolder.getContext().
+                getAuthentication().getPrincipal();
+        User applyingUser = userDetails.getUser();
+
+        User userStarted = crawlSession.getStartedBy();
+        if ((userStarted.getId() == applyingUser.getId()) || userStarted.isAllowedToStopSession(applyingUser.getLogin())){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }

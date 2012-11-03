@@ -8,7 +8,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
-    <spring:url var="sessionUrl" value="/sessions/" />
+    <spring:url var="sessionUrl" value="/sessions" />
     <spring:message code="label_session_started" var="labelSessionStarted" />
     <spring:message code="label_session_started_by" var="labelSessionStartedBy" />
     <spring:message code="label_session_finished" var="labelSessionFinished" />
@@ -47,7 +47,10 @@
                 gridview: true,
                 height: 300,
                 width: 750,
-                caption: '${labelSessionListing}'
+                caption: '${labelSessionListing}',
+                onSelectRow: function(id){
+                    document.location.href = "${sessionUrl}/"+id;
+                }
             });
         });
 
@@ -70,6 +73,10 @@
         };
 
     </script>
+
+    <c:if test="${not empty message}">
+        <div id="message" class="${message.type}">${message.message}</div>
+    </c:if>
 
     <h2>${labelSessionListing}</h2>
     <div>
