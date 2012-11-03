@@ -1,8 +1,10 @@
 package pl.edu.agh.ecm.domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.edu.agh.ecm.web.util.TimeUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -97,6 +99,7 @@ public class CrawlSession implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "policy_id")
+    @JsonIgnore(value = true)
     public Policy getPolicy() {
         return policy;
     }
@@ -107,6 +110,7 @@ public class CrawlSession implements Serializable {
 
     @ManyToOne()
     @JoinColumn(name = "domain_manager_node_id")
+    @JsonIgnore(value = true)
     public Node getDomainManagerNode() {
         return domainManagerNode;
     }
@@ -117,6 +121,7 @@ public class CrawlSession implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "remote_manager_server_node_id")
+    @JsonIgnore(value = true)
     public Node getRemoteManagerServerNode() {
         return remoteManagerServerNode;
     }
@@ -130,6 +135,7 @@ public class CrawlSession implements Serializable {
     @JoinTable(name = "ecm_sessions_nodes",
             joinColumns = @JoinColumn(name = "session_id"),
             inverseJoinColumns = @JoinColumn(name = "node_id"))
+    @JsonIgnore(value = true)
     public Set<Node> getNodes() {
         return nodes;
     }
@@ -141,4 +147,20 @@ public class CrawlSession implements Serializable {
     public void addNode(Node node){
         getNodes().add(node);
     }
+
+    @Transient
+    public String getStartedAsString(){
+        return TimeUtils.getDateTimeAsString(started);
+    }
+
+    @Transient
+    public String getFinishedAsString(){
+        if (finished != null){
+            return TimeUtils.getDateTimeAsString(finished);
+        }
+        else{
+            return null;
+        }
+    }
+
 }

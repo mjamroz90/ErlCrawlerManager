@@ -69,6 +69,7 @@ public class User implements Serializable {
 
     @NotEmpty(message="{validation.NotEmpty.message}")
     @Column(name = "password")
+    @JsonIgnore
     public String getPassword() {
         return password;
     }

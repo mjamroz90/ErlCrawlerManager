@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition name="sessions/list" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/sessions/list.jspx"/>
+    </definition>
+
+    <definition name="sessions/show" extends="default">
+        <put-attribute name="body" value="session.panel" />
+    </definition>
+
+    <definition name="session.panel" template="/WEB-INF/views/sessions/show.jspx">
+        <put-attribute name="sessionInfo" value="/WEB-INF/flows/startCrawlSession/sessionInfo.jspx" />
+    </definition>
+</tiles-definitions>        

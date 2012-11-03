@@ -3,6 +3,8 @@ package pl.edu.agh.ecm.service.jpa;
 import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,7 +63,7 @@ public class CrawlSessionServiceImpl implements CrawlSessionService {
 
     public CrawlSession save(CrawlSession session) {
         if (session.getStarted() == null){
-            session.setStarted(new DateTime(Calendar.getInstance().getTime()));
+            session.setStarted(DateTime.now());
         }
         return crawlSessionRepository.save(session);
     }
@@ -74,5 +76,10 @@ public class CrawlSessionServiceImpl implements CrawlSessionService {
 
     public void delete(CrawlSession crawlSession) {
         crawlSessionRepository.delete(crawlSession);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CrawlSession> findAllByPage(Pageable pageable) {
+        return crawlSessionRepository.findAll(pageable);
     }
 }

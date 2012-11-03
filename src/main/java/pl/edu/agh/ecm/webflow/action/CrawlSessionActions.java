@@ -80,6 +80,7 @@ public class CrawlSessionActions extends MultiAction {
        crawlSession = crawlSessionService.save(crawlSession);
        StartCrawlerResults startSessionResults = startSessionOnNodes(crawlSession);
        if (startSessionResults.isSessionStartedSuccessfully()){
+            requestContext.getFlowScope().put("sessionId",crawlSession.getId());
             return success();
        }
        else{
@@ -119,10 +120,12 @@ public class CrawlSessionActions extends MultiAction {
 
     public Event isAnySessionStarted(RequestContext requestContext){
 
-        if (crawlSessionService.getRunningSession() == null){
+        CrawlSession crawlSession = crawlSessionService.getRunningSession();
+        if (crawlSession == null){
             return new Event(this,"stopped");
         }
         else{
+            requestContext.getFlowScope().put("sessionId",crawlSession.getId());
             return new Event(this,"running");
         }
 

@@ -59,6 +59,6 @@
         <!--<evaluate expression="crawlSessionActions.startCrawlSession"/>-->
     <!--</action-state>-->
 
-    <end-state id="sessionRunningState" view="redirect:/users">
+    <end-state id="sessionRunningState" view="redirect:/sessions/#{flowScope.sessionId}">
     </end-state>
 </flow>

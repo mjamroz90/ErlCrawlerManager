@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:sec="http://www.springframework.org/security/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <spring:url var="sessionUrl" value="/sessions/" />
+    <spring:message code="label_session_started" var="labelSessionStarted" />
+    <spring:message code="label_session_started_by" var="labelSessionStartedBy" />
+    <spring:message code="label_session_finished" var="labelSessionFinished" />
+    <spring:message code="label_session_finished_by" var="labelSessionFinishedBy" />
+    <spring:message code="label_session_listing" var="labelSessionListing"/>
+
+    <script type="text/javascript">
+
+        $(function(){
+            $('#list').jqGrid({
+                url : '${sessionUrl}/listgrid',
+                datatype : 'json',
+                mtype : 'GET',
+                colNames: ['${labelSessionStarted}', '${labelSessionStartedBy}', '${labelSessionFinished}', '${labelSessionFinishedBy}'],
+                colModel: [
+                    {name : 'startedAsString', index : 'started', width : 150, align: 'center'},
+                    {name : 'startedBy', index : 'startedBy', width : 100, align : 'center', sortable : false, formatter: userFormatter},
+                    {name : 'finishedAsString', index : 'finished', width : 100, align : 'center', formatter: finishedDateFormatter},
+                    {name : 'finishedBy', index : 'finishedBy', width : 150, align : 'center', sortable : false, formatter : userFormatter}
+                ],
+                jsonReader :
+                {
+                    root : 'sessionData',
+                    page : 'currentPage',
+                    total : 'totalPages',
+                    records : 'totalRecords',
+                    repeatitems : false,
+                    id: 'id'
+                },
+                pager: '#pager',
+                rowNum: 10,
+                rowList:[5,10,15],
+                sortname: 'finished',
+                sortorder: 'asc',
+                viewrecords: true,
+                gridview: true,
+                height: 300,
+                width: 750,
+                caption: '${labelSessionListing}'
+            });
+        });
+
+        function finishedDateFormatter(cellvalue,options,rowObject){
+            if (cellvalue == null){
+                return "running";
+            }
+            else{
+                return cellvalue;
+            }
+        };
+
+        function userFormatter(cellvalue,options,rowObject){
+            if (cellvalue != null){
+                return cellvalue.login;
+            }
+            else{
+                return "";
+            }
+        };
+
+    </script>
+
+    <h2>${labelSessionListing}</h2>
+    <div>
+        <table id="list"><tr><td/></tr></table>
+    </div>
+    <div id="pager"/>
+
+</div>

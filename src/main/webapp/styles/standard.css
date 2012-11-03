@@ -431,7 +431,7 @@ table.entryTable th.first{
     width: auto;
 }
 
-table#paramsConfirmation.entryTable td{
+table#sessionInfo.entryTable td{
     width: auto;
     text-align: center;
 }

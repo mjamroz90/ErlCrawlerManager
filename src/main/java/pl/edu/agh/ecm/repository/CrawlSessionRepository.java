@@ -2,6 +2,7 @@ package pl.edu.agh.ecm.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import pl.edu.agh.ecm.domain.CrawlSession;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * Time: 18:54
  * To change this template use File | Settings | File Templates.
  */
-public interface CrawlSessionRepository extends CrudRepository<CrawlSession,Long> {
+public interface CrawlSessionRepository extends PagingAndSortingRepository<CrawlSession,Long> {
 
     @Query("select distinct s from CrawlSession s left join fetch s.nodes n where s.id = :id")
     public CrawlSession findByIdWithDetail(@Param("id")Long id);

@@ -1,5 +1,7 @@
 package pl.edu.agh.ecm.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pl.edu.agh.ecm.domain.CrawlSession;
 
 import java.util.List;
@@ -30,4 +32,6 @@ public interface CrawlSessionService {
     public CrawlSession getRunningSession();
 
     public void delete(CrawlSession crawlSession);
+
+    public Page<CrawlSession> findAllByPage(Pageable pageable);
 }

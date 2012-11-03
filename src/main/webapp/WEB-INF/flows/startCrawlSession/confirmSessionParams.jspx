@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page"
      xmlns:c="http://java.sun.com/jsp/jstl/core"
-     xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:tiles="http://tiles.apache.org/tags-tiles"
      version="2.0">
 
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
@@ -13,56 +14,7 @@
         <div id="message" class="${message.type}">${message.message}</div>
     </c:if>
 
-    <div id="paramsConfirmation">
-        <p>
-            <table class="entryTable">
-                <thead>
-                    <tr>
-                        <th><spring:message code="label_session_param_name" /></th>
-                        <th><spring:message code="label_session_param_value" /></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><spring:message code="label_session_nodes" /></td>
-                        <td>
-                            <ul>
-                                <c:forEach items="${crawlSession.nodes}" var="node">
-                                    <li>${node}</li>
-                                </c:forEach>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Domain Manager Node</td>
-                        <td>${crawlSession.domainManagerNode}</td>
-                    </tr>
-                    <tr>
-                        <td><spring:message code="label_session_initUrl" /></td>
-                        <td>
-                            <ul>
-                                <c:forEach items="${crawlSession.policy.initUrls}" var="initUrl">
-                                    <li>${initUrl}</li>
-                                </c:forEach>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><spring:message code="label_session_maxProcessCount" /></td>
-                        <td>${crawlSession.policy.maxProcessCount}</td>
-                    </tr>
-                    <tr>
-                        <td><spring:message code="label_session_bufferSize" /></td>
-                        <td>${crawlSession.policy.bufferSize}</td>
-                    </tr>
-                    <tr>
-                        <td><spring:message code="label_session_defaultValidityTime" /></td>
-                        <td>${crawlSession.policy.defaultValidityTimeAsString}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </p>
-    </div>
+    <tiles:insertAttribute name="sessionInfo" />
 
     <div style="margin-left:0%; width: 30%; background: #EEEEEE;border-radius: 5px; height: auto; ">
 

@@ -18,6 +18,10 @@
     </definition>
 
     <definition name="confirmSessionParams" extends="default">
-        <put-attribute name="body" value="/WEB-INF/flows/startCrawlSession/confirmSessionParams.jspx"/>
+        <put-attribute name="body" value="session.overview"/>
+    </definition>
+
+    <definition name="session.overview" template="/WEB-INF/flows/startCrawlSession/confirmSessionParams.jspx">
+        <put-attribute name="sessionInfo" value="/WEB-INF/flows/startCrawlSession/sessionInfo.jspx"/>
     </definition>
 </tiles-definitions>

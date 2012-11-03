@@ -1,7 +1,10 @@
 package pl.edu.agh.ecm.web.util;
 
+import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Period;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
@@ -35,5 +38,10 @@ public class TimeUtils {
 
     public static String getTimeLongAsString(Long timePeriod){
         return getPeriodTimeAsString(getTimeLongAsPeriod(timePeriod));
+    }
+
+    public static String getDateTimeAsString(DateTime dateTime){
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd-HH:mm");
+        return formatter.print(dateTime);
     }
 }
