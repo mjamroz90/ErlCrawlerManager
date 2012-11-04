@@ -76,6 +76,7 @@ public class CrawlSessionActions extends MultiAction {
     }
 
     public Event startCrawlSession(RequestContext requestContext){
+
        CrawlSession crawlSession = (CrawlSession)requestContext.getFlowScope().get("crawlSession");
        crawlSession = crawlSessionService.save(crawlSession);
        StartCrawlerResults startSessionResults = startSessionOnNodes(crawlSession);
@@ -120,15 +121,14 @@ public class CrawlSessionActions extends MultiAction {
 
     public Event isAnySessionStarted(RequestContext requestContext){
 
-        CrawlSession crawlSession = crawlSessionService.getRunningSession();
-        if (crawlSession == null){
+        CrawlSession crawlSession;
+        if ((crawlSession = getSessionStarted(requestContext)) == null){
             return new Event(this,"stopped");
         }
         else{
             requestContext.getFlowScope().put("sessionId",crawlSession.getId());
             return new Event(this,"running");
         }
-
     }
 
     public Event prepareSessionObject(RequestContext context){
@@ -156,6 +156,11 @@ public class CrawlSessionActions extends MultiAction {
     }
 
     public Event launchCrawler(RequestContext context){
+        CrawlSession startedSession;
+        if ((startedSession = getSessionStarted(context)) != null){
+            context.getFlowScope().put("sessionId", startedSession.getId());
+            return new Event(this,"running");
+        }
         CrawlSession crawlSession =(CrawlSession)context.getFlowScope().get("crawlSession",CrawlSession.class);
         //W tym momencie, w obiekcie sesji mamy pola domainManagerNode, oraz nodes
         String[][] firstConfig = ActionUtils.sessionNodesToProperties(crawlSession);
@@ -265,5 +270,10 @@ public class CrawlSessionActions extends MultiAction {
         Long time = initUrlForm.getValidityDate().toStandardDuration().getMillis();
         initUrl.setValidityTime(time);
         return initUrl;
+    }
+
+    private CrawlSession getSessionStarted(RequestContext context){
+        CrawlSession crawlSession = crawlSessionService.getRunningSession();
+        return crawlSession;
     }
 }

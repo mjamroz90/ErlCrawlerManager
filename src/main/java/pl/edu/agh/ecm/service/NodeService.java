@@ -29,4 +29,5 @@ public interface NodeService {
 
     public Node save(Node node);
 
+    public void remove(Node node);
 }

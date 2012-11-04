@@ -7,7 +7,6 @@
 
     <action-state id="isCrawlSessionStartedActionState">
        <evaluate expression="crawlSessionActions.isAnySessionStarted"/>
-       <transition on="running" to="sessionRunningState"/>
        <transition on="stopped" to="defineNodesForm" />
     </action-state>
 
@@ -37,7 +36,7 @@
         <transition on="addInitUrl" validate="true">
             <evaluate expression="crawlSessionActions.addInitUrlToCrawlSession(flowScope.crawlSessionForm)" />
         </transition>
-        <transition on="startSession" validate="true" to="confirmSessionParams">
+        <transition on="startSession" validate="true" to="confirmSessionParamsAction">
             <evaluate expression="crawlSessionActions.validatePolicyForm(flowScope.crawlSessionForm,messageContext)"/>
             <evaluate expression="crawlSessionActions.prepareSessionObject"/>
         </transition>
@@ -45,6 +44,11 @@
             <evaluate expression="crawlSessionActions.clearNodes(flowRequestContext)" />
         </transition>
     </view-state>
+
+    <action-state id="confirmSessionParamsAction">
+        <evaluate expression="crawlSessionActions.isAnySessionStarted"/>
+        <transition on="stopped" to="confirmSessionParams"/>
+    </action-state>
 
     <view-state id="confirmSessionParams" view="confirmSessionParams">
         <transition on="confirm" to="sessionRunningState">
@@ -55,10 +59,15 @@
         </transition>
     </view-state>
 
+    <end-state id="sessionRunningState" view="redirect:/sessions/#{flowScope.sessionId}?started">
+    </end-state>
+
+    <global-transitions>
+        <transition on="running" to="sessionRunningState" />
+    </global-transitions>
     <!--<action-state id="startCrawlSession">-->
         <!--<evaluate expression="crawlSessionActions.startCrawlSession"/>-->
     <!--</action-state>-->
 
-    <end-state id="sessionRunningState" view="redirect:/sessions/#{flowScope.sessionId}">
-    </end-state>
+
 </flow>

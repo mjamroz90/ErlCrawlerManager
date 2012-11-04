@@ -75,7 +75,8 @@
         </table>
     </div>
 
-    <div id="actionsPanel" style="margin-left:10%;width: 40% ;background: #EEEEEE;border-radius: 5px;height: auto; ">
+    <c:if test="${appsView.canGoToNextStep}">
+        <div id="actionsPanel" style="margin-left:10%;width: 40% ;background: #EEEEEE;border-radius: 5px;height: auto; ">
             <p style="text-align: center;">
                 <button class="ui-button-text">
                     <a href="${nextStepUrl}">
@@ -85,5 +86,7 @@
                     </a>
                 </button>
             </p>
-    </div>
+        </div>
+    </c:if>
+
 </div>

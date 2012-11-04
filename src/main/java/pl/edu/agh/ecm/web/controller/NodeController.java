@@ -114,6 +114,15 @@ public class NodeController {
         return "nodes/list";
     }
 
+    @RequestMapping(value = "/{id}",params = "removeNode", method = RequestMethod.GET)
+    public String removeNode(@PathVariable("id")Long id,Model uiModel){
+
+        Node nodeToRemove = nodeService.findById(id);
+        nodeService.remove(nodeToRemove);
+        uiModel.addAttribute("newNode",new Node());
+        return "nodes/list";
+    }
+
     private List<NodeExt> checkAccessiblity(List<Node> nodes){
 
         List<NodeExt> nodeExtList = new ArrayList<NodeExt>();

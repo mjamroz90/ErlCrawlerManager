@@ -62,4 +62,8 @@ public class NodeServiceImpl implements NodeService {
     public Node save(Node node) {
         return nodeRepository.save(node);
     }
+
+    public void remove(Node node) {
+        nodeRepository.delete(node);
+    }
 }

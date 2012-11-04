@@ -92,10 +92,23 @@ public class CrawlSessionController {
         return fillSessionModel(crawlSession,uiModel);
     }
 
+    @RequestMapping(value = "/{id}",params = "started",method = RequestMethod.GET)
+    public String showStarted(@PathVariable("id")Long id,Model uiModel,Locale locale){
+
+        CrawlSession crawlSession = crawlSessionService.findByIdWithDetail(id);
+        uiModel.addAttribute("message",new Message("success",
+                messageSource.getMessage("label_session_start_success",new Object[]{},locale)));
+        return fillSessionModel(crawlSession,uiModel);
+    }
+
     @RequestMapping(value = "/{id}",params = "stopSession", method = RequestMethod.GET)
     public String stopSession(@PathVariable("id")Long id,Model uiModel,RedirectAttributes attributes,Locale locale){
 
         CrawlSession crawlSession = crawlSessionService.findByIdWithDetail(id);
+        if (!isAllowedToStopSession(crawlSession)){
+            return "redirect:/security/access-denied";
+        }
+
         boolean stopResult = crawlerConnector.stopSession(true,crawlSession);
         User loggedUser = ((UserDetailsAdapter)SecurityContextHolder.getContext().
                 getAuthentication().getPrincipal()).getUser();

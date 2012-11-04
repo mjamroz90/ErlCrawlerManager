@@ -60,9 +60,9 @@ CREATE  TABLE IF NOT EXISTS `ecm_policies` (
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `ecm_sessions` (
   `ID` INT NOT NULL AUTO_INCREMENT ,
-  `started` DATE NOT NULL ,
+  `started` DATETIME NOT NULL ,
   `started_by` INT NOT NULL ,
-  `finished` DATE NULL DEFAULT NULL ,
+  `finished` DATETIME NULL DEFAULT NULL ,
   `finished_by` INT NULL DEFAULT NULL ,
   `policy_id` INT NOT NULL ,
   `domain_manager_node_id` INT NOT NULL ,

@@ -32,6 +32,7 @@
             <intercept-url pattern="/nodes" method="GET" access="isAuthenticated()" />
             <intercept-url pattern="/nodes" method="POST" access="hasRole('ROLE_ADMIN')" />
             <intercept-url pattern="/users/*/panel" access="isAuthenticated()" />
+            <intercept-url pattern="/startCrawlSession" access="hasRole('ROLE_ADMIN')" />
             <intercept-url pattern="/*"  access="permitAll" />
             <!--<intercept-url pattern="/**" access="denyAll" />-->
             <intercept-url pattern='/*' access='permitAll' />

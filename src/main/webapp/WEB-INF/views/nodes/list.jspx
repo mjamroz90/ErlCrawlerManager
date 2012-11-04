@@ -22,12 +22,13 @@
                 url : '${showNodesUrl}/listgrid',
                 datatype : 'json',
                 mtype : 'GET',
-                colNames : ['${labelNodeName}','${labelNodeAddress}', '${labelNodeAccess}'],
+                colNames : ['${labelNodeName}','${labelNodeAddress}', '${labelNodeAccess}', ''],
                 colModel : [
                     {name : 'name', index : 'name', width : '150', align : 'center'},
                     {name : 'address', index : 'address', width : '150', align : 'center'},
                     {name : 'accessible', index : 'accessible', width : '100',
-                        align : 'center', edittype : 'image', formatter : imageFormatter, sortable: 'false' }
+                        align : 'center', edittype : 'image', formatter : imageFormatter, sortable: 'false'},
+                    {name: 'remove', width : '50', align : 'center', formatter : linkFormatter}
                 ],
                 jsonReader :
                 {
@@ -59,6 +60,10 @@
                 return '<img src='/ecm/resources/styles/messages/error.png' />';
             }
         };
+
+        function linkFormatter(cellvalue,options,rowObject){
+            return '<a href="${showNodesUrl}' + rowObject.node.id + '?removeNode">remove</a>';
+        }
 
     </script>
 
