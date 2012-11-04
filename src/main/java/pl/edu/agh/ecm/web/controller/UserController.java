@@ -52,6 +52,7 @@ import java.util.Map;
 public class UserController {
 
     final static Logger logger = LoggerFactory.getLogger(UserController.class);
+    final static String accessDeniedPage = "redirect:/security/access-denied";
 
     @Autowired
     private UserService userService;
@@ -96,8 +97,6 @@ public class UserController {
                 sort = new Sort(Sort.Direction.ASC, orderBy);
         }
 
-        // Constructs page request for current page
-        // Note: page number for Spring Data JPA starts with 0, while jqGrid starts with 1
         PageRequest pageRequest = null;
 
         if (sort != null) {
@@ -135,14 +134,15 @@ public class UserController {
                 messageSource.getMessage("label_user_registration_success",new Object[]{},locale)));
 
         User user = toUser(userForm);
-        //TODO: pamiętac o constraint unique(firstname, lastname).
         user = userService.save(user,user.getPassword());
         return "redirect:/users/"+ UrlUtil.encodeUrlPathSegment(user.getId().toString(),request);
     }
 
     @RequestMapping(value = "/{id}/panel",method = RequestMethod.GET)
     public String showPanel(@PathVariable("id")Long id, Model uiModel){
-
+        if (!isAllowedForPanel(id)){
+            return accessDeniedPage;
+        }
         return preparePanelUiModel(id,uiModel);
     }
 
@@ -151,6 +151,9 @@ public class UserController {
                              @ModelAttribute("userForm") @Valid UserForm userForm,BindingResult bindingResult,
                              Model uiModel,HttpServletRequest request, RedirectAttributes redirectAttributes,Locale locale){
 
+        if (!isAllowedForPanel(id)){
+            return accessDeniedPage;
+        }
         validateUserLogin(userForm.getLogin(),bindingResult,id);
         convertPasswordError(bindingResult);
 
@@ -178,6 +181,9 @@ public class UserController {
         UserAllowToStopSessionForm userStopSessionForm,Model uiModel,HttpServletRequest request,
                                           RedirectAttributes redirectAttributes,Locale locale)
     {
+        if (!isAllowedForPanel(id)){
+            return accessDeniedPage;
+        }
         User user = userService.findByIdWithDetail(id);
         user = addAllowedToStopSession(userStopSessionForm,user);
         userService.save(user,null);
@@ -191,6 +197,9 @@ public class UserController {
     public String giveAdminPermissions(@PathVariable("id")Long id, @ModelAttribute("userForm")UserForm userForm,
                                        Model uiModel,HttpServletRequest request, RedirectAttributes redirectAttributes,Locale locale){
 
+        if (!isAllowedForPanel(id)){
+            return accessDeniedPage;
+        }
         User user = userService.findById(id);
         user.setAdmin(userForm.isAdmin());
         userService.save(user,null);
@@ -213,6 +222,9 @@ public class UserController {
     public String setConnectorParams(@PathVariable("id")Long id, @ModelAttribute("crawlerConnector") @Valid
     CrawlerConnector connector,BindingResult result,Model uiModel,HttpServletRequest request, RedirectAttributes attributes,Locale locale)
     {
+        if (!isAllowedForPanel(id)){
+            return accessDeniedPage;
+        }
         if (result.hasErrors()){
             preparePanelUiModel(id,uiModel,null,connector);
             uiModel.addAttribute("connectorMessage",new Message("error",
@@ -349,5 +361,12 @@ public class UserController {
             uiModel.addAttribute("crawlerConnector",connector);
         }
         return "users/panel";
+    }
+
+    private boolean isAllowedForPanel(Long id){
+        UserDetailsAdapter userDetailsAdapter =
+                (UserDetailsAdapter)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userAttempting = userDetailsAdapter.getUser();
+        return (userAttempting.getId().equals(id) || userAttempting.isAdmin());
     }
 }

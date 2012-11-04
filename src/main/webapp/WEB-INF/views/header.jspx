@@ -9,23 +9,51 @@
 	<spring:message code="application_name" var="headerText"/>
     <spring:message code="label_user_logout_action" var="labelLogout"/>
     <spring:message code="label_welcome" var="labelWelcome"/>
+    <spring:message code="nodes_naviation_link" var="nodeNavLink"/>
+    <spring:message code="users_navigation_link" var="usersNavLink"/>
+    <spring:message code="sessions_navigation_link" var="sessionsNavLink" />
+    <spring:message code="start_session_navigation_link" var="startSessionNavLink" />
+    <spring:message code="label_user_login_action" var="labelUserLogIn" />
+    <spring:message code="label_user_register" var="register" />
+
     <spring:url var="logoutUrl" value="/j_spring_security_logout" />
-    <spring:url var="editUserUrl" value="/users" />
+    <spring:url var="usersUrl" value="/users" />
+    <spring:url value="/sessions/" var="sessionUrl" />
+    <spring:url value="/nodes/" var="nodesUrl" />
+    <spring:url value="/startCrawlSession/" var="startSessionUrl" />
+    <spring:url value="/users/login" var="logInUrl" />
+    <spring:url value="/users/register" var="registerUrl" />
+    <!--<div id="appname">-->
+        <!--<h1>${headerText}</h1>-->
+    <!--</div>-->
 
 
-    <div id="appname">
-        <h1>${headerText}</h1>
-    </div>
+    <ul id="menu-bar">
+        <li><a href="${usersUrl}/">${usersNavLink}</a></li>
+        <li><a href="${nodesUrl}">${nodeNavLink}</a></li>
+        <li><a href="${sessionUrl}">${sessionsNavLink}</a></li>
+        <li><a href="${startSessionUrl}">${startSessionNavLink}</a></li>
+
+        <sec:authorize access="isAuthenticated()">
+            <c:set var="currentUserId"><sec:authentication property="principal.id" /></c:set>
+            <div>
+                <li><a href="${logoutUrl}">${labelLogout}</a></li>
+                <li><a href="${usersUrl}/${currentUserId}/panel">Panel</a></li>
+            </div>
+        </sec:authorize>
+        <sec:authorize access="isAnonymous()">
+            <div>
+                <li><a href="${logInUrl}">${labelUserLogIn}</a> </li>
+                <li><a href="${registerUrl}">${register}</a></li>
+            </div>
+        </sec:authorize>
+    </ul>
 
     <div id="userinfo">
         <sec:authorize access="isAuthenticated()">
-            <c:set var="currentUserId"><sec:authentication property="principal.id" /></c:set>
             ${labelWelcome}
             <sec:authentication property="principal.username" />
-            <br/>
-            <a href="${logoutUrl}">${labelLogout}</a> |
-            <a href="${editUserUrl}/${currentUserId}/panel">Panel</a>
-        </sec:authorize>                    
+        </sec:authorize>
     </div>
 
  </div>

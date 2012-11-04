@@ -6,8 +6,9 @@
 
 	<spring:message code="label_en_US" var="labelEnUs"/>
     <spring:message code="label_pl" var="labelPl"/>
-	<spring:url value="/users" var="homeUrl"/>
-         |
+	<spring:url value="/" var="homeUrl"/>
+
+    <a href="${homeUrl}">Home</a> |
     <a href="${homeUrl}?lang=en_US">${labelEnUs}</a> |
     <a href="${homeUrl}?lang=pl">${labelPl}</a>
 

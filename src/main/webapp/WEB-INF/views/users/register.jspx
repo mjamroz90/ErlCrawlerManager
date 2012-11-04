@@ -24,56 +24,60 @@
             <div id="message" class="${message.type}">${message.message}</div>
         </c:if>
 
-        <form:label path="login">
-            ${labelUserLogin}*
-        </form:label>
-        <form:input path="login"/>
-        <div>
-            <form:errors path="login" cssClass="error"/>
-        </div>
-        <p/>
+        <p>
+            <form:label path="login">
+                ${labelUserLogin}*
+            </form:label>
+            <form:input path="login"/>
+            <div>
+                <form:errors path="login" cssClass="error"/>
+            </div>
+        </p>
 
-        <form:label path="firstname">
-            ${labelUserFirstName}
-        </form:label>
-        <form:input path="firstname" />
-        <div>
-            <form:errors path="firstname" cssClass="error" />
-        </div>
-        <p/>
+        <p>
+            <form:label path="firstname">
+                ${labelUserFirstName}
+            </form:label>
+            <form:input path="firstname" />
+            <div>
+                <form:errors path="firstname" cssClass="error" />
+            </div>
+        </p>
 
-        <form:label path="lastname">
-            ${labelUserLastName}
-        </form:label>
-        <form:input path="lastname" />
-        <div>
-            <form:errors path="lastname" cssClass="error" />
-        </div>
-        <p/>
+        <p>
+            <form:label path="lastname">
+                ${labelUserLastName}
+            </form:label>
+            <form:input path="lastname" />
+            <div>
+                <form:errors path="lastname" cssClass="error" />
+            </div>
+        </p>
 
-        <form:label path="password">
-            ${labelUserPassword}*
-        </form:label>
-        <div>
-            <form:password path="password" cssClass="error" />
-        </div>
-        <div><form:errors path="password" cssClass="error" /></div>
-        <p/>
+        <p>
+            <form:label path="password">
+                ${labelUserPassword}*
+            </form:label>
+            <div>
+                <form:password path="password" cssClass="error" />
+            </div>
+            <div><form:errors path="password" cssClass="error" /></div>
+        </p>
 
-        <form:label path="confirmPassword">
-            ${labelUserRePassword}*
-        </form:label>
-        <div>
-            <form:password path="confirmPassword" cssClass="error" />
-        </div>
-        <p/>
+        <p>
+            <form:label path="confirmPassword">
+                ${labelUserRePassword}*
+            </form:label>
+            <div>
+                <form:password path="confirmPassword" cssClass="error" />
+            </div>
+        </p>
 
-        <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-            <span class="ui-button-text">${labelUserSave}</span>
-        </button>
-        <button type="reset" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-            <span class="ui-button-text">${labelUserReset}</span>
-        </button>
+        <p>
+            <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                <span class="ui-button-text">${labelUserSave}</span>
+            </button>
+        </p>
 
     </form:form>
     </div>
