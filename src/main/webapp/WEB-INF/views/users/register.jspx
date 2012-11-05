@@ -17,6 +17,25 @@
     <spring:message code="label_user_save" var="labelUserSave" />
     <spring:message code="label_user_reset" var="labelUserReset" />
 
+    <script type="text/javascript">
+        $(function(){
+            $('#userRegistrationForm').submit(function(){
+                var password = $('#password').val();
+                var confirmPassword = $('#confirmPassword').val();
+                if (password != confirmPassword){
+                    if (document.getElementById('confirmPassword.errors') == null){
+                        $('#confirmPassword').parent().after
+                                ('<span id="confirmPassword.errors" class="error">password mismatch</span>');
+                    }
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            });
+        });
+    </script>
+
     <h1>${labelUserRegister}</h1>
     <div id="userRegistration">
     <form:form modelAttribute="user" id="userRegistrationForm" method="post">
