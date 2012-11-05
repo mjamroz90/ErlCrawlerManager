@@ -20,7 +20,7 @@
     <spring:url var="usersUrl" value="/users" />
     <spring:url value="/sessions/" var="sessionUrl" />
     <spring:url value="/nodes/" var="nodesUrl" />
-    <spring:url value="/startCrawlSession/" var="startSessionUrl" />
+    <spring:url value="/startCrawlSession" var="startSessionUrl" />
     <spring:url value="/users/login" var="logInUrl" />
     <spring:url value="/users/register" var="registerUrl" />
     <!--<div id="appname">-->
