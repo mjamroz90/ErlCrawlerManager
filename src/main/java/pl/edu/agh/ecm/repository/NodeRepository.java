@@ -6,6 +6,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import pl.edu.agh.ecm.domain.Node;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Michal
@@ -16,10 +18,10 @@ import pl.edu.agh.ecm.domain.Node;
 public interface NodeRepository extends PagingAndSortingRepository<Node,Long> {
 
     @Query("select distinct n from Node n where n.address = :address")
-    public Node findByAddress(@Param("address") String address);
+    public List<Node> findByAddress(@Param("address") String address);
 
     @Query("select distinct n from Node n where n.name = :name")
-    public Node findByName(@Param("name") String name);
+    public List<Node> findByName(@Param("name") String name);
 
     @Query("select distinct n from Node n where n.name = :name and n.address = :address")
     public Node findByNameAndAddress(@Param("name")String name,@Param("address") String address);

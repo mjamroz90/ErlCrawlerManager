@@ -40,8 +40,8 @@ public class ActionUtils {
         return result;
     }
 
-    public static String[] remoteManagerNodeToProperty(CrawlSession crawlSession){
-        String[] result = new String[]{"remote_manager_server_node",crawlSession.getRemoteManagerServerNode().toString()};
+    public static String[] remoteManagerNodeToProperty(CrawlerConnector crawlerConnector){
+        String[] result = new String[]{"remote_manager_server_node",crawlerConnector.getRemoteNodeName()+'@'+crawlerConnector.getRemoteManagerAddress()};
         return result;
     }
 
@@ -96,7 +96,7 @@ public class ActionUtils {
         return result;
     }
 
-    public static String[][] sessionToProperties(CrawlSession crawlSession,boolean domainManagerNodeConf){
+    public static String[][] sessionToProperties(CrawlSession crawlSession,boolean domainManagerNodeConf,CrawlerConnector crawlerConnector){
         String[][] result = new String[][]
         {
             contactNodesToProperty(crawlSession),
@@ -107,19 +107,19 @@ public class ActionUtils {
             initUrlsToProperty(crawlSession,domainManagerNodeConf),
             //triggerTimeToProperty(),
             sessionIdToProperty(crawlSession),
-            remoteManagerNodeToProperty(crawlSession)
+            remoteManagerNodeToProperty(crawlerConnector)
         };
 
         return result;
     }
 
 
-    public static String[][] sessionNodesToProperties(CrawlSession crawlSession){
+    public static String[][] sessionNodesToProperties(CrawlSession crawlSession,CrawlerConnector crawlerConnector){
         String[][] result = new String[][]
         {
                 contactNodesToProperty(crawlSession),
                 domainManagerNodeToProperty(crawlSession),
-                remoteManagerNodeToProperty(crawlSession)
+                remoteManagerNodeToProperty(crawlerConnector)
         };
         return result;
     }

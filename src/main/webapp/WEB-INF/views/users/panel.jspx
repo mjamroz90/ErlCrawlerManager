@@ -183,6 +183,12 @@
                     </div>
                 </p>
 
+                <p>
+                    <form:label path="remoteNodeName">
+                        Node:
+                    </form:label>
+                    <form:input path="remoteNodeName"/>
+                </p>
                 <p style="text-align: center;">
                     <button type="submit" class="ui-button">
                         <span class="ui-button-text">${labelUserSave}</span>

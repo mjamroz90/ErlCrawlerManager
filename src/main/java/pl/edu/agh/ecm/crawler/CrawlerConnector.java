@@ -34,16 +34,18 @@ import java.net.SocketPermission;
 public class CrawlerConnector {
 
     private String remoteManagerAddress;
+    private String remoteNodeName;
     private int remoteManagerPort;
     private RemoteManagerServer remoteManagerServer = null;
     private ORB orb = null;
 
     public CrawlerConnector(){}
 
-    public CrawlerConnector(String remoteManagerAddress,int remoteManagerPort){
+    public CrawlerConnector(String remoteManagerAddress,String remoteNodeName,int remoteManagerPort){
         try{
             this.remoteManagerAddress = remoteManagerAddress;
             this.remoteManagerPort = remoteManagerPort;
+            this.remoteNodeName = remoteNodeName;
             initManagerServer(remoteManagerAddress,remoteManagerPort);
         }
         catch (Exception e)
@@ -158,13 +160,20 @@ public class CrawlerConnector {
     }
 
     @NotNull(message = "{validation.NotEmpty.message}")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
     public int getRemoteManagerPort() {
         return remoteManagerPort;
     }
 
     public void setRemoteManagerPort(int remoteManagerPort) {
         this.remoteManagerPort = remoteManagerPort;
+    }
+
+    public String getRemoteNodeName() {
+        return remoteNodeName;
+    }
+
+    public void setRemoteNodeName(String remoteNodeName) {
+        this.remoteNodeName = remoteNodeName;
     }
 
     public RemoteManagerServer getRemoteManagerServer() {

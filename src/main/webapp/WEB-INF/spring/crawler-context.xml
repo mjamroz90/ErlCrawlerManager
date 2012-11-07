@@ -7,9 +7,9 @@
 
 
     <beans:bean id="crawlerConnector" class="pl.edu.agh.ecm.crawler.CrawlerConnector" >
-        <!--<property name="remoteManagerAddress" value="127.0.0.1"/>-->
-        <!--<property name="remoteManagerPort" value="4001" />-->
+
         <constructor-arg name="remoteManagerAddress" value="127.0.0.1" />
+        <constructor-arg name="remoteNodeName" value="remote_node" />
         <constructor-arg name="remoteManagerPort" value="4001" />
     </beans:bean>
 

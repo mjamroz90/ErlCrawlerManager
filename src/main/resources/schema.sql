@@ -66,7 +66,7 @@ CREATE  TABLE IF NOT EXISTS `ecm_sessions` (
   `finished_by` INT NULL DEFAULT NULL ,
   `policy_id` INT NOT NULL ,
   `domain_manager_node_id` INT NOT NULL ,
-  `remote_manager_server_node_id` INT NOT NULL ,
+  `remote_manager_server_node_id` INT NULL ,
   PRIMARY KEY (`ID`) ,  
   CONSTRAINT `FK_sessions_users_finished`
     FOREIGN KEY (`finished_by` )

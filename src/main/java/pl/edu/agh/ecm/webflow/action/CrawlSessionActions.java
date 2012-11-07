@@ -163,7 +163,7 @@ public class CrawlSessionActions extends MultiAction {
         }
         CrawlSession crawlSession =(CrawlSession)context.getFlowScope().get("crawlSession",CrawlSession.class);
         //W tym momencie, w obiekcie sesji mamy pola domainManagerNode, oraz nodes
-        String[][] firstConfig = ActionUtils.sessionNodesToProperties(crawlSession);
+        String[][] firstConfig = ActionUtils.sessionNodesToProperties(crawlSession,crawlerConnector);
         StartCrawlerResults crawlerResults = startCrawlerOnNode(firstConfig,crawlSession);
         context.getFlowScope().put("appsView",crawlerResults);
         return success();
@@ -196,15 +196,12 @@ public class CrawlSessionActions extends MultiAction {
                 crawlSession.addNode(nodeObj);
             }
         }
-        String address = crawlerConnector.getRemoteManagerAddress();
-        Node remoteManagerNode = nodeService.findByAddress(address).get(0);
-        crawlSession.setRemoteManagerServerNode(remoteManagerNode);
         return crawlSession;
     }
 
     private StartCrawlerResults startSessionOnNodes(CrawlSession crawlSession){
-        String[][] domainManagerConf = ActionUtils.sessionToProperties(crawlSession,true);
-        String[][] ordinaryConf = ActionUtils.sessionToProperties(crawlSession,false);
+        String[][] domainManagerConf = ActionUtils.sessionToProperties(crawlSession,true,crawlerConnector);
+        String[][] ordinaryConf = ActionUtils.sessionToProperties(crawlSession,false,crawlerConnector);
         Set<Node> nodeList = crawlSession.getNodes();
         StartCrawlerResults result = new StartCrawlerResults();
 

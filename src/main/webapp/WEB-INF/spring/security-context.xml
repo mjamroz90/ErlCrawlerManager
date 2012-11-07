@@ -29,8 +29,8 @@
             <intercept-url pattern="/users/register" access="isAnonymous()" />
             <intercept-url pattern="/users/login" method="GET" access="isAnonymous()" />
             <intercept-url pattern="/users/*" method="GET" access="isAuthenticated()" />
-            <intercept-url pattern="/nodes" method="GET" access="isAuthenticated()" />
-            <intercept-url pattern="/nodes" method="POST" access="hasRole('ROLE_ADMIN')" />
+            <intercept-url pattern="/nodes/" method="GET" access="isAuthenticated()" />
+            <intercept-url pattern="/nodes/*" method="POST" access="hasRole('ROLE_ADMIN')" />
             <intercept-url pattern="/users/*/panel" access="isAuthenticated()" />
             <intercept-url pattern="/startCrawlSession" access="hasRole('ROLE_ADMIN')" />
             <intercept-url pattern="/*"  access="permitAll" />
