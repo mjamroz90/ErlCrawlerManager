@@ -20,6 +20,9 @@
     <spring:message code="label_user_allowing_to_stop_session" var="allowingToStopSession" />
     <spring:url value="/users" var="usersUrl" />
 
+    <c:set var="userId"><sec:authentication property="principal.id" /></c:set>
+    <spring:url value="/users/${userId}/panel" var="currentUser" />
+
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <div id="adminRole">
             <form:form modelAttribute="userForm" action="?giveAdminPermissions">
@@ -39,7 +42,7 @@
     </c:if>
 
     <div id="userInfo" class="panelComponent">
-        <form:form modelAttribute="userForm" id="userEditForm" method="post" action="?updateUser">
+        <form:form modelAttribute="userForm" id="userEditForm" method="post" action="${currentUser}?updateUser">
 
             <p>
                 <form:label path="login">
@@ -116,7 +119,7 @@
 
         <h3><spring:message code="label_user_allow_to_stop_session" /></h3>
         <form:form id="allowToStopSessionForm" modelAttribute="userStopSessionForm"
-                   method="post" action="?allowToStopSession">
+                   method="post" action="${currentUser}?allowToStopSession">
 
             <table class="entryTable">
                 <thead>
@@ -161,7 +164,7 @@
             </c:if>
 
             <h2 align="center"><spring:message code="label_connector_params_title" /></h2>
-            <form:form modelAttribute="crawlerConnector" method="post" action="?setConnectorParams">
+            <form:form modelAttribute="crawlerConnector" method="post" action="${currentUser}?setConnectorParams">
 
                 <p>
                     <form:label path="remoteManagerAddress">

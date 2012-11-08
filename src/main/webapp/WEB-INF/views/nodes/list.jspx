@@ -14,7 +14,7 @@
     <spring:message code="label_node_accessible" var="labelNodeAccess" />
     <spring:message code="label_node_save" var="labelNodeSave" />
 
-    <spring:url value="/nodes/" var="showNodesUrl" />
+    <spring:url value="/nodes" var="showNodesUrl" />
 
     <script type="text/javascript">
         $(function(){
@@ -62,7 +62,7 @@
         };
 
         function linkFormatter(cellvalue,options,rowObject){
-            return '<a href="${showNodesUrl}' + rowObject.node.id + '?removeNode">remove</a>';
+            return '<a href="${showNodesUrl}/' + rowObject.node.id + '?removeNode">remove</a>';
         }
 
     </script>
@@ -75,7 +75,7 @@
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <h2><spring:message code="label_node_new_node" /></h2>
         <div id="addNodeForm" class="addNodeForm">
-            <form:form modelAttribute="newNode" id="addNodeForm" method="post" action="?addNode">
+            <form:form modelAttribute="newNode" id="addNodeForm" method="post" action="${showNodesUrl}?addNode">
                 <form:label path="name">
                     ${labelNodeName}*
                 </form:label>
