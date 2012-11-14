@@ -17,6 +17,7 @@ import pl.edu.agh.ecm.domain.*;
 import pl.edu.agh.ecm.service.CrawlSessionService;
 import pl.edu.agh.ecm.service.NodeService;
 import pl.edu.agh.ecm.web.form.Message;
+import pl.edu.agh.ecm.web.util.TimeUtils;
 import pl.edu.agh.ecm.webflow.forms.*;
 import pl.edu.agh.ecm.webflow.validators.PolicyFormValidator;
 
@@ -119,9 +120,22 @@ public class CrawlSessionActions extends MultiAction {
         return form;
     }
 
+    public CrawlSessionForm resumedSessionToCrawlSessionForm(RequestContext requestContext){
+
+        CrawlSession crawlSession = (CrawlSession)requestContext.getFlowScope().get("crawlSession");
+        return fillCrawlSessionForm(crawlSession);
+    }
+
     public Event isAnySessionStarted(RequestContext requestContext){
 
         CrawlSession crawlSession;
+        ParameterMap parameterMap = requestContext.getRequestParameters();
+        if (parameterMap.contains("resumedSessionId")){
+            Long sessionId = parameterMap.getLong("resumedSessionId");
+            crawlSession = crawlSessionService.findByIdWithDetail(sessionId);
+            requestContext.getFlowScope().put("crawlSession",crawlSession);
+            return new Event(this,"resumed");
+        }
         if ((crawlSession = getSessionStarted(requestContext)) == null){
             return new Event(this,"stopped");
         }
@@ -272,5 +286,30 @@ public class CrawlSessionActions extends MultiAction {
     private CrawlSession getSessionStarted(RequestContext context){
         CrawlSession crawlSession = crawlSessionService.getRunningSession();
         return crawlSession;
+    }
+
+    private CrawlSessionForm fillCrawlSessionForm(CrawlSession crawlSession){
+        CrawlSessionForm crawlSessionForm = new CrawlSessionForm();
+        PolicyForm policyForm = new PolicyForm();
+        policyForm.setBufferSize(crawlSession.getPolicy().getBufferSize());
+        policyForm.setDefaultValidityDate(TimeUtils.getTimeLongAsPeriod(crawlSession.getPolicy().getDefaultValidityTime()));
+        policyForm.setMaxProcessCount(crawlSession.getPolicy().getMaxProcessCount());
+
+        List<InitUrlForm> initUrlFormList = new ArrayList<InitUrlForm>();
+        for (InitUrl initUrl : crawlSession.getPolicy().getInitUrls()){
+            InitUrlForm initUrlForm = new InitUrlForm();
+            initUrlForm.setAddress(initUrl.getAddress());
+            initUrlForm.setDepth(initUrl.getDepth());
+            initUrlForm.setWidth(initUrl.getWidth());
+            initUrlForm.setValidityDate(TimeUtils.getTimeLongAsPeriod(initUrl.getValidityTime()));
+
+            initUrlFormList.add(initUrlForm);
+        }
+
+        crawlSessionForm.setInitUrlFormList(initUrlFormList);
+        crawlSessionForm.setNewInitUrl(new InitUrlForm());
+        crawlSessionForm.setPolicy(policyForm);
+
+        return crawlSessionForm;
     }
 }
