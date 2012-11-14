@@ -67,39 +67,11 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!-- JSF 2 -->
-    <!-- Use JSF view templates saved as *.xhtml, for use with Facelets -->
-    <!--<context-param>-->
-        <!--<param-name>javax.faces.DEFAULT_SUFFIX</param-name>-->
-        <!--<param-value>.xhtml</param-value>-->
-    <!--</context-param>-->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/views/errors/error-500.jspx</location>
+    </error-page>
 
-    <!--&lt;!&ndash; Enables special Facelets debug output during development &ndash;&gt;-->
-    <!--<context-param>-->
-        <!--<param-name>javax.faces.PROJECT_STAGE</param-name>-->
-        <!--<param-value>Development</param-value>-->
-    <!--</context-param>-->
-
-    <!--&lt;!&ndash; Causes Facelets to refresh templates during development &ndash;&gt;-->
-    <!--<context-param>-->
-        <!--<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>-->
-        <!--<param-value>1</param-value>-->
-    <!--</context-param>-->
-
-    <!-- Just here so the JSF implementation can initialize, *not* used at runtime -->
-    <!--<servlet>-->
-        <!--<servlet-name>Faces Servlet</servlet-name>-->
-        <!--<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>-->
-        <!--<load-on-startup>1</load-on-startup>-->
-    <!--</servlet>-->
-
-    <!--&lt;!&ndash; Just here so the JSF implementation can initialize &ndash;&gt;-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>Faces Servlet</servlet-name>-->
-        <!--<url-pattern>*.faces</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!-- Processes application requests -->
     <servlet>
         <servlet-name>appServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

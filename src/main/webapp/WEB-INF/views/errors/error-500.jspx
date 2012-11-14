@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:jsp="http://java.sun.com/JSP/Page"
+       xmlns:spring="http://www.springframework.org/tags" >
+
+    <jsp:output doctype-root-element="HTML" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+                doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8" />
+    <jsp:directive.page pageEncoding="UTF-8" />
+
+    <head>
+        <spring:url value="/resources/styles/standard.css" var="standardCssUrl"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="${standardCssUrl}" />
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="main">
+                <div id="message" class="error">
+                    HTTP Status 500 - Internal Server Error
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

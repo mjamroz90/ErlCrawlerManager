@@ -61,7 +61,6 @@
   	        <tiles:insertAttribute name="header" ignore="true" />
   	    </div>
    		<div id="wrapper">
-		    <!--<tiles:insertAttribute name="menu" ignore="true" />   -->
 		    <div id="main">
 	    		<tiles:insertAttribute name="body"/> 
 		    	<tiles:insertAttribute name="footer" ignore="true"/>
