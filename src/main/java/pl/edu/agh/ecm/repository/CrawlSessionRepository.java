@@ -17,7 +17,8 @@ import java.util.List;
  */
 public interface CrawlSessionRepository extends PagingAndSortingRepository<CrawlSession,Long> {
 
-    @Query("select distinct s from CrawlSession s left join fetch s.nodes n where s.id = :id")
+    @Query("select distinct s from CrawlSession s left join fetch s.nodes n " +
+            "left join fetch s.policy p left join fetch p.initUrls i where s.id = :id ")
     public CrawlSession findByIdWithDetail(@Param("id")Long id);
 
     @Query("select distinct s from CrawlSession s left join fetch s.nodes n order by s.finished")

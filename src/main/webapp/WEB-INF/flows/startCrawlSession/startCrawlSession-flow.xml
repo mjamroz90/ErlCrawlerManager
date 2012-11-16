@@ -7,10 +7,9 @@
 
     <action-state id="isCrawlSessionStartedActionState">
        <evaluate expression="crawlSessionActions.isAnySessionStarted"/>
-       <transition on="resumed" to="defineSessionParams" />
-       <transition on="stopped" to="defineNodesForm" >
-            <evaluate expression="crawlSessionActions.resumedSessionToCrawlSessionForm">
+       <transition on="resumed" to="launchCrawlerActionState" >
        </transition>
+       <transition on="stopped" to="defineNodesForm" />
     </action-state>
 
     <view-state id="defineNodesForm" view="defineNodesForm" model="defineNodesForm">
@@ -25,13 +24,13 @@
     </view-state>
 
     <action-state id="launchCrawlerActionState">
-        <evaluate expression="crawlSessionActions.launchCrawler" result="flowScope.crawlSessionForm" />
+        <evaluate expression="crawlSessionActions.launchCrawler" />
         <transition on="success" to="displayAppsView" />
     </action-state>
 
     <view-state id="displayAppsView" view="displayAppsView">
         <transition on="next" to="defineSessionParams">
-            <evaluate expression="crawlSessionActions.initCrawlSessionForm()" result="flowScope.crawlSessionForm"/>
+            <evaluate expression="crawlSessionActions.initCrawlSessionForm(flowRequestContext)" result="flowScope.crawlSessionForm"/>
         </transition>
     </view-state>
 
@@ -39,7 +38,7 @@
         <transition on="addInitUrl" validate="true">
             <evaluate expression="crawlSessionActions.addInitUrlToCrawlSession(flowScope.crawlSessionForm)" />
         </transition>
-        <transition on="startSession" validate="true" to="confirmSessionParamsAction">
+        <transition on="startSession" validate="false" to="confirmSessionParamsAction">
             <evaluate expression="crawlSessionActions.validatePolicyForm(flowScope.crawlSessionForm,messageContext)"/>
             <evaluate expression="crawlSessionActions.prepareSessionObject"/>
         </transition>
@@ -68,9 +67,6 @@
     <global-transitions>
         <transition on="running" to="sessionRunningState" />
     </global-transitions>
-    <!--<action-state id="startCrawlSession">-->
-        <!--<evaluate expression="crawlSessionActions.startCrawlSession"/>-->
-    <!--</action-state>-->
 
 
 </flow>

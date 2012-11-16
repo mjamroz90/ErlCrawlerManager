@@ -79,17 +79,25 @@ public class CrawlSessionActions extends MultiAction {
     public Event startCrawlSession(RequestContext requestContext){
 
        CrawlSession crawlSession = (CrawlSession)requestContext.getFlowScope().get("crawlSession");
+       crawlSession.setFinishedBy(null);
+       crawlSession.setFinished(null);
        crawlSession = crawlSessionService.save(crawlSession);
        StartCrawlerResults startSessionResults = startSessionOnNodes(crawlSession);
        if (startSessionResults.isSessionStartedSuccessfully()){
-            requestContext.getFlowScope().put("sessionId",crawlSession.getId());
+            requestContext.getFlowScope().put("sessionId", crawlSession.getId());
             return success();
        }
        else{
             Locale locale = LocaleContextHolder.getLocale();
             requestContext.getViewScope().put("message",new Message("error",
                     messageSource.getMessage("label_session_start_failure",new Object[]{},locale )));
-            crawlSessionService.delete(crawlSession);
+            if (crawlSession.getId() == null){
+                crawlSessionService.delete(crawlSession);
+            }
+            else{
+                CrawlSession originalSession = (CrawlSession)requestContext.getFlowScope().get("originalCrawlSesion");
+                crawlSessionService.save(originalSession);
+            }
             return error();
        }
     }
@@ -112,18 +120,19 @@ public class CrawlSessionActions extends MultiAction {
         }
     }
 
-    public CrawlSessionForm initCrawlSessionForm(){
-        CrawlSessionForm form = new CrawlSessionForm();
-        form.setNewInitUrl(new InitUrlForm());
-        form.setPolicy(new PolicyForm());
-        form.setCurrentTime(DateTime.now());
+    public CrawlSessionForm initCrawlSessionForm(RequestContext context){
+        CrawlSession crawlSession = (CrawlSession)context.getFlowScope().get("crawlSession");
+        CrawlSessionForm form = null;
+        if (crawlSession.getId() != null){
+            form = fillCrawlSessionForm(crawlSession);
+        }
+        else{
+            form = new CrawlSessionForm();
+            form.setNewInitUrl(new InitUrlForm());
+            form.setPolicy(new PolicyForm());
+            form.setCurrentTime(DateTime.now());
+        }
         return form;
-    }
-
-    public CrawlSessionForm resumedSessionToCrawlSessionForm(RequestContext requestContext){
-
-        CrawlSession crawlSession = (CrawlSession)requestContext.getFlowScope().get("crawlSession");
-        return fillCrawlSessionForm(crawlSession);
     }
 
     public Event isAnySessionStarted(RequestContext requestContext){
@@ -133,7 +142,9 @@ public class CrawlSessionActions extends MultiAction {
         if (parameterMap.contains("resumedSessionId")){
             Long sessionId = parameterMap.getLong("resumedSessionId");
             crawlSession = crawlSessionService.findByIdWithDetail(sessionId);
+            requestContext.getFlowScope().put("originalCrawlSession",crawlSession);
             requestContext.getFlowScope().put("crawlSession",crawlSession);
+            requestContext.getFlowScope().put("resumedSession",true);
             return new Event(this,"resumed");
         }
         if ((crawlSession = getSessionStarted(requestContext)) == null){
@@ -288,6 +299,7 @@ public class CrawlSessionActions extends MultiAction {
         return crawlSession;
     }
 
+    //uzywana tylko w przypadku wznawiania sesji
     private CrawlSessionForm fillCrawlSessionForm(CrawlSession crawlSession){
         CrawlSessionForm crawlSessionForm = new CrawlSessionForm();
         PolicyForm policyForm = new PolicyForm();

@@ -58,14 +58,15 @@
                 </div>
             </p>
             <p style="text-align: center;">
-
-                <button class="ui-button">
-                    <a href="${flowExecutionUrl}&amp;_eventId=back" style="color: black;">
-                        <span class="ui-button-text">
-                            <spring:message code="label_session_back"/>
-                        </span>
-                    </a>
-                </button>
+                <c:if test="${empty resumedSession}">
+                    <button class="ui-button">
+                        <a href="${flowExecutionUrl}&amp;_eventId=back" style="color: black;">
+                            <span class="ui-button-text">
+                                <spring:message code="label_session_back"/>
+                            </span>
+                        </a>
+                    </button>
+                </c:if>
                 <button type="submit" class="ui-button" name="_eventId_startSession">
                     <span class="ui-button-text">
                         <spring:message code="label_session_startSession"/>
