@@ -139,7 +139,11 @@ public class CrawlSessionActions extends MultiAction {
 
         CrawlSession crawlSession;
         ParameterMap parameterMap = requestContext.getRequestParameters();
-        if (parameterMap.contains("resumedSessionId")){
+        if ((crawlSession = getSessionStarted(requestContext)) != null){
+            requestContext.getFlowScope().put("sessionId",crawlSession.getId());
+            return new Event(this,"running");
+        }
+        else if (parameterMap.contains("resumedSessionId")){
             Long sessionId = parameterMap.getLong("resumedSessionId");
             crawlSession = crawlSessionService.findByIdWithDetail(sessionId);
             requestContext.getFlowScope().put("originalCrawlSession",crawlSession);
@@ -147,13 +151,10 @@ public class CrawlSessionActions extends MultiAction {
             requestContext.getFlowScope().put("resumedSession",true);
             return new Event(this,"resumed");
         }
-        if ((crawlSession = getSessionStarted(requestContext)) == null){
+        else{
             return new Event(this,"stopped");
         }
-        else{
-            requestContext.getFlowScope().put("sessionId",crawlSession.getId());
-            return new Event(this,"running");
-        }
+
     }
 
     public Event prepareSessionObject(RequestContext context){

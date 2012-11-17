@@ -32,7 +32,7 @@
                             </button>
                         </p>
                     </c:when>
-                    <c:otherwise>
+                    <c:when test="${allowedToStopSession and not empty crawlSession.finished}">
                         <p style="text-align: center;">
                             <button class="ui-button">
                                 <a href="${resumeSessionUrl}">
@@ -42,7 +42,7 @@
                                 </a>
                             </button>
                         </p>
-                    </c:otherwise>
+                    </c:when>
                 </c:choose>
             </div>
 </div>
