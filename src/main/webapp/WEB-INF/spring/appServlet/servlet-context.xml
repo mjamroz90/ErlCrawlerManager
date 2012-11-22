@@ -67,5 +67,4 @@ resource bundle localizes all application specific messages such as entity names
         <beans:property name="validationMessageSource" ref="messageSource"/>
     </beans:bean>
 
-
 </beans:beans>
