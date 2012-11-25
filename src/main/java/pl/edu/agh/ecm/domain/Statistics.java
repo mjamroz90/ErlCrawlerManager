@@ -1,5 +1,9 @@
 package pl.edu.agh.ecm.domain;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 
 /**
@@ -16,14 +20,16 @@ public class Statistics {
 
     private Long id;
     private CrawlSession crawlSession;
+    private Node node;
     private int totalProcessedSitesNum;
     private double meanSiteProcessingNum;
     private double meanProcessorUsage;
     private double memoryUsage;
-    private double totalAddressesFetchedNum;
+    private int totalAddressesFetchedNum;
     private double meanAddressesNumPerSite;
     private double partAddressesNumPerSite;
     private String hashValue;
+    private DateTime reported;
 
     public Statistics(CrawlSession crawlSession){
         this.crawlSession = crawlSession;
@@ -89,11 +95,11 @@ public class Statistics {
     }
 
     @Column(name = "total_addresses_fetched_num")
-    public double getTotalAddressesFetchedNum() {
+    public int getTotalAddressesFetchedNum() {
         return totalAddressesFetchedNum;
     }
 
-    public void setTotalAddressesFetchedNum(double totalAddressesFetchedNum) {
+    public void setTotalAddressesFetchedNum(int totalAddressesFetchedNum) {
         this.totalAddressesFetchedNum = totalAddressesFetchedNum;
     }
 
@@ -113,6 +119,27 @@ public class Statistics {
 
     public void setPartAddressesNumPerSite(double partAddressesNumPerSite) {
         this.partAddressesNumPerSite = partAddressesNumPerSite;
+    }
+
+    @Column(name = "reportd")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    public DateTime getReported() {
+        return reported;
+    }
+
+    public void setReported(DateTime reported) {
+        this.reported = reported;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "node")
+    public Node getNode() {
+        return node;
+    }
+
+    public void setNode(Node node) {
+        this.node = node;
     }
 
     @Transient

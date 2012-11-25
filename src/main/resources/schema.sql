@@ -122,4 +122,29 @@ CREATE  TABLE IF NOT EXISTS `ecm_init_urls` (
   CONSTRAINT `FK_initurls_policies`
     FOREIGN KEY (`policy_id` )
     REFERENCES `ecm_policies` (`ID` )
-    );  
+    );
+
+ --------------------------------------------------------
+ -- Table 'ecm_statistics' ------------------------------
+ -------------------------------------------------------
+
+ CREATE  TABLE IF NOT EXISTS `ecm_statistics` (
+  `ID` INT NOT NULL AUTO_INCREMENT ,
+  `crawl_session` INT NOT NULL,
+  `node` INT NOT NULL,
+  `reported` DATETIME NULL,
+  `total_processed_sites_num` INT NULL,
+  `mean_site_processing_num` DOUBLE NULL,
+  `processor_usage` DOUBLE NULL,
+  `memory_usage` DOUBLE NULL,
+  `total_addresses_fetched_num` INT NULL,
+  `mean_addresses_num_per_site` DOUBLE NULL,
+  `part_addresses_num_per_site` DOUBLE NULL,
+  PRIMARY KEY (`ID`) ,
+  CONSTRAINT `FK_statistics_sessions`
+    FOREIGN KEY (`crawl_session` )
+    REFERENCES `ecm_sessions` (`ID` )
+    ,
+  CONSTRAINT `FK_statistics_nodes`
+    FOREIGN KEY (`node` )
+    REFERENCES `ecm_nodes` (`ID` ));
