@@ -121,7 +121,7 @@ public class Statistics {
         this.partAddressesNumPerSite = partAddressesNumPerSite;
     }
 
-    @Column(name = "reportd")
+    @Column(name = "reported")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     public DateTime getReported() {

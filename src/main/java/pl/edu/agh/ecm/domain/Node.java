@@ -22,7 +22,6 @@ public class Node implements Serializable {
     private Long id;
     private String name;
     private String address;
-    //private Set<CrawlSession> sessions;
 
     public Node(){}
 
@@ -70,15 +69,11 @@ public class Node implements Serializable {
     public String toString(){
        return name + '@' + address;
     }
-//    @ManyToMany
-//    @JoinTable(name = "ecm_sessions_nodes",
-//            joinColumns = @JoinColumn(name = "node_id"),
-//            inverseJoinColumns = @JoinColumn(name = "session_id"))
-//    public Set<CrawlSession> getSessions() {
-//        return sessions;
-//    }
-//
-//    public void setSessions(Set<CrawlSession> sessions) {
-//        this.sessions = sessions;
-//    }
+
+    @Override
+    public boolean equals(Object otherNode){
+        return (this.address.equals(((Node)otherNode).getAddress()) &&
+                this.name.equals(((Node)otherNode).getName()));
+    }
+
 }
