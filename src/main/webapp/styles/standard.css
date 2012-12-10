@@ -1,5 +1,15 @@
 @import url("messages/messages.css");
 
+.center{
+    text-align: center;
+}
+.left{
+    text-align: left;
+}
+.right{
+    text-align: right;
+}
+
 /* main elements */
 
 body,div,td {
@@ -154,12 +164,26 @@ table.navigation {
 label {
 	width:150px;
 	float:left;
-	margin-left: 5px;
+	//margin-left: 5px;
 	margin-top: 5px;
 }
+label.checkbox_label{
+    margin-left:10px;
+}
+
 
 input {
 	height:20px;
+}
+input[type=submit]{
+    height:100%;
+}
+input[type=checkbox]{
+    margin-top:5px;
+    float:left;
+}
+input[type=text], input[type=password]{
+    border-radius:3px;
 }
 
 input, textarea, select {
@@ -171,11 +195,11 @@ input.image {
 	height: auto;
 	vertical-align: middle;
 }
-
+   /*
 submit {
 	height:25px;
 }
-
+     */
 div {
 	text-align: left;
 }
@@ -256,6 +280,11 @@ a:active {
 
 a:visited {
 	color: #7db223;
+}
+
+a.ui-button{
+    padding: 0.4em 1em;
+    color:#555555;
 }
 
 li {
@@ -414,7 +443,7 @@ fieldset th {
 	height: 11px;
 	width: 16px;
 }
-
+/*
 .entryTable {
     background: #EEEEEE;
     margin: 2px 0 0 0;
@@ -422,44 +451,103 @@ fieldset th {
     border-collapse: collapse;
     width: 30%;
     border-radius: 10px;
+} */
+table.entryTable{
+    width: auto;
+    margin: auto;
 }
 
 table.entryTable th{
     width: 100px;
+    text-align: center;
 }
 table.entryTable th.first{
     width: auto;
 }
 
-table#sessionInfo.entryTable td{
+table#sessionInfo.entryTable td, table.entryTable td{
     width: auto;
     text-align: center;
 }
+table.entryTable td.first{
+    text-align: left;
+}
 
 
-.loginForm{
-    margin-left: 35%;
+div.loginForm{
+    margin:auto;
     margin-bottom: 30%;
-    width: 40%;
+    width: 43%;
+
+}
+/*
+div.loginForm form{
     background: #EEEEEE;
-    border-radius: 15px
+    border-radius: 15px;
+    padding:10px;
+}
+
+form div{
+    margin-bottom:6px;
+    overflow: hidden;
+}
+*/
+div.standardForm{
+    margin:auto;
+    width: 43%;
+}
+
+form.standardForm{
+    background: #EEEEEE;
+    border-radius: 15px;
+    padding:10px;
+}
+
+form.standardForm div, form div{
+    margin-bottom:6px;
+    overflow: hidden;
+}
+
+span.required{
+    margin:0;
+    color: #dd0000;
+}
+
+div#addNodeForm{
+    margin:0;
 }
 
 .addNodeForm{
-    margin-right: 10%;
-    margin-top: 0px;
+    //margin-right: 10%;
+    //margin-top: 0px;
     width : 40%;
     background: #EEEEEE;
     border-radius: 10px
 }
 
 .panelComponent{
-    margin-left: 10%;
+    //margin-left: 10%;
+    margin:auto;
     width: 40%;
     background: #EEEEEE;
-    border-radius: 15px
+    border-radius: 15px;
+    padding:10px;
+    margin-bottom: 10px;
+}
+div#appsView{
+    width:50%;
 }
 
 #initUrls.panelComponent #sessionParams.panelComponent{
     width: 70%;
+}
+
+
+div#sessionControllPanel{
+    width: 40%;
+    background: #EEEEEE;
+    border-radius: 15px;
+    margin:auto;
+    padding:10px;
+    padding-top:1px;
 }

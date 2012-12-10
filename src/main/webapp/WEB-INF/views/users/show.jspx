@@ -21,9 +21,9 @@
     <h1>${labelUserInfo}</h1>
 
     <div id="userInfo">
-        <table>
+        <table style="width:auto;">
             <tr>
-                <td>${labelUserLogin}</td>
+                <td style="min-width: 100px;">${labelUserLogin}</td>
                 <td>${user.login}</td>
             </tr>
             <tr>

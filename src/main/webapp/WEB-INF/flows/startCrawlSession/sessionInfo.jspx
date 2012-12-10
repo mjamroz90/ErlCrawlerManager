@@ -10,13 +10,13 @@
         <table class="entryTable">
             <thead>
             <tr>
-                <th><spring:message code="label_session_param_name" /></th>
-                <th><spring:message code="label_session_param_value" /></th>
+                <th class="first"><spring:message code="label_session_param_name" /></th>
+                <th style="width:auto"><spring:message code="label_session_param_value" /></th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td><spring:message code="label_session_nodes" /></td>
+                <td class="first"><spring:message code="label_session_nodes" /></td>
                 <td>
                     <ul>
                         <c:forEach items="${crawlSession.nodes}" var="node">
@@ -26,11 +26,11 @@
                 </td>
             </tr>
             <tr>
-                <td>Domain Manager Node</td>
+                <td class="first">Domain Manager Node</td>
                 <td>${crawlSession.domainManagerNode}</td>
             </tr>
             <tr>
-                <td><spring:message code="label_session_initUrl" /></td>
+                <td class="first"><spring:message code="label_session_initUrl" /></td>
                 <td>
                     <ul>
                         <c:forEach items="${crawlSession.policy.initUrls}" var="initUrl">
@@ -40,15 +40,15 @@
                 </td>
             </tr>
             <tr>
-                <td><spring:message code="label_session_maxProcessCount" /></td>
+                <td class="first"><spring:message code="label_session_maxProcessCount" /></td>
                 <td>${crawlSession.policy.maxProcessCount}</td>
             </tr>
             <tr>
-                <td><spring:message code="label_session_bufferSize" /></td>
+                <td class="first"><spring:message code="label_session_bufferSize" /></td>
                 <td>${crawlSession.policy.bufferSize}</td>
             </tr>
             <tr>
-                <td><spring:message code="label_session_defaultValidityTime" /></td>
+                <td class="first"><spring:message code="label_session_defaultValidityTime" /></td>
                 <td>${crawlSession.policy.defaultValidityTimeAsString}</td>
             </tr>
             </tbody>

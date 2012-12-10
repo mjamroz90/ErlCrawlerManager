@@ -16,6 +16,7 @@
     <spring:message code="label_user_reenter_password" var="labelUserRePassword" />
     <spring:message code="label_user_save" var="labelUserSave" />
     <spring:message code="label_user_reset" var="labelUserReset" />
+    <spring:message code="required_field" var="requiredField" />
 
     <script type="text/javascript">
         $(function(){
@@ -37,23 +38,23 @@
     </script>
 
     <h1>${labelUserRegister}</h1>
-    <div id="userRegistration">
-    <form:form modelAttribute="user" id="userRegistrationForm" method="post">
+    <div id="userRegistration" class="standardForm">
+    <form:form modelAttribute="user" class="standardForm" id="userRegistrationForm" method="post">
         <c:if test="${not empty message}">
             <div id="message" class="${message.type}">${message.message}</div>
         </c:if>
 
-        <p>
+        <div>
             <form:label path="login">
-                ${labelUserLogin}*
+                ${labelUserLogin}<span class="required">*</span>
             </form:label>
             <form:input path="login"/>
             <div>
                 <form:errors path="login" cssClass="error"/>
             </div>
-        </p>
+        </div>
 
-        <p>
+        <div>
             <form:label path="firstname">
                 ${labelUserFirstName}
             </form:label>
@@ -61,9 +62,9 @@
             <div>
                 <form:errors path="firstname" cssClass="error" />
             </div>
-        </p>
+        </div>
 
-        <p>
+        <div>
             <form:label path="lastname">
                 ${labelUserLastName}
             </form:label>
@@ -71,34 +72,33 @@
             <div>
                 <form:errors path="lastname" cssClass="error" />
             </div>
-        </p>
+        </div>
 
-        <p>
+        <div>
             <form:label path="password">
-                ${labelUserPassword}*
+                ${labelUserPassword}<span class="required">*</span>
             </form:label>
             <div>
                 <form:password path="password" cssClass="error" />
             </div>
             <div><form:errors path="password" cssClass="error" /></div>
-        </p>
+        </div>
 
-        <p>
+        <div>
             <form:label path="confirmPassword">
-                ${labelUserRePassword}*
+                ${labelUserRePassword}<span class="required">*</span>
             </form:label>
             <div>
                 <form:password path="confirmPassword" cssClass="error" />
             </div>
-        </p>
+        </div>
 
-        <p>
-            <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-                <span class="ui-button-text">${labelUserSave}</span>
-            </button>
-        </p>
+        <div>
+            <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="${labelUserSave}" />
+        </div>
 
     </form:form>
+    <p><span class="required">*</span> ${requiredField}</p>
     </div>
 
 </div>

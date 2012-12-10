@@ -8,6 +8,8 @@
 
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    <spring:message code="label_session_startSession" var="labelSessionStartSession"/>
+    <spring:message code="required_field" var="requiredField" />
 
     <script type="text/javascript">
         var pickerObject = {
@@ -28,52 +30,50 @@
     <div id="sessionParams" class="panelComponent">
         <h3 align="center"><spring:message code="label_session_other_params"/></h3>
         <form:form modelAttribute="crawlSessionForm.policy" action="${flowExecutionUrl}">
-            <p>
+            <div>
                 <form:label path="maxProcessCount">
-                    <spring:message code="label_session_maxProcessCount"/>
+                    <spring:message code="label_session_maxProcessCount"/><span class="required">*</span>
                 </form:label>
                 <form:input path="maxProcessCount"/>
                 <div>
                     <form:errors path="maxProcessCount" cssClass="error"/>
                 </div>
-            </p>
+            </div>
 
-            <p>
+            <div>
                 <form:label path="bufferSize">
-                    <spring:message code="label_session_bufferSize" />
+                    <spring:message code="label_session_bufferSize" /><span class="required">*</span>
                 </form:label>
                 <form:input path="bufferSize"/>
                 <div>
                     <form:errors path="bufferSize" cssClass="error"/>
                 </div>
-            </p>
+            </div>
 
-            <p>
-                <form:label path="defaultValidityDate">
-                    <spring:message code="label_session_defaultValidityTime" />
-                </form:label>
+            <div>
+                <label for="defaultValidityDate">
+                    <spring:message code="label_session_defaultValidityTime" /><span class="required">*</span>
+                </label>
                 <form:input path="defaultValidityDate" id="defaultValidityDate"/>
                 <div>
                     <form:errors path="defaultValidityDate" cssClass="error"/>
                 </div>
-            </p>
-            <p style="text-align: center;">
+            </div>
+            <div class="center">
                 <c:if test="${empty resumedSession}">
-                    <button class="ui-button">
-                        <a href="${flowExecutionUrl}&amp;_eventId=back" style="color: black;">
-                            <span class="ui-button-text">
+
+                        <a href="${flowExecutionUrl}&amp;_eventId=back" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+
                                 <spring:message code="label_session_back"/>
-                            </span>
+
                         </a>
-                    </button>
+
                 </c:if>
-                <button type="submit" class="ui-button" name="_eventId_startSession">
-                    <span class="ui-button-text">
-                        <spring:message code="label_session_startSession"/>
-                    </span>
-                </button>
-            </p>
+                <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" name="_eventId_startSession" value="${labelSessionStartSession}" />
+
+            </div>
         </form:form>
     </div>
+    <p style="margin:auto;width:40%;padding:10px;padding-top:0;"><span class="required" style="margin-left:-10px;">*</span> ${requiredField}</p>
 
 </div>

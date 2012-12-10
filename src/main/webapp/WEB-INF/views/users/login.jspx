@@ -10,6 +10,7 @@
 
     <spring:message code="label_user_login" var="labelLogin" />
     <spring:message code="label_user_password" var="labelPassword" />
+    <spring:message code="required_field" var="requiredField" />
     <spring:url var="loginUrl" value="/j_spring_security_check" />
 
     <c:if test="${not empty message}">
@@ -18,7 +19,7 @@
 
         <h2><spring:message code="label_user_login_ask" /> </h2>
         <div id="loginForm" class="loginForm">
-            <form name="loginForm" method="post" action="${loginUrl}">
+            <form name="loginForm" class="standardForm" method="post" action="${loginUrl}">
                 <!--<table>-->
                     <!--<tr>-->
                         <!--<td>${labelLogin}</td>-->
@@ -38,34 +39,36 @@
                         <!--</td>-->
                     <!--</tr>-->
                 <!--</table>-->
-                <p>
+                <div>
                     <label for="j_username">
-                        ${labelLogin}*
+                        ${labelLogin}<span class="required">*</span>
                     </label>
-                    <input type="text" name="j_username" />
-                </p>
+                    <input type="text" name="j_username" id="j_username" />
+                </div>
 
-                <p>
+                <div>
                     <label for="j_password">
-                        ${labelPassword}*
+                        ${labelPassword}<span class="required">*</span>
                     </label>
-                    <input type="password" name="j_password" />
-                </p>
+                    <input type="password" name="j_password" id="j_password" />
+                </div>
 
-                <p>
-                    <input type="checkbox" name="_spring_security_remember_me" >
-                        <spring:message code="label_user_remember_me" />
+                <div>
+                    <input type="checkbox" name="_spring_security_remember_me" id="_spring_security_remember_me" >
+                        <label for="_spring_security_remember_me" class="checkbox_label">
+                            <spring:message code="label_user_remember_me" />
+                        </label>
                     </input>
-                </p>
+                </div>
 
-                <p style="text-align: center">
-                    <button type="submit" style="align : center" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-                        <span class="ui-button-text">Log In</span>
-                    </button>
-                </p>
+                <div style="text-align: center">
+                    <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="Log In" />
+                </div>
 
             </form>
+            <p><span class="required">*</span> ${requiredField}</p>
         </div>
+
 
 
 

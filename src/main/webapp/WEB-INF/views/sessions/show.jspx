@@ -13,36 +13,37 @@
         <div id="message" class="${message.type}">${message.message}</div>
     </c:if>
 
-    <h3><spring:message code="label_session_info" /></h3>
+    <h2><spring:message code="label_session_info"/></h2>
     <tiles:insertAttribute name="sessionInfo"/>
 
-            <div id="stopSessionPanel" style="margin-left: 0%; width: 40%; background: #EEEEEE; border-radius: 15px;">
-                <p>
-                    <h3 align="center"><spring:message code="label_session_stop_session" /></h3>
+    <div id="sessionControllPanel">
+        <h3 class="center"><spring:message code="label_session_stop_session"/></h3>
+
+        <c:choose>
+            <c:when test="${allowedToStopSession and empty crawlSession.finished}">
+                <p style="text-align: center;">
+
+                    <a href="${sessionUrl}?stopSession"
+                       class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+
+                        Stop
+
+                    </a>
+
                 </p>
-                <c:choose>
-                    <c:when test="${allowedToStopSession and empty crawlSession.finished}">
-                        <p style="text-align: center;">
-                            <button class="ui-button">
-                                <a href="${sessionUrl}?stopSession">
-                                    <span class="ui-button-text">
-                                        Stop
-                                    </span>
-                                </a>
-                            </button>
-                        </p>
-                    </c:when>
-                    <c:when test="${allowedToStopSession and not empty crawlSession.finished}">
-                        <p style="text-align: center;">
-                            <button class="ui-button">
-                                <a href="${resumeSessionUrl}">
-                                    <span class="ui-button-text">
-                                        Resume
-                                    </span>
-                                </a>
-                            </button>
-                        </p>
-                    </c:when>
-                </c:choose>
-            </div>
+            </c:when>
+            <c:when test="${allowedToStopSession and not empty crawlSession.finished}">
+                <p style="text-align: center;">
+
+                    <a href="${resumeSessionUrl}"
+                       class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+
+                        Resume
+
+                    </a>
+
+                </p>
+            </c:when>
+        </c:choose>
+    </div>
 </div>

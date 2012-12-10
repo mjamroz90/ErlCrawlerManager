@@ -14,7 +14,9 @@
     <c:set value="${flowExecutionUrl}&amp;_eventId=next" var="nextStepUrl" />
 
     <h2>${labelAppsView}</h2>
-    <div id="appsView" class="panelComponent">
+    <!--<div id="appsView" class="panelComponent">
+    -->
+    <div>
         <table class="entryTable">
             <thead>
                 <tr>
@@ -28,7 +30,7 @@
             <tbody>
                   <c:forEach items="${appsView.startAppsResultOnNodes}" var="startResult" varStatus="status">
                      <tr>
-                         <td>${startResult.nodeName}</td>
+                         <td class="first">${startResult.nodeName}</td>
                          <td>
                              <c:choose>
                                  <c:when test="${startResult.cacheStarted}">
@@ -76,15 +78,11 @@
     </div>
 
     <c:if test="${appsView.canGoToNextStep}">
-        <div id="actionsPanel" style="margin-left:10%;width: 40% ;background: #EEEEEE;border-radius: 5px;height: auto; ">
-            <p style="text-align: center;">
-                <button class="ui-button-text">
-                    <a href="${nextStepUrl}">
-                        <span class="ui-button-text">
-                            <spring:message code="label_session_next" />
-                        </span>
-                    </a>
-                </button>
+        <div id="actionsPanel" style="/*margin-left:10%;width: 40% ;background: #EEEEEE;border-radius: 5px;height: auto; */">
+            <p class="center">
+                <a href="${nextStepUrl}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                    <spring:message code="label_session_next" />
+                </a>
             </p>
         </div>
     </c:if>

@@ -8,36 +8,38 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
-    <h2><spring:message code="label_session_overall" /></h2>
+    <h2><spring:message code="label_session_overall"/></h2>
 
     <c:if test="${not empty message}">
         <div id="message" class="${message.type}">${message.message}</div>
     </c:if>
 
-    <tiles:insertAttribute name="sessionInfo" />
+    <tiles:insertAttribute name="sessionInfo"/>
 
-    <div style="margin-left:0%; width: 30%; background: #EEEEEE;border-radius: 5px; height: auto; ">
+    <!--<div style="margin-left:0%; width: 30%; background: #EEEEEE;border-radius: 5px; height: auto; ">-->
+    <div>
 
-          <form action="${flowExecutionUrl}">
-              <p style="text-align: center;">
+        <form action="${flowExecutionUrl}">
+            <p style="text-align: center;">
 
-                  <button class="ui-button">
-                      <a href="${flowExecutionUrl}&amp;_eventId=back">
-                          <span class="ui-button-text">
-                                <spring:message code="label_session_back" />
-                          </span>
-                      </a>
-                  </button>
 
-                  <button class="ui-button">
-                      <a href="${flowExecutionUrl}&amp;_eventId=confirm">
-                          <span class="ui-button-text">
-                             <spring:message code="label_session_confirm" />
-                          </span>
-                      </a>
-                  </button>
-              </p>
-          </form>
+                <a href="${flowExecutionUrl}&amp;_eventId=back"
+                   class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+
+                    <spring:message code="label_session_back"/>
+
+                </a>
+
+
+                <a href="${flowExecutionUrl}&amp;_eventId=confirm"
+                   class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+
+                    <spring:message code="label_session_confirm"/>
+
+                </a>
+
+            </p>
+        </form>
 
     </div>
 

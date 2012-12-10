@@ -74,29 +74,31 @@
 
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <h2><spring:message code="label_node_new_node" /></h2>
-        <div id="addNodeForm" class="addNodeForm">
-            <form:form modelAttribute="newNode" id="addNodeForm" method="post" action="${showNodesUrl}?addNode">
+        <div id="addNodeForm" class="addNodeForm standardForm">
+            <form:form modelAttribute="newNode" id="addNodeForm" method="post" action="${showNodesUrl}?addNode" class="standardForm">
                 <form:label path="name">
                     ${labelNodeName}*
                 </form:label>
-                <form:input path="name"/>
                 <div>
-                    <form:errors path="name" cssClass="error"/>
+                    <form:input path="name"/>
+                    <div>
+                        <form:errors path="name" cssClass="error"/>
+                    </div>
                 </div>
-                <p/>
 
-                <form:label path="address">
-                    ${labelNodeAddress}*
-                </form:label>
-                <form:input path="address"/>
                 <div>
-                    <form:errors path="address" cssClass="error" />
+                    <form:label path="address">
+                        ${labelNodeAddress}*
+                    </form:label>
+                    <form:input path="address"/>
+                    <div>
+                        <form:errors path="address" cssClass="error" />
+                    </div>
                 </div>
-                <p/>
 
-                <button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-                    <span class="ui-button-text">${labelNodeSave}</span>
-                </button>
+                <div>
+                    <input type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="${labelNodeSave}"/>
+                </div>
             </form:form>
         </div>
     </sec:authorize>
