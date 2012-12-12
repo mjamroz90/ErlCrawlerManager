@@ -53,6 +53,7 @@ public class UserController {
 
     final static Logger logger = LoggerFactory.getLogger(UserController.class);
     final static String accessDeniedPage = "redirect:/security/access-denied";
+    private UserDetailsAdapter userDetailsAdapter = null;
 
     @Autowired
     private UserService userService;
@@ -214,7 +215,10 @@ public class UserController {
         }
         redirectAttributes.addFlashAttribute("message",displayedMessage);
 
-        UserDetailsAdapter loggedUser = (UserDetailsAdapter)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetailsAdapter loggedUser = userDetailsAdapter;
+        if (loggedUser == null){
+            loggedUser = (UserDetailsAdapter)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
         return "redirect:/users/"+UrlUtil.encodeUrlPathSegment(loggedUser.getId().toString(),request)+"/panel";
     }
 
@@ -364,9 +368,12 @@ public class UserController {
     }
 
     private boolean isAllowedForPanel(Long id){
-        UserDetailsAdapter userDetailsAdapter =
-                (UserDetailsAdapter)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userAttempting = userDetailsAdapter.getUser();
+        UserDetailsAdapter detailsAdapter = userDetailsAdapter;
+        if (detailsAdapter == null){
+            detailsAdapter =
+                    (UserDetailsAdapter)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+        User userAttempting = detailsAdapter.getUser();
         return (userAttempting.getId().equals(id) || userAttempting.isAdmin());
     }
 }

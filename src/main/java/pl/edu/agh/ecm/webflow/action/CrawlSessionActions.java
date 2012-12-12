@@ -105,14 +105,25 @@ public class CrawlSessionActions extends MultiAction {
     public Event validateDefineNodesForm(DefineNodesForm defineNodesForm,MessageContext messageContext){
 
         boolean foundMarkedNode = false;
+        boolean dmNodeMarked = false;
         for (NodeEntry nodeEntry : defineNodesForm.getNodeEntryList()){
             if (nodeEntry.isUsed()){
                 foundMarkedNode = true;
+            }
+            if(defineNodesForm.getDomainManagerNode().equals(nodeEntry.getNodeName())){
+                if (nodeEntry.isUsed()){
+                    dmNodeMarked = true;
+                }
             }
         }
         if (!foundMarkedNode){
             messageContext.addMessage(new MessageBuilder().error().source("nodeEntryList")
                     .code("label_session_node_unmarked").build());
+            return error();
+        }
+        if (!dmNodeMarked){
+            messageContext.addMessage(new MessageBuilder().error().source("nodeEntryList")
+                    .code("label_session_domain_node_unmarked").build());
             return error();
         }
         else{
