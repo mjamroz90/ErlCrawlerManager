@@ -147,4 +147,5 @@ CREATE  TABLE IF NOT EXISTS `ecm_init_urls` (
     ,
   CONSTRAINT `FK_statistics_nodes`
     FOREIGN KEY (`node` )
-    REFERENCES `ecm_nodes` (`ID` ));
+    REFERENCES `ecm_nodes` (`ID` )
+    );
