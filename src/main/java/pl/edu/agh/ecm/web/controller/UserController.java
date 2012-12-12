@@ -1,10 +1,6 @@
 package pl.edu.agh.ecm.web.controller;
 
 import com.google.common.collect.Lists;
-import com.sun.corba.se.pept.transport.ContactInfo;
-import org.apache.commons.collections.FactoryUtils;
-import org.apache.commons.collections.keyvalue.DefaultKeyValue;
-import org.apache.commons.collections.list.LazyList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.servlet.mvc.AbstractController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.webflow.execution.RequestContext;
 import pl.edu.agh.ecm.crawler.CrawlerConnector;
 import pl.edu.agh.ecm.domain.User;
 import pl.edu.agh.ecm.domain.UserDetailsAdapter;
@@ -30,14 +23,11 @@ import pl.edu.agh.ecm.service.UserService;
 import pl.edu.agh.ecm.web.form.*;
 import pl.edu.agh.ecm.web.util.UrlUtil;
 
-
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,10 +1,8 @@
 package pl.edu.agh.ecm.web.controller;
 
-import org.hibernate.type.ListType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -21,7 +19,6 @@ import pl.edu.agh.ecm.domain.UserDetailsAdapter;
 import pl.edu.agh.ecm.service.UserService;
 import pl.edu.agh.ecm.web.form.UserAllowToStopSessionForm;
 import pl.edu.agh.ecm.web.form.UserEntry;
-import pl.edu.agh.ecm.web.form.UserForm;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
