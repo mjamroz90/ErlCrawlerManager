@@ -58,6 +58,7 @@ public class StatisticsServiceImplTest extends AbstractServiceImplTest {
         sampleStats = statisticsService.save(sampleStats);
         Assert.assertNotNull(sampleStats.getId());
         statisticsService.delete(sampleStats);
+        sampleStats.setId(null);
         Assert.assertNull(sampleStats.getId());
     }
 
@@ -68,28 +69,33 @@ public class StatisticsServiceImplTest extends AbstractServiceImplTest {
         sampleStats = statisticsService.save(sampleStats);
         Assert.assertNotNull(sampleStats.getId());
         statisticsService.delete(sampleStats);
+        sampleStats.setId(null);
         Assert.assertNull(sampleStats.getId());
     }
 
     @Test
     public void testFindStatisticsByNode() throws Exception {
 
+        Assert.assertNotNull(domainNode.getId());
         sampleStats = statisticsService.save(sampleStats);
         List<Statistics> foundStats = statisticsService.findStatisticsByNode(domainNode.getId());
         Assert.assertEquals(foundStats.size(),1);
         Assert.assertEquals(foundStats.get(0).getId(),sampleStats.getId());
         statisticsService.delete(sampleStats);
+        sampleStats.setId(null);
         Assert.assertNull(sampleStats.getId());
     }
 
     @Test
     public void testFindStatisticsBySession() throws Exception {
 
+        Assert.assertNotNull(domainNode.getId());
         sampleStats = statisticsService.save(sampleStats);
         List<Statistics> foundStats = statisticsService.findStatisticsBySession(crawlSession.getId());
         Assert.assertEquals(foundStats.size(),1);
         Assert.assertEquals(foundStats.get(0).getId(),sampleStats.getId());
         statisticsService.delete(sampleStats);
+        sampleStats.setId(null);
         Assert.assertNull(sampleStats.getId());
     }
 }

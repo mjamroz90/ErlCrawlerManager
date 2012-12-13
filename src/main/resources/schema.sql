@@ -124,10 +124,9 @@ CREATE  TABLE IF NOT EXISTS `ecm_init_urls` (
     REFERENCES `ecm_policies` (`ID` )
     );
 
- --------------------------------------------------------
- -- Table 'ecm_statistics' ------------------------------
- -------------------------------------------------------
-
+-- ------------------------------------------------------
+-- Table 'ecm_statistics' ------------------------------
+-- -----------------------------------------------------
  CREATE  TABLE IF NOT EXISTS `ecm_statistics` (
   `ID` INT NOT NULL AUTO_INCREMENT ,
   `crawl_session` INT NOT NULL,

@@ -17,10 +17,10 @@ import java.util.List;
 
 public interface StatisticsRepository extends CrudRepository<Statistics,Long> {
 
-    @Query("select distinct s from Statistics s where s.node = :nodeId")
+    @Query("select distinct s from Statistics s where s.node.id = :nodeId")
     public List<Statistics> findStatisticsByNode(@Param("nodeId")Long nodeId);
 
-    @Query("select distinct s from Statistics s where s.crawlSession = :sessionId")
+    @Query("select distinct s from Statistics s where s.crawlSession.id = :sessionId")
     public List<Statistics> findStatisticsBySession(@Param("sessionId")Long sessionId);
 
 }
