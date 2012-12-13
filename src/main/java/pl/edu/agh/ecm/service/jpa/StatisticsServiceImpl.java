@@ -1,5 +1,6 @@
 package pl.edu.agh.ecm.service.jpa;
 
+import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,5 +50,9 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     public List<Statistics> findStatisticsBySession(Long sessionId) {
         return statisticsRepository.findStatisticsBySession(sessionId);
+    }
+
+    public List<Statistics> findAll() {
+       return Lists.newArrayList(statisticsRepository.findAll());
     }
 }

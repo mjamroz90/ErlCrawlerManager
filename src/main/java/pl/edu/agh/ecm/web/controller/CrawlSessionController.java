@@ -35,6 +35,8 @@ import java.util.Locale;
 @RequestMapping("/sessions")
 public class CrawlSessionController {
 
+    private UserDetailsAdapter userDetailsAdapter = null;
+
     @Autowired
     private CrawlSessionService crawlSessionService;
 
@@ -110,8 +112,7 @@ public class CrawlSessionController {
         }
 
         boolean stopResult = crawlerConnector.stopSession(true,crawlSession);
-        User loggedUser = ((UserDetailsAdapter)SecurityContextHolder.getContext().
-                getAuthentication().getPrincipal()).getUser();
+        User loggedUser = getLoggedInUser();
 
         if (stopResult == true){
             attributes.addFlashAttribute("message",new Message("success",
@@ -137,9 +138,7 @@ public class CrawlSessionController {
 
     private boolean isAllowedToStopSession(CrawlSession crawlSession){
 
-        UserDetailsAdapter userDetails = (UserDetailsAdapter)SecurityContextHolder.getContext().
-                getAuthentication().getPrincipal();
-        User applyingUser = userDetails.getUser();
+        User applyingUser = getLoggedInUser();
 
         User userStarted = crawlSession.getStartedBy();
         if ((userStarted.getId() == applyingUser.getId()) || userStarted.isAllowedToStopSession(applyingUser.getLogin())){
@@ -150,4 +149,13 @@ public class CrawlSessionController {
         }
     }
 
+    private User getLoggedInUser(){
+
+        UserDetailsAdapter userDetails = userDetailsAdapter;
+        if (userDetails == null){
+            userDetails = (UserDetailsAdapter)SecurityContextHolder.getContext().
+                    getAuthentication().getPrincipal();
+        }
+        return userDetails.getUser();
+    }
 }

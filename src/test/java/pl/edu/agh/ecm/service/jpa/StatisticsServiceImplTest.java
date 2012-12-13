@@ -60,6 +60,7 @@ public class StatisticsServiceImplTest extends AbstractServiceImplTest {
         statisticsService.delete(sampleStats);
         sampleStats.setId(null);
         Assert.assertNull(sampleStats.getId());
+        Assert.assertEquals(statisticsService.findAll().size(),0);
     }
 
     @Test
@@ -68,6 +69,7 @@ public class StatisticsServiceImplTest extends AbstractServiceImplTest {
         Statistics tempStats = sampleStats;
         sampleStats = statisticsService.save(sampleStats);
         Assert.assertNotNull(sampleStats.getId());
+        Assert.assertEquals(statisticsService.findAll().size(),1);
         statisticsService.delete(sampleStats);
         sampleStats.setId(null);
         Assert.assertNull(sampleStats.getId());

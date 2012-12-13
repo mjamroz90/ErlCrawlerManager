@@ -1,5 +1,6 @@
 package pl.edu.agh.ecm.web.controller;
 
+import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +8,9 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.ui.ExtendedModelMap;
@@ -19,6 +23,7 @@ import pl.edu.agh.ecm.domain.UserDetailsAdapter;
 import pl.edu.agh.ecm.service.UserService;
 import pl.edu.agh.ecm.web.form.UserAllowToStopSessionForm;
 import pl.edu.agh.ecm.web.form.UserEntry;
+import pl.edu.agh.ecm.web.form.UserGrid;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -26,6 +31,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import static org.junit.matchers.JUnitMatchers.*;
+import static org.hamcrest.CoreMatchers.*;
 /**
  * Created with IntelliJ IDEA.
  * User: Michal
@@ -241,6 +248,23 @@ public class UserControllerTest extends AbstractControllerTest {
         Assert.assertEquals(nearlyAdmin.isAdmin(),true);
     }
 
+    @Test
+    public void testListGrid() throws Exception{
+
+        userService = Mockito.mock(UserService.class);
+        UserController userController = new UserController();
+        ReflectionTestUtils.setField(userController,"userService",userService);
+        List<User> sampleUsers = new LinkedList<User>();
+        Page<User> samplePage = prepareSamplePage(sampleUsers);
+        Mockito.when(userService.findAllByPage(Mockito.isA(PageRequest.class))).thenReturn(samplePage);
+
+        UserGrid userGrid = userController.listGrid(1, 10, "firstName", "asc");
+        Assert.assertEquals(userGrid.getCurrentPage(),samplePage.getNumber()+1);
+        Assert.assertEquals(userGrid.getTotalPages(),samplePage.getTotalPages());
+        Assert.assertEquals(userGrid.getTotalRecords(),samplePage.getTotalElements());
+        Assert.assertThat(userGrid.getUserData(), is(equalTo(sampleUsers)));
+    }
+
     private UserAllowToStopSessionForm prepareSampleForm(List<User> sampleUsers){
         UserAllowToStopSessionForm form = new UserAllowToStopSessionForm();
         User user1 = new User("A","B","A.B",null);
@@ -252,5 +276,18 @@ public class UserControllerTest extends AbstractControllerTest {
         sampleUsers.add(user1);
         sampleUsers.add(user2);
         return form;
+    }
+
+    private Page<User> prepareSamplePage(List<User> sampleUsersResult){
+        User user1 = new User("A","B","A.B",null);
+        User user2 = new User("C","D","C.D",null);
+        User user3 = new User("E","F","E.F",null);
+
+        sampleUsersResult.add(user1);
+        sampleUsersResult.add(user2);
+        sampleUsersResult.add(user3);
+        Page<User> result = new PageImpl<User>(sampleUsersResult);
+
+        return result;
     }
 }

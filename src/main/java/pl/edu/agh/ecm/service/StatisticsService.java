@@ -23,4 +23,5 @@ public interface StatisticsService {
 
     public List<Statistics> findStatisticsBySession(Long sessionId);
 
+    public List<Statistics> findAll();
 }
