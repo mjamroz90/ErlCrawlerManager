@@ -130,6 +130,12 @@ public class CrawlSessionController {
 
     }
 
+    @RequestMapping(value = "{id}/stats",method = RequestMethod.GET)
+    public String showStats(@PathVariable("id")Long id,Model uiModel){
+
+        return "sessions/stats";
+    }
+
     private String fillSessionModel(CrawlSession crawlSession,Model uiModel){
         uiModel.addAttribute("crawlSession",crawlSession);
         uiModel.addAttribute("allowedToStopSession",isAllowedToStopSession(crawlSession));

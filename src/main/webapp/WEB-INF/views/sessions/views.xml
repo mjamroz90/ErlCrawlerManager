@@ -12,4 +12,8 @@
     <definition name="session.panel" template="/WEB-INF/views/sessions/show.jspx">
         <put-attribute name="sessionInfo" value="/WEB-INF/flows/startCrawlSession/sessionInfo.jspx" />
     </definition>
+
+    <definition name="sessions/stats" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/sessions/stats.jspx" />
+    </definition>
 </tiles-definitions>        

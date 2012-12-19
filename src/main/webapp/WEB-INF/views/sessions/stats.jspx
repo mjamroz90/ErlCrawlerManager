@@ -1,0 +1,25 @@
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:tiles="http://tiles.apache.org/tags-tiles" xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+
+    <spring:url value="/resources/scripts/flot/jquery.flot.js" var="flotUrl"/>
+    <script type="text/javascript" src="${flotUrl}"><jsp:text/></script>
+
+    <script type="text/javascript">
+
+        $(function(){
+            var placeholder = $('#placeholder');
+            var data = [];
+            for (var i = 0; 14 > i; i += 0.5){
+                data.push([i,Math.sin(i)]);
+            }
+            $.plot(placeholder,[data]);
+        });
+
+    </script>
+
+    <div id="placeholder" style="width:600px;height:300px">
+    </div>
+</div>
