@@ -52,6 +52,11 @@ public class StatisticsServiceImpl implements StatisticsService {
         return statisticsRepository.findStatisticsBySession(sessionId);
     }
 
+    @Transactional(readOnly = true)
+    public List<Statistics> findStatisticsBySessionAndNode(Long sessionId, Long nodeId) {
+        return statisticsRepository.findStatisticsBySessionAndNode(sessionId,nodeId);
+    }
+
     public List<Statistics> findAll() {
        return Lists.newArrayList(statisticsRepository.findAll());
     }

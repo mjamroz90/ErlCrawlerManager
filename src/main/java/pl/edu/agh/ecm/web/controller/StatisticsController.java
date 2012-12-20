@@ -9,9 +9,12 @@ import pl.edu.agh.ecm.domain.Statistics;
 import pl.edu.agh.ecm.service.CrawlSessionService;
 import pl.edu.agh.ecm.service.NodeService;
 import pl.edu.agh.ecm.service.StatisticsService;
+import pl.edu.agh.ecm.web.form.StatsGrid;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -57,6 +60,25 @@ public class StatisticsController {
         statisticsService.save(stats);
 
         return true;
+    }
+
+    @RequestMapping(value = "/{id}",params = "fetch", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public List<StatsGrid> fetchStatistics(@PathVariable("id")Long id){
+
+        CrawlSession crawlSession = crawlSessionService.findByIdWithDetail(id);
+        List<StatsGrid> result = new LinkedList<StatsGrid>();
+
+        for (Node node : crawlSession.getNodes()){
+            StatsGrid statsGrid = new StatsGrid(node.toString());
+            List<Statistics> statisticsList =
+                    statisticsService.findStatisticsBySessionAndNode(crawlSession.getId(),node.getId());
+            statsGrid.setStatisticsList(statisticsList);
+
+            result.add(statsGrid);
+        }
+
+        return result;
     }
 
     private boolean computeHash(Statistics statistics){

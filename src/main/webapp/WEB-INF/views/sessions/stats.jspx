@@ -11,11 +11,17 @@
 
         $(function(){
             var placeholder = $('#placeholder');
-            var data = [];
+            /*var data = [];
             for (var i = 0; 14 > i; i += 0.5){
                 data.push([i,Math.sin(i)]);
             }
-            $.plot(placeholder,[data]);
+            $.plot(placeholder,[data]); */
+            var jsonObject;
+            var chunks = location.href.split('/');
+            var id = chunks[chunks.length-2];
+            $.getJSON("/ecm/stats/"+id.toString()+"?fetch",function(data){
+                jsonObject = data;
+            });
         });
 
     </script>

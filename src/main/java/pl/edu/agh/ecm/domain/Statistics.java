@@ -5,6 +5,7 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,7 +17,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ecm_statistics")
-public class Statistics {
+public class Statistics implements Serializable {
 
     private Long id;
     private CrawlSession crawlSession;
