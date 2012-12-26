@@ -21,6 +21,7 @@ import pl.edu.agh.ecm.domain.User;
 import pl.edu.agh.ecm.domain.UserDetailsAdapter;
 import pl.edu.agh.ecm.service.UserService;
 import pl.edu.agh.ecm.web.form.*;
+import pl.edu.agh.ecm.web.util.PanelAccess;
 import pl.edu.agh.ecm.web.util.UrlUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -129,22 +130,24 @@ public class UserController {
         return "redirect:/users/"+ UrlUtil.encodeUrlPathSegment(user.getId().toString(),request);
     }
 
+    @PanelAccess
     @RequestMapping(value = "/{id}/panel",method = RequestMethod.GET)
     public String showPanel(@PathVariable("id")Long id, Model uiModel){
-        if (!isAllowedForPanel(id)){
-            return accessDeniedPage;
-        }
+//        if (!isAllowedForPanel(id)){
+//            return accessDeniedPage;
+//        }
         return preparePanelUiModel(id,uiModel);
     }
 
+    @PanelAccess
     @RequestMapping(value = "/{id}/panel",params = "updateUser",method = RequestMethod.POST)
     public String updateUser(@PathVariable("id")Long id,
                              @ModelAttribute("userForm") @Valid UserForm userForm,BindingResult bindingResult,
                              Model uiModel,HttpServletRequest request, RedirectAttributes redirectAttributes,Locale locale){
 
-        if (!isAllowedForPanel(id)){
-            return accessDeniedPage;
-        }
+//        if (!isAllowedForPanel(id)){
+//            return accessDeniedPage;
+//        }
         validateUserLogin(userForm.getLogin(),bindingResult,id);
         convertPasswordError(bindingResult);
 
@@ -167,14 +170,15 @@ public class UserController {
         return "redirect:/users/"+ UrlUtil.encodeUrlPathSegment(user.getId().toString(),request);
     }
 
+    @PanelAccess
     @RequestMapping(value = "/{id}/panel",params = "allowToStopSession", method = RequestMethod.POST)
     public String allowToStopSession(@PathVariable("id")Long id, @ModelAttribute("userStopSessionForm")
         UserAllowToStopSessionForm userStopSessionForm,Model uiModel,HttpServletRequest request,
                                           RedirectAttributes redirectAttributes,Locale locale)
     {
-        if (!isAllowedForPanel(id)){
-            return accessDeniedPage;
-        }
+//        if (!isAllowedForPanel(id)){
+//            return accessDeniedPage;
+//        }
         User user = userService.findByIdWithDetail(id);
         user = addAllowedToStopSession(userStopSessionForm,user);
         userService.save(user,null);
@@ -184,13 +188,14 @@ public class UserController {
         return "redirect:/users/"+UrlUtil.encodeUrlPathSegment(user.getId().toString(),request)+"/panel";
     }
 
+    @PanelAccess
     @RequestMapping(value = "/{id}/panel", params = "giveAdminPermissions", method = RequestMethod.POST)
     public String giveAdminPermissions(@PathVariable("id")Long id, @ModelAttribute("userForm")UserForm userForm,
                                        Model uiModel,HttpServletRequest request, RedirectAttributes redirectAttributes,Locale locale){
 
-        if (!isAllowedForPanel(id)){
-            return accessDeniedPage;
-        }
+//        if (!isAllowedForPanel(id)){
+//            return accessDeniedPage;
+//        }
         User user = userService.findById(id);
         user.setAdmin(userForm.isAdmin());
         userService.save(user,null);
@@ -212,13 +217,14 @@ public class UserController {
         return "redirect:/users/"+UrlUtil.encodeUrlPathSegment(loggedUser.getId().toString(),request)+"/panel";
     }
 
+    @PanelAccess
     @RequestMapping(value = "/{id}/panel", params = "setConnectorParams", method = RequestMethod.POST)
     public String setConnectorParams(@PathVariable("id")Long id, @ModelAttribute("crawlerConnector") @Valid
     CrawlerConnector connector,BindingResult result,Model uiModel,HttpServletRequest request, RedirectAttributes attributes,Locale locale)
     {
-        if (!isAllowedForPanel(id)){
-            return accessDeniedPage;
-        }
+//        if (!isAllowedForPanel(id)){
+//            return accessDeniedPage;
+//        }
         if (result.hasErrors()){
             preparePanelUiModel(id,uiModel,null,connector);
             uiModel.addAttribute("connectorMessage",new Message("error",

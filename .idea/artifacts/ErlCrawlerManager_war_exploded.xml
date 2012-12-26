@@ -40,7 +40,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:3.1.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:1.0.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons-core:1.1.0.RELEASE" />
-          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.6.8" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.6.9" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-entitymanager:3.6.8.Final" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:3.6.8.Final" />
           <element id="library" level="project" name="Maven: antlr:antlr:2.7.6" />
@@ -68,6 +68,7 @@
           <element id="library" level="project" name="Maven: org.springframework.webflow:spring-js-resources:2.3.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.webflow:spring-webflow:2.3.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-test:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.6.9" />
           <element id="library" level="project" name="Maven: org.apache.tiles:tiles-core:2.2.2" />
           <element id="library" level="project" name="Maven: org.apache.tiles:tiles-api:2.2.2" />
           <element id="library" level="project" name="Maven: commons-digester:commons-digester:2.0" />
