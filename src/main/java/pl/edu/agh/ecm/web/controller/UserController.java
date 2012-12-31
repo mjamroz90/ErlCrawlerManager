@@ -133,9 +133,6 @@ public class UserController {
     @PanelAccess
     @RequestMapping(value = "/{id}/panel",method = RequestMethod.GET)
     public String showPanel(@PathVariable("id")Long id, Model uiModel){
-//        if (!isAllowedForPanel(id)){
-//            return accessDeniedPage;
-//        }
         return preparePanelUiModel(id,uiModel);
     }
 
@@ -145,9 +142,6 @@ public class UserController {
                              @ModelAttribute("userForm") @Valid UserForm userForm,BindingResult bindingResult,
                              Model uiModel,HttpServletRequest request, RedirectAttributes redirectAttributes,Locale locale){
 
-//        if (!isAllowedForPanel(id)){
-//            return accessDeniedPage;
-//        }
         validateUserLogin(userForm.getLogin(),bindingResult,id);
         convertPasswordError(bindingResult);
 
@@ -176,9 +170,6 @@ public class UserController {
         UserAllowToStopSessionForm userStopSessionForm,Model uiModel,HttpServletRequest request,
                                           RedirectAttributes redirectAttributes,Locale locale)
     {
-//        if (!isAllowedForPanel(id)){
-//            return accessDeniedPage;
-//        }
         User user = userService.findByIdWithDetail(id);
         user = addAllowedToStopSession(userStopSessionForm,user);
         userService.save(user,null);
@@ -193,9 +184,6 @@ public class UserController {
     public String giveAdminPermissions(@PathVariable("id")Long id, @ModelAttribute("userForm")UserForm userForm,
                                        Model uiModel,HttpServletRequest request, RedirectAttributes redirectAttributes,Locale locale){
 
-//        if (!isAllowedForPanel(id)){
-//            return accessDeniedPage;
-//        }
         User user = userService.findById(id);
         user.setAdmin(userForm.isAdmin());
         userService.save(user,null);
@@ -222,9 +210,6 @@ public class UserController {
     public String setConnectorParams(@PathVariable("id")Long id, @ModelAttribute("crawlerConnector") @Valid
     CrawlerConnector connector,BindingResult result,Model uiModel,HttpServletRequest request, RedirectAttributes attributes,Locale locale)
     {
-//        if (!isAllowedForPanel(id)){
-//            return accessDeniedPage;
-//        }
         if (result.hasErrors()){
             preparePanelUiModel(id,uiModel,null,connector);
             uiModel.addAttribute("connectorMessage",new Message("error",

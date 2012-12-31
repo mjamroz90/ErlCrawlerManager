@@ -24,7 +24,7 @@ public interface StatisticsRepository extends CrudRepository<Statistics,Long> {
     public List<Statistics> findStatisticsBySession(@Param("sessionId")Long sessionId);
 
     @Query("select distinct s from Statistics s where s.crawlSession.id = :sessionId " +
-            "and s.node.id = :nodeId")
+            "and s.node.id = :nodeId order by s.reported")
     public List<Statistics> findStatisticsBySessionAndNode(@Param("sessionId")Long sessionId,
                                                            @Param("nodeId")Long nodeId);
 }

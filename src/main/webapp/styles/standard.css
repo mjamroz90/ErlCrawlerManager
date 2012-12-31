@@ -551,3 +551,12 @@ div#sessionControllPanel{
     padding:10px;
     padding-top:1px;
 }
+
+div#container{
+    width : 600px;
+}
+
+div#container div.figure{
+    width : 600px;
+    height : 300px;
+}

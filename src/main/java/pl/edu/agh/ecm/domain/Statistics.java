@@ -1,8 +1,10 @@
 package pl.edu.agh.ecm.domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.edu.agh.ecm.web.util.TimeUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -49,6 +51,7 @@ public class Statistics implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "crawl_session")
     public CrawlSession getCrawlSession() {
@@ -133,6 +136,7 @@ public class Statistics implements Serializable {
         this.reported = reported;
     }
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "node")
     public Node getNode() {
@@ -143,6 +147,7 @@ public class Statistics implements Serializable {
         this.node = node;
     }
 
+    @JsonIgnore
     @Transient
     public String getHashValue() {
         return hashValue;
@@ -150,5 +155,16 @@ public class Statistics implements Serializable {
 
     public void setHashValue(String hashValue) {
         this.hashValue = hashValue;
+    }
+
+    @Transient
+    @JsonIgnore
+    public String getReportedAsString(){
+        if (reported != null){
+            return TimeUtils.getDateTimeAsString(reported);
+        }
+        else{
+            return null;
+        }
     }
 }

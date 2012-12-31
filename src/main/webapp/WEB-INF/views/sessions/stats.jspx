@@ -1,31 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page"
      xmlns:c="http://java.sun.com/jsp/jstl/core"
      xmlns:spring="http://www.springframework.org/tags"
-     xmlns:tiles="http://tiles.apache.org/tags-tiles" xmlns:form="http://www.springframework.org/tags/form"
      version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
 
     <spring:url value="/resources/scripts/flot/jquery.flot.js" var="flotUrl"/>
+    <spring:url value="/resources/scripts/flot/jquery.flot.time.js" var="flotTimeUrl" />
     <script type="text/javascript" src="${flotUrl}"><jsp:text/></script>
-
+    <script type="text/javascript" src="${flotTimeUrl}"><jsp:text/></script>
     <script type="text/javascript">
 
         $(function(){
-            var placeholder = $('#placeholder');
-            /*var data = [];
-            for (var i = 0; 14 > i; i += 0.5){
-                data.push([i,Math.sin(i)]);
-            }
-            $.plot(placeholder,[data]); */
-            var jsonObject;
+
             var chunks = location.href.split('/');
             var id = chunks[chunks.length-2];
+
             $.getJSON("/ecm/stats/"+id.toString()+"?fetch",function(data){
-                jsonObject = data;
+                var jsonObject = data;
+                var node2JsonStats = jsonObject[1]['statisticsList'];
+                var result = processNodeJson(node2JsonStats);
+                var options = {
+                    series : {
+                        lines : {show : true},
+                        points : {show : true}
+                    },
+                    xaxis : {
+                        mode : "time",
+                        timeformat : "%Y-%m-%d-%H:%M"
+                    }
+                };
+                $.plot($('#totalProcessedSitesNum'),[result['totalProcessedSitesNum']],options);
+                $.plot($('#meanSiteProcessingNum'),[result['meanSiteProcessingNum']],options);
+                $.plot($('#totalAddressesFetchedNum'),[result['totalAddressesFetchedNum']],options);
+                $.plot($('#partAddressesNumPerSite'),[result['partAddressesNumPerSite']],options);
+                $.plot($('#meanAddressesNumPerSite'),[result['meanAddressesNumPerSite']],options);
+                $.plot($('#memoryUsage'),[result['memoryUsage']],options);
+                $.plot($('#meanProcessorUsage'),[result['meanProcessorUsage']],options);
             });
+
         });
+
+        //nodeJsonStats = [{id,meanAddressesNumPerSite,meanProcessorUsage,meanSiteProcessingNum,memoryUsage,partAddressesNumPerSite,
+        // reportedAsString,totalAddressesFetchedNum,totalProcessedSitesNum},{..},..]
+        function processNodeJson(nodeJsonStats){
+            var result = {};
+            result['meanAddressesNumPerSite'] = [];
+            result['meanProcessorUsage'] = [];
+            result['meanSiteProcessingNum'] = [];
+            result['memoryUsage'] = [];
+            result['partAddressesNumPerSite'] = [];
+            result['totalAddressesFetchedNum'] = [];
+            result['totalProcessedSitesNum'] = [];
+
+            for (var i=0; !(i >= nodeJsonStats.length); i++){
+                var tuple = nodeJsonStats[i];
+                var reported = tuple['reported'];
+                result['meanAddressesNumPerSite'].push([reported,tuple['meanAddressesNumPerSite']]);
+                result['meanProcessorUsage'].push([reported,tuple['meanProcessorUsage']]);
+                result['meanSiteProcessingNum'].push([reported,tuple['meanSiteProcessingNum']]);
+                result['memoryUsage'].push([reported,tuple['memoryUsage']]);
+                result['partAddressesNumPerSite'].push([reported,tuple['partAddressesNumPerSite']]);
+                result['totalAddressesFetchedNum'].push([reported,tuple['totalAddressesFetchedNum']]);
+                result['totalProcessedSitesNum'].push([reported,tuple['totalProcessedSitesNum']]);
+            }
+
+            return result;
+        };
 
     </script>
 
-    <div id="placeholder" style="width:600px;height:300px">
+    <div id="container">
+
+        <h3><spring:message code="label_stats_totalSitesNum" /></h3>
+        <div id="totalProcessedSitesNum" class="figure" ><jsp:text/></div>
+
+        <!-- style="width: 600px; height: 300px;" -->
+        <h3><spring:message code="label_stats_meanSitesNum" /></h3>
+        <div id="meanSiteProcessingNum" class="figure"><jsp:text/></div>
+
+        <h3><spring:message code="label_stats_totalAddressesNum" /></h3>
+        <div id="totalAddressesFetchedNum" class="figure" ><jsp:text/></div>
+
+        <h3><spring:message code="label_stats_partAddressesNumPerSite" /></h3>
+        <div id="partAddressesNumPerSite" class="figure"><jsp:text/></div>
+
+        <h3><spring:message code="label_stats_meanAddressesNumPerSite" /></h3>
+        <div id="meanAddressesNumPerSite" class="figure"><jsp:text/></div>
+
+        <h3><spring:message code="label_stats_memoryUsage" /></h3>
+        <div id="memoryUsage" class="figure"><jsp:text/></div>
+
+        <h3><spring:message code="label_stats_processorUsage" /></h3>
+        <div id="meanProcessorUsage" class="figure"><jsp:text/></div>
+
     </div>
+
+
 </div>
