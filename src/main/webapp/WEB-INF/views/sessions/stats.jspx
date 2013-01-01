@@ -14,30 +14,50 @@
 
         $(function(){
 
+            $('div.container a').click(function(){
+                var figure = $(this).closest('div').find('div.figure');
+                if (figure.is(':hidden')){
+                    figure.show('slow');
+                }
+                else{
+                    figure.hide('slow');
+                }
+            });
+
+            $("div#tabs").tabs({active : 0});
+            //> [id!='template']"
             var chunks = location.href.split('/');
             var id = chunks[chunks.length-2];
 
             $.getJSON("/ecm/stats/"+id.toString()+"?fetch",function(data){
                 var jsonObject = data;
-                var node2JsonStats = jsonObject[1]['statisticsList'];
-                var result = processNodeJson(node2JsonStats);
-                var options = {
-                    series : {
-                        lines : {show : true},
-                        points : {show : true}
-                    },
-                    xaxis : {
-                        mode : "time",
-                        timeformat : "%Y-%m-%d-%H:%M"
-                    }
-                };
-                $.plot($('#totalProcessedSitesNum'),[result['totalProcessedSitesNum']],options);
-                $.plot($('#meanSiteProcessingNum'),[result['meanSiteProcessingNum']],options);
-                $.plot($('#totalAddressesFetchedNum'),[result['totalAddressesFetchedNum']],options);
-                $.plot($('#partAddressesNumPerSite'),[result['partAddressesNumPerSite']],options);
-                $.plot($('#meanAddressesNumPerSite'),[result['meanAddressesNumPerSite']],options);
-                $.plot($('#memoryUsage'),[result['memoryUsage']],options);
-                $.plot($('#meanProcessorUsage'),[result['meanProcessorUsage']],options);
+                for (var i=0; !(i >= jsonObject.length); i++){
+                    var nodeName = jsonObject[i]['nodeName'];
+                    var oldNodeName = nodeName;
+                    nodeName = nodeName.split('.').join('').split('@').join('');
+                    $('ul#tabTitles').append('<li><a href="#'+nodeName+'">'+oldNodeName+'</a></li>');
+                    $('div#template').clone(true).attr('id',nodeName).appendTo($('div#tabs'));
+                    var node2JsonStats = jsonObject[i]['statisticsList'];
+                    var result = processNodeJson(node2JsonStats);
+                    var options = {
+                        series : {
+                            lines : {show : true},
+                            points : {show : true}
+                        },
+                        xaxis : {
+                            mode : "time",
+                            timeformat : "%Y-%m-%d-%H:%M"
+                        }
+                    };
+
+                    $.plot($('div#'+nodeName+' div#totalProcessedSitesNum').find('div.figure'),[result['totalProcessedSitesNum']],options);
+                    $.plot($('div#'+nodeName+' div#meanSiteProcessingNum').find('div.figure'),[result['meanSiteProcessingNum']],options);
+                    $.plot($('div#'+nodeName+' div#totalAddressesFetchedNum').find('div.figure'),[result['totalAddressesFetchedNum']],options);
+                    $.plot($('div#'+nodeName+' div#partAddressesNumPerSite').find('div.figure'),[result['partAddressesNumPerSite']],options);
+                    $.plot($('div#'+nodeName+' div#meanAddressesNumPerSite').find('div.figure'),[result['meanAddressesNumPerSite']],options);
+                    $.plot($('div#'+nodeName+' div#memoryUsage').find('div.figure'),[result['memoryUsage']],options);
+                    $.plot($('div#'+nodeName+' div#meanProcessorUsage').find('div.figure'),[result['meanProcessorUsage']],options);
+                }
             });
 
         });
@@ -71,31 +91,93 @@
 
     </script>
 
-    <div id="container">
+    <div id="tabs">
+        <ul id="tabTitles">
+            <jsp:text />
+        </ul>
+        <div id="template" class="container">
 
-        <h3><spring:message code="label_stats_totalSitesNum" /></h3>
-        <div id="totalProcessedSitesNum" class="figure" ><jsp:text/></div>
+            <div id="totalProcessedSitesNum">
+                <h3>
+                    <a href="#totalProcessedSitesNum" >
+                        <spring:message code="label_stats_totalSitesNum" />
+                    </a>
+                </h3>
+                <div class="figure" >
+                    <jsp:text />
+                </div>
+            </div>
 
-        <!-- style="width: 600px; height: 300px;" -->
-        <h3><spring:message code="label_stats_meanSitesNum" /></h3>
-        <div id="meanSiteProcessingNum" class="figure"><jsp:text/></div>
+            <div id="meanSiteProcessingNum">
+                <h3>
+                    <a href="#meanSiteProcessingNum">
+                        <spring:message code="label_stats_meanSitesNum" />
+                    </a>
+                </h3>
+                <div class="figure" >
+                    <jsp:text />
+                </div>
+            </div>
 
-        <h3><spring:message code="label_stats_totalAddressesNum" /></h3>
-        <div id="totalAddressesFetchedNum" class="figure" ><jsp:text/></div>
 
-        <h3><spring:message code="label_stats_partAddressesNumPerSite" /></h3>
-        <div id="partAddressesNumPerSite" class="figure"><jsp:text/></div>
+            <div id="totalAddressesFetchedNum">
+                <h3>
+                    <a href="#totalAddressesFetchedNum">
+                        <spring:message code="label_stats_totalAddressesNum" />
+                    </a>
+                </h3>
+                <div class="figure" >
+                    <jsp:text />
+                </div>
+            </div>
 
-        <h3><spring:message code="label_stats_meanAddressesNumPerSite" /></h3>
-        <div id="meanAddressesNumPerSite" class="figure"><jsp:text/></div>
 
-        <h3><spring:message code="label_stats_memoryUsage" /></h3>
-        <div id="memoryUsage" class="figure"><jsp:text/></div>
+            <div id="partAddressesNumPerSite">
+                <h3>
+                    <a href="#partAddressesNumPerSite">
+                        <spring:message code="label_stats_partAddressesNumPerSite" />
+                    </a>
+                </h3>
+                <div class="figure" >
+                    <jsp:text />
+                </div>
+            </div>
 
-        <h3><spring:message code="label_stats_processorUsage" /></h3>
-        <div id="meanProcessorUsage" class="figure"><jsp:text/></div>
 
+            <div id="meanAddressesNumPerSite">
+                <h3>
+                    <a href="#meanAddressesNumPerSite">
+                        <spring:message code="label_stats_meanAddressesNumPerSite" />
+                    </a>
+                </h3>
+                <div class="figure" >
+                    <jsp:text />
+                </div>
+            </div>
+
+
+            <div id="memoryUsage">
+                <h3>
+                    <a href="#memoryUsage">
+                        <spring:message code="label_stats_memoryUsage" />
+                    </a>
+                </h3>
+                <div class="figure" >
+                    <jsp:text />
+                </div>
+            </div>
+
+
+            <div id="meanProcessorUsage">
+                <h3>
+                    <a href="#meanProcessorUsage">
+                        <spring:message code="label_stats_processorUsage" />
+                    </a>
+                </h3>
+                <div class="figure" >
+                    <jsp:text />
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </div>

@@ -552,11 +552,15 @@ div#sessionControllPanel{
     padding-top:1px;
 }
 
-div#container{
+div.container{
     width : 600px;
 }
 
-div#container div.figure{
+div#template.container{
+    width : 600px;
+    display: none;
+}
+div.container div.figure{
     width : 600px;
     height : 300px;
 }
