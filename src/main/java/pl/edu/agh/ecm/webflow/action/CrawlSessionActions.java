@@ -62,7 +62,14 @@ public class CrawlSessionActions extends MultiAction {
 
     public DefineNodesForm initDefineNodesForm(){
 
-        DefineNodesForm form = new DefineNodesForm(nodeService.findAll());
+        List<Node> nodes = nodeService.findAll();
+        List<Node> accessibleNodes = new LinkedList<Node>();
+        for (Node node : nodes){
+            if (crawlerConnector.pingNode(node.toString())){
+                accessibleNodes.add(node);
+            }
+        }
+        DefineNodesForm form = new DefineNodesForm(accessibleNodes);
         return form;
     }
 
