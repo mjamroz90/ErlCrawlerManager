@@ -552,8 +552,16 @@ div#sessionControllPanel{
     padding-top:1px;
 }
 
+div#tabs ul a.active{
+    color:#ff0000;
+}
+
 div.container{
     width : 600px;
+    display:none;
+}
+div.container.active{
+    display:block;
 }
 
 div#template.container{

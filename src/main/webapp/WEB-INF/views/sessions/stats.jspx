@@ -29,6 +29,8 @@
             var chunks = location.href.split('/');
             var id = chunks[chunks.length-2];
 
+
+
             $.getJSON("/ecm/stats/"+id.toString()+"?fetch",function(data){
                 var jsonObject = data;
                 for (var i=0; !(i >= jsonObject.length); i++){
@@ -36,7 +38,21 @@
                     var oldNodeName = nodeName;
                     nodeName = nodeName.split('.').join('').split('@').join('');
                     $('ul#tabTitles').append('<li><a href="#'+nodeName+'">'+oldNodeName+'</a></li>');
+                    $('ul#tabTitles li a[href=#'+nodeName+']').click((function(name){
+                        return function(){
+                            $('div.container.active').removeClass('active');
+                            $('div#'+name).addClass('active');
+
+
+                            $('ul#tabTitles li a.active').removeClass('active');
+                            $(this).addClass('active');
+                        }
+                    })(nodeName));
                     $('div#template').clone(true).attr('id',nodeName).appendTo($('div#tabs'));
+
+                    if(i==0){
+
+                    }
                     var node2JsonStats = jsonObject[i]['statisticsList'];
                     var result = processNodeJson(node2JsonStats);
                     var options = {
@@ -57,6 +73,14 @@
                     $.plot($('div#'+nodeName+' div#meanAddressesNumPerSite').find('div.figure'),[result['meanAddressesNumPerSite']],options);
                     $.plot($('div#'+nodeName+' div#memoryUsage').find('div.figure'),[result['memoryUsage']],options);
                     $.plot($('div#'+nodeName+' div#meanProcessorUsage').find('div.figure'),[result['meanProcessorUsage']],options);
+                }
+                var anchor = window.location.hash.replace("#", "")
+                if(anchor!=""){
+                    $('ul#tabTitles li a[href=#'+anchor+']').addClass('active');
+                    $('div#'+anchor).addClass('active');
+                }else{
+                    $('ul#tabTitles li:first a').addClass('active');
+                    $('div.container:not(#template)').first().addClass('active');
                 }
             });
 
