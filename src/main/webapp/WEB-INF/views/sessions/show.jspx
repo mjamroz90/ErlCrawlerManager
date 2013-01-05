@@ -16,6 +16,10 @@
     <h2><spring:message code="label_session_info"/></h2>
     <tiles:insertAttribute name="sessionInfo"/>
 
+    <p class="center">
+        <a href="${sessionUrl}/stats"><spring:message code="label_session_stats"/></a>
+    </p>
+
     <div id="sessionControllPanel">
         <h3 class="center"><spring:message code="label_session_stop_session"/></h3>
 
@@ -46,4 +50,5 @@
             </c:when>
         </c:choose>
     </div>
+
 </div>
