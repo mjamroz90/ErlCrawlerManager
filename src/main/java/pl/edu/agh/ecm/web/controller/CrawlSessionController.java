@@ -145,7 +145,9 @@ public class CrawlSessionController {
     private boolean isAllowedToStopSession(CrawlSession crawlSession){
 
         User applyingUser = getLoggedInUser();
-
+        if (applyingUser == null){
+            return false;
+        }
         User userStarted = crawlSession.getStartedBy();
         if ((userStarted.getId() == applyingUser.getId()) || userStarted.isAllowedToStopSession(applyingUser.getLogin())){
             return true;
@@ -157,11 +159,16 @@ public class CrawlSessionController {
 
     private User getLoggedInUser(){
 
-        UserDetailsAdapter userDetails = userDetailsAdapter;
-        if (userDetails == null){
-            userDetails = (UserDetailsAdapter)SecurityContextHolder.getContext().
-                    getAuthentication().getPrincipal();
+        try{
+            UserDetailsAdapter userDetails = userDetailsAdapter;
+            if (userDetails == null){
+                userDetails = (UserDetailsAdapter)SecurityContextHolder.getContext().
+                        getAuthentication().getPrincipal();
+            }
+            return userDetails.getUser();
         }
-        return userDetails.getUser();
+        catch (Exception e){
+            return null;
+        }
     }
 }
