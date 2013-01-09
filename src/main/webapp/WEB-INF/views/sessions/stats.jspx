@@ -40,8 +40,8 @@
                     $('ul#tabTitles').append('<li><a href="#'+nodeName+'">'+oldNodeName+'</a></li>');
                     $('ul#tabTitles li a[href=#'+nodeName+']').click((function(name){
                         return function(){
-                            $('div.container.active').removeClass('active');
-                            $('div#'+name).addClass('active');
+                            $('div.container.active').removeClass('active').addClass('inactive');
+                            $('div#'+name).addClass('active').removeClass('inactive');
 
 
                             $('ul#tabTitles li a.active').removeClass('active');
@@ -62,7 +62,7 @@
                         },
                         xaxis : {
                             mode : "time",
-                            timeformat : "%Y-%m-%d-%H:%M"
+                            timeformat : "%y-%m-%d %H:%M"
                         }
                     };
 
@@ -112,7 +112,15 @@
 
             return result;
         };
+          /*
+        $(window).load(function(){
+            $('div.container:not(div.active)').addClass('inactive');
+            setTimeout(function(){
+                $('div.container:not(div.active)').addClass('inactive');
+            }, 300);
 
+        });
+            */
     </script>
 
     <div id="tabs">

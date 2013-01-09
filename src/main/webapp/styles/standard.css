@@ -557,18 +557,27 @@ div#tabs ul a.active{
 }
 
 div.container{
-    width : 600px;
-    display:none;
+    //width : 600px;
+    height:0;
+    overflow: hidden;
+
+}
+div.container.inactive{
+    //display:none;
+    //height:0;
+    //overflow: hidden;
 }
 div.container.active{
-    display:block;
+    //display:block;
+    height: auto;/*kombinowane z wysokoscia, bo przy display:none zle rysuja sie canvasy*/
 }
 
 div#template.container{
-    width : 600px;
+    //width : 600px;
     display: none;
 }
 div.container div.figure{
-    width : 600px;
+    width : 700px;
     height : 300px;
+    margin:auto;
 }
