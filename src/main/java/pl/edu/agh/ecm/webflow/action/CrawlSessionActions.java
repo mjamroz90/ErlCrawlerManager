@@ -269,16 +269,26 @@ public class CrawlSessionActions extends MultiAction {
 
         StartCrawlerResults crawlerResults = new StartCrawlerResults();
         Set<Node> nodeList = crawlSession.getNodes();
+        Node domainManagerNode = crawlSession.getDomainManagerNode();
         for (Node node : nodeList){
-            String nodeName = node.toString();
-            String[][] result = crawlerConnector.startCrawlerOnNode(nodeName,properties);
-            StartAppsResultOnNode resultOnNode =
-                    ActionUtils.getStartAppsResultOnNode(nodeName,
-                            result,crawlerConnector);
-            crawlerResults.addStartAppsResultOnNode(resultOnNode);
+            if (!node.toString().equals(domainManagerNode.toString())){
+                startAppsOnNode(node,properties,crawlerResults);
+            }
         }
+        //Uruchomienie wszystkiego na domain_manager_node
+        startAppsOnNode(domainManagerNode,properties,crawlerResults);
         crawlerResults.setCanGoToNextStep(crawlSession.getDomainManagerNode().toString());
         return crawlerResults;
+    }
+
+    private void startAppsOnNode(Node node,String[][] properties,
+                                                  StartCrawlerResults crawlerResults){
+        String nodeName = node.toString();
+        String[][] result = crawlerConnector.startCrawlerOnNode(nodeName,properties);
+        StartAppsResultOnNode resultOnNode =
+                ActionUtils.getStartAppsResultOnNode(nodeName,
+                        result,crawlerConnector);
+        crawlerResults.addStartAppsResultOnNode(resultOnNode);
     }
 
     private void fillCrawlSessionObject(CrawlSessionForm crawlSessionForm,CrawlSession session){
