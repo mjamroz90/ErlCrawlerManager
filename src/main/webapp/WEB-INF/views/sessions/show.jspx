@@ -34,6 +34,10 @@
 
                     </a>
 
+                    <a href="${sessionUrl}?markAsStopped"
+                       class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                        <spring:message code="label_session_mark_as_stopped" />
+                    </a>
                 </p>
             </c:when>
             <c:when test="${allowedToStopSession and not empty crawlSession.finished}">

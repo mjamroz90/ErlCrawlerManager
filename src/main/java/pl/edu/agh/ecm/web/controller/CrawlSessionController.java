@@ -130,6 +130,32 @@ public class CrawlSessionController {
 
     }
 
+    @RequestMapping(value="/{id}",params="markAsStopped",method = RequestMethod.GET)
+    public String markAsStopped(@PathVariable("id")Long id,Model uiModel,RedirectAttributes attributes,Locale locale){
+
+        CrawlSession crawlSession = crawlSessionService.findByIdWithDetail(id);
+        if (!isAllowedToStopSession(crawlSession)){
+            return "redirect:/security/access-denied";
+        }
+
+        boolean stopResult = true;
+        User loggedUser = getLoggedInUser();
+
+        if (stopResult == true){
+            attributes.addFlashAttribute("message",new Message("success",
+                    messageSource.getMessage("label_session_stop_success",new Object[]{},locale)));
+            crawlSession.setFinishedBy(loggedUser);
+            crawlSession.setFinished(DateTime.now());
+            crawlSessionService.save(crawlSession);
+            return "redirect:/sessions";
+        }
+        else{
+            uiModel.addAttribute("message",new Message("error",
+                    messageSource.getMessage("label_session_stop_failed",new Object[]{},locale)));
+            return fillSessionModel(crawlSession,uiModel);
+        }
+    }
+
     @RequestMapping(value = "{id}/stats",method = RequestMethod.GET)
     public String showStats(@PathVariable("id")Long id,Model uiModel){
 
