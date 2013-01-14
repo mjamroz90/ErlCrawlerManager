@@ -23,7 +23,7 @@ public class TimeUtils {
             .appendMinutes().minimumPrintedDigits(2)
             .toFormatter();
 
-    public static String getPeriodTimeAsString(Period period){
+    public static String getTimePeriodAsString(Period period){
           String result ="";
           if (period != null){
               result = periodFormatter.print(period);
@@ -31,13 +31,17 @@ public class TimeUtils {
           return result;
     }
 
+    public static Long getTimePeriodAsLong(Period period){
+        return period.toStandardDuration().getMillis()*1000;
+    }
+
     public static Period getTimeLongAsPeriod(Long timePeriod){
-        Duration duration = new Duration(timePeriod);
+        Duration duration = new Duration(timePeriod/1000);
         return duration.toPeriod();
     }
 
     public static String getTimeLongAsString(Long timePeriod){
-        return getPeriodTimeAsString(getTimeLongAsPeriod(timePeriod));
+        return getTimePeriodAsString(getTimeLongAsPeriod(timePeriod));
     }
 
     public static String getDateTimeAsString(DateTime dateTime){

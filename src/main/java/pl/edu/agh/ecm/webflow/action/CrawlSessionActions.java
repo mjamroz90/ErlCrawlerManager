@@ -299,7 +299,7 @@ public class CrawlSessionActions extends MultiAction {
         Policy sessionPolicy = new Policy(policyForm.getMaxProcessCount(),
                 policyForm.getBufferSize(),currentUser);
 
-        Long time = policyForm.getDefaultValidityDate().toStandardDuration().getMillis();
+        Long time = TimeUtils.getTimePeriodAsLong(policyForm.getDefaultValidityDate());
         sessionPolicy.setDefaultValidityTime(time);
         List<InitUrlForm> initUrlFormList = crawlSessionForm.getInitUrlFormList();
         for (InitUrlForm initUrlForm : initUrlFormList){
@@ -318,7 +318,7 @@ public class CrawlSessionActions extends MultiAction {
         initUrl.setAddress(initUrlForm.getAddress());
         initUrl.setWidth(initUrlForm.getWidth());
         initUrl.setDepth(initUrlForm.getDepth());
-        Long time = initUrlForm.getValidityDate().toStandardDuration().getMillis();
+        Long time = TimeUtils.getTimePeriodAsLong(initUrlForm.getValidityDate());
         initUrl.setValidityTime(time);
         return initUrl;
     }

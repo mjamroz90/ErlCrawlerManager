@@ -17,7 +17,7 @@ public class TimeUtilsTest {
     public void testGetPeriodTimeAsString() throws Exception {
 
         Period period = new Period(13,34,0,0);
-        String periodAsString = TimeUtils.getPeriodTimeAsString(period);
+        String periodAsString = TimeUtils.getTimePeriodAsString(period);
         Assert.assertEquals(periodAsString,"13:34");
     }
 

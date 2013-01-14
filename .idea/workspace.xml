@@ -2,32 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/util/TimeUtilsTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/webflow/converters/PeriodTimeConverterTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/webflow/validators/PolicyFormValidatorTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/web/util/TimeUtils.java" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/web/util/TimeUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/action/CrawlSessionActions.java" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/action/CrawlSessionActions.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/forms/InitUrlForm.java" afterPath="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/forms/InitUrlForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/util/TimeUtilsTest.java" afterPath="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/util/TimeUtilsTest.java" />
     </list>
     <ignored path="ErlCrawlerManager.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/application.properties" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357389572061" ignored="false" />
-    <file path="/messages_pl.properties" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357389520656" ignored="false" />
-    <file path="/messages.properties" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357389504686" ignored="false" />
-    <file path="/show.jspx" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357389462600" ignored="false" />
-    <file path="/standard.css" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357341933110" ignored="false" />
-    <file path="/stats.jspx" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357344819217" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/runner.layout.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357338157466" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/jdk.table.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337833048" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/statistics.application.usages.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357345006273" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/feature.usage.statistics.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357344761789" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/code.style.schemes.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337055024" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/browsers.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054667" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/IntelliLang.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054667" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/vcs.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054667" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/file.template.settings.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054667" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/mavenVersion.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054639" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/encoding.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054639" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/options/osmorc.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054639" ignored="false" />
-    <file path="$USER_HOME$/.IntelliJIdea12/config/inspection/Default.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054639" ignored="false" />
     <file path="/Dummy.txt" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357389010069" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/inspection/Default.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054639" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/osmorc.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054639" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/encoding.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054639" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/mavenVersion.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054639" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/file.template.settings.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054667" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/vcs.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054667" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/IntelliLang.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054667" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/browsers.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337054667" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/code.style.schemes.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337055024" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/feature.usage.statistics.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357344761789" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/statistics.application.usages.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357345006273" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/jdk.table.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357337833048" ignored="false" />
+    <file path="$USER_HOME$/.IntelliJIdea12/config/options/runner.layout.xml" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357338157466" ignored="false" />
+    <file path="/stats.jspx" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357344819217" ignored="false" />
+    <file path="/standard.css" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357341933110" ignored="false" />
+    <file path="/show.jspx" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357389462600" ignored="false" />
+    <file path="/messages.properties" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357389504686" ignored="false" />
+    <file path="/messages_pl.properties" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357389520656" ignored="false" />
+    <file path="/application.properties" changelist="5e7a4df1-ca1a-4189-b5b2-2b19fa760161" time="1357389572061" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,19 +208,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="confirmSessionParams.jspx" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/flows/startCrawlSession/confirmSessionParams.jspx">
+      <file leaf-file-name="PolicyFormValidator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/validators/PolicyFormValidator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="26" selection-start="1255" selection-end="1255" vertical-scroll-proportion="-22.4">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserControllerTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/controller/UserControllerTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="13" selection-start="1565" selection-end="1565" vertical-scroll-proportion="0.0">
+            <state line="14" column="0" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -226,19 +220,53 @@
       <file leaf-file-name="TimeUtils.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/web/util/TimeUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="41" selection-start="717" selection-end="717" vertical-scroll-proportion="0.0">
+            <state line="30" column="24" selection-start="931" selection-end="931" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimeUtilsTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/util/TimeUtilsTest.java">
+      <file leaf-file-name="CrawlSessionActions.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/action/CrawlSessionActions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="37" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="329" column="50" selection-start="14106" selection-end="14106" vertical-scroll-proportion="0.994363">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InitUrlForm.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/forms/InitUrlForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="13" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CrawlSessionForm.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/forms/CrawlSessionForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="13" selection-start="387" selection-end="387" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ActionUtils.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/action/ActionUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="179" column="44" selection-start="7073" selection-end="7073" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InitUrl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/domain/InitUrl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="13" selection-start="647" selection-end="647" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -246,56 +274,21 @@
       <file leaf-file-name="PeriodTimeConverter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/converters/PeriodTimeConverter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="7" selection-start="1221" selection-end="1221" vertical-scroll-proportion="0.0">
+            <state line="17" column="13" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PeriodTimeConverterTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/webflow/converters/PeriodTimeConverterTest.java">
+      <file leaf-file-name="startCrawlSession-flow.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/flows/startCrawlSession/startCrawlSession-flow.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="26" selection-start="693" selection-end="693" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ApplicationConversionService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/converters/ApplicationConversionService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="37" selection-start="448" selection-end="448" vertical-scroll-proportion="0.0">
+            <state line="38" column="64" selection-start="1965" selection-end="1965" vertical-scroll-proportion="-26.666666">
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PolicyFormValidator.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/validators/PolicyFormValidator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="13" selection-start="437" selection-end="437" vertical-scroll-proportion="0.19842164">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JdbcUserDetailsRepository.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/repository/JdbcUserDetailsRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="13" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CrawlSession.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/domain/CrawlSession.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="13" selection-start="589" selection-end="589" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
+          <provider editor-type-id="com.intellij.spring.webflow.fileEditor.WebflowDesignerFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
@@ -321,15 +314,12 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/web/controller/StatisticsController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/repository/StatisticsRepository.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/flows/startCrawlSession/defineNodesForm.jspx" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/i18n/messages.properties" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/i18n/messages_pl.properties" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/web/aspects/UserControllerAspect.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/sessions/stats.jspx" />
         <option value="$PROJECT_DIR$/src/main/webapp/styles/standard.css" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/action/CrawlSessionActions.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/i18n/application.properties" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/i18n/application_pl.properties" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/web/controller/CrawlSessionController.java" />
@@ -337,6 +327,9 @@
         <option value="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/util/TimeUtilsTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/webflow/converters/PeriodTimeConverterTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/converters/ApplicationConversionService.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/webflow/validators/PolicyFormValidatorTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/action/CrawlSessionActions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/web/util/TimeUtils.java" />
       </list>
     </option>
   </component>
@@ -387,10 +380,9 @@
     <option name="jreName" value="#JAVA_INTERNAL" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
-    <option name="y" value="-5" />
-    <option name="width" value="1922" />
-    <option name="height" value="1086" />
+    <option name="y" value="24" />
+    <option name="width" value="1920" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -510,47 +502,43 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="webflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="validators" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ErlCrawlerManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ErlCrawlerManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ecm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ErlCrawlerManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ErlCrawlerManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ecm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -608,7 +596,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="jpa" />
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ErlCrawlerManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ErlCrawlerManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ecm" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -635,126 +653,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ErlCrawlerManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ErlCrawlerManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ErlCrawlerManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ErlCrawlerManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sessions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ErlCrawlerManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ErlCrawlerManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spring" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ErlCrawlerManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ErlCrawlerManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="styles" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -918,6 +816,74 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="webflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="converters" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ErlCrawlerManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ErlCrawlerManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ecm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="action" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ErlCrawlerManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ErlCrawlerManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ecm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -942,6 +908,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -952,16 +928,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="ErlCrawlerManager" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -983,13 +949,13 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="103" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="Downloaded.Files.Path" value="C:\Users\Michal\IdeaProjects\ErlCrawlerManager\lib" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="Downloaded.Files.Path" value="C:\Users\Michal\IdeaProjects\ErlCrawlerManager\lib" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="RESOURCE_BUNDLE_SPLITTER_PROPORTION" value="0.5" />
     <property name="options.lastSelected" value="preferences.externalTools" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="project.structure.side.proportion" value="0.30837438" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -1021,6 +987,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="pl.edu.agh.ecm.webflow.validators" />
       <recent name="pl.edu.agh.ecm.webflow.converters" />
       <recent name="pl.edu.agh.ecm.web.util" />
       <recent name="pl.edu.agh.ecm.web.controller" />
@@ -1038,50 +1005,16 @@
       <recent name="C:\Users\Michal\IdeaProjects\ErlCrawlerManager" />
       <recent name="C:\Users\Michal\IdeaProjects\ErlCrawlerManager\src\main\idl" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/errors" />
-      <recent name="C:\Users\Michal\IdeaProjects\ErlCrawlerManager\src\main\webapp\WEB-INF" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="pl.edu.agh.ecm.repository" />
       <recent name="pl.edu.agh.ecm.service.jpa" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/errors" />
+      <recent name="C:\Users\Michal\IdeaProjects\ErlCrawlerManager\src\main\webapp\WEB-INF" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.PeriodTimeConverterTest">
-    <configuration default="false" name="CrawlSessionControllerTest.testStopSession" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="pl.edu.agh.ecm.web.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="ErlCrawlerManager" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="pl.edu.agh.ecm.web.controller" />
-      <option name="MAIN_CLASS_NAME" value="pl.edu.agh.ecm.web.controller.CrawlSessionControllerTest" />
-      <option name="METHOD_NAME" value="testStopSession" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.PolicyFormValidatorTest">
     <configuration default="false" name="AbstractServiceImplTest and 8 more" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="ErlCrawlerManager" />
@@ -1210,6 +1143,40 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="false" name="PolicyFormValidatorTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="pl.edu.agh.ecm.webflow.validators.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="ErlCrawlerManager" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="pl.edu.agh.ecm.webflow.validators" />
+      <option name="MAIN_CLASS_NAME" value="pl.edu.agh.ecm.webflow.validators.PolicyFormValidatorTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -1259,24 +1226,6 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -1303,6 +1252,24 @@
       <envs />
       <properties />
       <listeners />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -1341,17 +1308,6 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -1375,6 +1331,17 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
@@ -1498,13 +1465,13 @@
     </configuration>
     <list size="8">
       <item index="0" class="java.lang.String" itemvalue="Application.JpaTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.CrawlSessionControllerTest.testStopSession" />
-      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.ecm JavaScript" />
-      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.ecm" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.AbstractServiceImplTest and 8 more" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.CrawlSessionServiceImplTest and 6 more" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.TimeUtilsTest" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.PeriodTimeConverterTest" />
+      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.ecm JavaScript" />
+      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.ecm" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.AbstractServiceImplTest and 8 more" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.CrawlSessionServiceImplTest and 6 more" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.TimeUtilsTest" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.PeriodTimeConverterTest" />
+      <item index="7" class="java.lang.String" itemvalue="JUnit.PolicyFormValidatorTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -1676,7 +1643,11 @@
       <created>1357938985882</created>
       <updated>1357938985883</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Napisane testy dla klas TimeUtilsTest i PeriodTimeConverter">
+      <created>1358178718709</created>
+      <updated>1358178718709</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1700,7 +1671,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-5" width="1922" height="1086" extended-state="6" />
+    <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1715,16 +1686,16 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32853982" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31156316" sideWeight="0.4974093" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32799146" sideWeight="0.67558885" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24778107" sideWeight="0.23681125" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27588046" sideWeight="0.67558885" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21955128" sideWeight="0.67558885" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21931697" sideWeight="0.67558885" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32441112" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" x="91" y="91" width="1218" height="820" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32799146" sideWeight="0.67558885" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1770,7 +1741,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodana możliwość oznaczenia sesji jako zatrzymanej" />
+    <option name="LAST_COMMIT_MESSAGE" value="Napisane testy dla klas TimeUtilsTest i PeriodTimeConverter" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1783,7 +1754,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Zmiany w encjach odzwierciedlające zmiany w schemacie bazy. Dodane nowe testy" />
     <MESSAGE value="Dodany nowy view i action state związany z uruchomieniem pomocniczych aplikacji crawlera." />
     <MESSAGE value="Dodana część view state związana z podawaniem adresów startowych i parametrów do nich." />
     <MESSAGE value="Zrobiona formatka do powania innych parametrów sesji, zmieniony sposób przechowywania czasu ważności." />
@@ -1808,6 +1778,7 @@
     <MESSAGE value="Dorobione zwijanie wykresu i zakładki, trzeba popracować, żeby widoczna była tylko jedna naraz" />
     <MESSAGE value="Aplikacje na domain_manager_node są teraz uruchamiane na końcu." />
     <MESSAGE value="Dodana możliwość oznaczenia sesji jako zatrzymanej" />
+    <MESSAGE value="Napisane testy dla klas TimeUtilsTest i PeriodTimeConverter" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1879,114 +1850,126 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/styles/standard.css">
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/controller/AbstractControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="579" column="13" selection-start="7637" selection-end="7637" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/users/register.jspx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/webflow/CrawlSessionFlowTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="13" selection-start="834" selection-end="834" vertical-scroll-proportion="0.19842164">
+        <state line="20" column="13" selection-start="638" selection-end="638" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/test/config/ServiceTestConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="13" selection-start="894" selection-end="894" vertical-scroll-proportion="0.2886133">
+        <state line="43" column="44" selection-start="1451" selection-end="1451" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/domain/Node.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/service/jpa/PolicyServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="13" selection-start="410" selection-end="410" vertical-scroll-proportion="0.2586605">
+        <state line="45" column="51" selection-start="1376" selection-end="1376" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/domain/User.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/webflow/spring-binding/2.3.0.RELEASE/spring-binding-2.3.0.RELEASE.jar!/org/springframework/binding/message/MessageResolver.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="13" selection-start="647" selection-end="647" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/domain/CrawlSession.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="13" selection-start="589" selection-end="589" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/flows/startCrawlSession/confirmSessionParams.jspx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="26" selection-start="1255" selection-end="1255" vertical-scroll-proportion="-22.4">
+        <state line="5" column="17" selection-start="177" selection-end="177" vertical-scroll-proportion="0.07424594">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/controller/UserControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="13" selection-start="1565" selection-end="1565" vertical-scroll-proportion="0.0">
+        <state line="88" column="66" selection-start="3055" selection-end="3055" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#3247#3248#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/appServlet/webflow.xml">
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="4" selection-start="2234" selection-end="2234" vertical-scroll-proportion="0.68591225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/webflow/validators/PolicyFormValidatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="36" selection-start="927" selection-end="927" vertical-scroll-proportion="0.5490417">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1325#1543#0" expanded="true" />
+            <element signature="e#1532#1533#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/validators/PolicyFormValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/flows/startCrawlSession/startCrawlSession-flow.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="64" selection-start="1965" selection-end="1965" vertical-scroll-proportion="-26.666666">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.spring.webflow.fileEditor.WebflowDesignerFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/converters/PeriodTimeConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="13" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/domain/InitUrl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="13" selection-start="647" selection-end="647" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/forms/CrawlSessionForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="13" selection-start="387" selection-end="387" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/forms/InitUrlForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="13" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/action/ActionUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="179" column="44" selection-start="7073" selection-end="7073" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/web/util/TimeUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="41" selection-start="717" selection-end="717" vertical-scroll-proportion="0.0">
+        <state line="30" column="24" selection-start="931" selection-end="931" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/repository/JdbcUserDetailsRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/action/CrawlSessionActions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/web/util/TimeUtilsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="37" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/converters/PeriodTimeConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="7" selection-start="1221" selection-end="1221" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pl/edu/agh/ecm/webflow/converters/PeriodTimeConverterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="26" selection-start="693" selection-end="693" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/converters/ApplicationConversionService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="37" selection-start="448" selection-end="448" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/edu/agh/ecm/webflow/validators/PolicyFormValidator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="437" selection-end="437" vertical-scroll-proportion="0.19842164">
+        <state line="329" column="50" selection-start="14106" selection-end="14106" vertical-scroll-proportion="0.994363">
           <folding />
         </state>
       </provider>

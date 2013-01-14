@@ -1,16 +1,10 @@
 package pl.edu.agh.ecm.webflow.forms;
 
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
-import org.joda.time.DateTime;
 import org.joda.time.Period;
-import org.joda.time.format.PeriodFormat;
-import org.joda.time.format.PeriodFormatter;
-import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.format.annotation.NumberFormat;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import pl.edu.agh.ecm.web.util.TimeUtils;
 
 import javax.validation.constraints.Min;
@@ -82,7 +76,7 @@ public class InitUrlForm implements Serializable {
     }
 
     public String getValidityTimeString(){
-       return TimeUtils.getPeriodTimeAsString(validityDate);
+       return TimeUtils.getTimePeriodAsString(validityDate);
     }
 
     @Override
