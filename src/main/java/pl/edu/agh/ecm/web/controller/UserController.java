@@ -217,9 +217,20 @@ public class UserController {
             return "users/panel";
         }
 
+        uiModel.asMap().clear();
         crawlerConnector.setRemoteManagerAddress(connector.getRemoteManagerAddress());
         crawlerConnector.setRemoteManagerPort(connector.getRemoteManagerPort());
-        crawlerConnector.initManagerServer();
+        if (!crawlerConnector.initManagerServer()){
+            attributes.addFlashAttribute("connectorMessage",new Message("error",messageSource.getMessage(
+                    "label_connector_inaccessible",new Object[]{},locale
+            )));
+        }
+        else{
+            attributes.addFlashAttribute("connectorMessage",new Message("success",messageSource.getMessage(
+                    "label_connector_accessible",new Object[]{},locale
+            )));
+
+        }
 
         return "redirect:/users/"+UrlUtil.encodeUrlPathSegment(id.toString(),request)+"/panel";
     }

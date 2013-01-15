@@ -65,9 +65,13 @@ public class CrawlSessionActions extends MultiAction {
         List<Node> nodes = nodeService.findAll();
         List<Node> accessibleNodes = new LinkedList<Node>();
         for (Node node : nodes){
-            if (crawlerConnector.pingNode(node.toString())){
-                accessibleNodes.add(node);
+            try{
+                if (crawlerConnector.pingNode(node.toString())){
+                    accessibleNodes.add(node);
+                }
             }
+            catch (Exception e)
+            {}
         }
         DefineNodesForm form = new DefineNodesForm(accessibleNodes);
         return form;

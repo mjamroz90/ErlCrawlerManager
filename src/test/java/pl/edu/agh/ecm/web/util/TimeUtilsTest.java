@@ -24,8 +24,8 @@ public class TimeUtilsTest {
     @Test
     public void testGetTimeLongAsPeriod() throws Exception {
 
-        Long timeInMillis = 1234555L;
-        Period period = TimeUtils.getTimeLongAsPeriod(timeInMillis);
+        Long timeInMicros = 1234555*1000L;
+        Period period = TimeUtils.getTimeLongAsPeriod(timeInMicros);
         Assert.assertEquals(period.getMinutes(),20);
         Assert.assertEquals(period.getSeconds(),34);
         Assert.assertEquals(period.getMillis(),555);
@@ -34,8 +34,8 @@ public class TimeUtilsTest {
     @Test
     public void testGetTimeLongAsString() throws Exception {
 
-        Long timeInMillis = 1234555L+3600000;
-        String time = TimeUtils.getTimeLongAsString(timeInMillis);
+        Long timeInMicros = (1234555L+3600000)*1000;
+        String time = TimeUtils.getTimeLongAsString(timeInMicros);
         Assert.assertEquals(time,"1:20");
     }
 
