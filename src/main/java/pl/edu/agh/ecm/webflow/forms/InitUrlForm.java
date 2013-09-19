@@ -24,6 +24,9 @@ public class InitUrlForm implements Serializable {
     private Integer width;
     private Integer depth;
     private Period validityDate;
+    private Integer subDomainBreadth;
+    private Integer subDomainDepth;
+    private Period subDomainValidityDate;
 
     public InitUrlForm(){}
 
@@ -67,6 +70,28 @@ public class InitUrlForm implements Serializable {
     }
 
     @NotNull(message = "{validation.NotEmpty.message}")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Min(value = 0)
+    public Integer getSubDomainBreadth() {
+        return subDomainBreadth;
+    }
+
+    public void setSubDomainBreadth(Integer subDomainBreadth) {
+        this.subDomainBreadth = subDomainBreadth;
+    }
+
+    @NotNull(message = "{validation.NotEmpty.message}")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Min(value = 0)
+    public Integer getSubDomainDepth() {
+        return subDomainDepth;
+    }
+
+    public void setSubDomainDepth(Integer subDomainDepth) {
+        this.subDomainDepth = subDomainDepth;
+    }
+
+    @NotNull(message = "{validation.NotEmpty.message}")
     public Period getValidityDate() {
         return validityDate;
     }
@@ -75,16 +100,41 @@ public class InitUrlForm implements Serializable {
         this.validityDate = validityDate;
     }
 
-    public String getValidityTimeString(){
+    @NotNull(message = "{validation.NotEmpty.message}")
+    public Period getSubDomainValidityDate() {
+        return subDomainValidityDate;
+    }
+
+    public void setSubDomainValidityDate(Period subDomainValidityDate) {
+        this.subDomainValidityDate = subDomainValidityDate;
+    }
+
+    public String getValidityTimeAsString(){
        return TimeUtils.getTimePeriodAsString(validityDate);
+    }
+
+    public String getSubDomainValidityTimeAsString(){
+        return TimeUtils.getTimePeriodAsString(subDomainValidityDate);
     }
 
     @Override
     public String toString(){
 
-        return String.format("address : %s, width : %s, depth : %s, valid before : %s",
-                address,width,depth,getValidityTimeString());
+//        return String.format("address : %s, width : %s, depth : %s, valid before : %s",
+//                address,width,depth,getValidityTimeString());
+
+        return String.format("address : %s, width/subdomain-width : %s/%s, depth/subdomain-depth : %s/%s, " +
+                "valid before/subdomain-valid before : %s/%s",
+                address,width,subDomainBreadth,depth,subDomainDepth,getValidityTimeAsString(),getSubDomainValidityTimeAsString());
 
 
+    }
+
+    public InitUrlForm copy(){
+        InitUrlForm result = new InitUrlForm(this.address,this.width,this.depth,this.validityDate);
+        result.setSubDomainBreadth(this.subDomainBreadth);
+        result.setSubDomainDepth(this.subDomainDepth);
+        result.setSubDomainValidityDate(this.subDomainValidityDate);
+        return result;
     }
 }

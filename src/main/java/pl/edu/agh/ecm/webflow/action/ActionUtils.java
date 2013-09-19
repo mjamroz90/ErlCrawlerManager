@@ -1,8 +1,5 @@
 package pl.edu.agh.ecm.webflow.action;
 
-import org.dbunit.dataset.datatype.StringIgnoreCaseDataType;
-import org.hibernate.type.ListType;
-import org.joda.time.DateTime;
 import pl.edu.agh.ecm.crawler.CrawlerAppsNames;
 import pl.edu.agh.ecm.crawler.CrawlerConnector;
 import pl.edu.agh.ecm.domain.CrawlSession;
@@ -25,33 +22,44 @@ public class ActionUtils {
 
     private static Integer triggerTime = 3000;
 
-    public static String[] maxProcessCountToProperty(CrawlSession crawlSession){
+    //properties for session manager
+    private static String[] maxProcessCountToProperty(CrawlSession crawlSession){
         String[] result = new String[]{"max_process_count",crawlSession.getPolicy().getMaxProcessCount().toString()};
         return result;
     }
 
-    public static String[] bufferSizeToProperty(CrawlSession crawlSession){
+    private static String[] bufferSizeToProperty(CrawlSession crawlSession){
         String[] result = new String[]{"buffer_size",crawlSession.getPolicy().getBufferSize().toString()};
         return result;
     }
 
-    public static String[] defaultValidityTimeToProperty(CrawlSession crawlSession){
+    private static String[] defaultValidityTimeToProperty(CrawlSession crawlSession){
         String[] result = new String[]{"default_validity_time",crawlSession.getPolicy().getDefaultValidityTime().toString()};
         return result;
     }
 
-    public static String[] remoteManagerNodeToProperty(CrawlerConnector crawlerConnector){
+    private static String[] remoteManagerNodeToProperty(CrawlerConnector crawlerConnector){
         String[] result = new String[]{"remote_manager_server_node",crawlerConnector.getRemoteNodeName()+'@'+crawlerConnector.getRemoteManagerAddress()};
         return result;
     }
 
-    public static String[] sessionIdToProperty(CrawlSession crawlSession){
+    private static String[] sessionIdToProperty(CrawlSession crawlSession){
         String[] result = new String[]{"session_id", crawlSession.getId().toString()};
         return result;
     }
 
-    public static String[] triggerTimeToProperty(){
+    private static String[] triggerTimeToProperty(){
         String[] result = new String[]{"trigger_time",triggerTime.toString()};
+        return result;
+    }
+
+    private static String[] defaultBreadthToProperty(CrawlSession crawlSession){
+        String[] result = new String[]{"default_breadth",crawlSession.getPolicy().getDefaultBreadth().toString()};
+        return result;
+    }
+
+    private static String[] defaultDepthToProperty(CrawlSession crawlSession){
+        String[] result = new String[]{"default_depth",crawlSession.getPolicy().getDefaultDepth().toString()};
         return result;
     }
 
@@ -75,7 +83,7 @@ public class ActionUtils {
         return  result;
     }
 
-    public static String[] contactNodesToProperty(CrawlSession crawlSession){
+    private static String[] contactNodesToProperty(CrawlSession crawlSession){
 
         List<Node> nodeList = new ArrayList<Node>(crawlSession.getNodes());
 
@@ -91,7 +99,7 @@ public class ActionUtils {
         return result;
     }
 
-    public static String[] domainManagerNodeToProperty(CrawlSession crawlSession){
+    private static String[] domainManagerNodeToProperty(CrawlSession crawlSession){
         String[] result = new String[]{"domain_manager_node",crawlSession.getDomainManagerNode().toString()};
         return result;
     }
@@ -103,6 +111,8 @@ public class ActionUtils {
             domainManagerNodeToProperty(crawlSession),
             maxProcessCountToProperty(crawlSession),
             defaultValidityTimeToProperty(crawlSession),
+            defaultBreadthToProperty(crawlSession),
+            defaultDepthToProperty(crawlSession),
             bufferSizeToProperty(crawlSession),
             initUrlsToProperty(crawlSession,domainManagerNodeConf),
             //triggerTimeToProperty(),
@@ -187,9 +197,16 @@ public class ActionUtils {
         buffer.append(getProperty("depth",initUrl.getDepth().toString()));
         buffer.append(","); //[{init_url,val},{width,val},{depth,val},
         buffer.append(getProperty("validity_time",initUrl.getValidityTime().toString()));
+        buffer.append(",");
+        buffer.append(getProperty("subdomain_breadth",initUrl.getSubDomainBreadth().toString()));
+        buffer.append(",");
+        buffer.append(getProperty("subdomain_depth",initUrl.getSubDomainDepth().toString()));
+        buffer.append(",");
+        buffer.append(getProperty("subdomain_validity_time",initUrl.getValidityTime().toString()));
         buffer.append("]"); //[{init_url,val},{width,val},{depth,val},{validity_time,val}]
         return buffer.toString();
     }
+
     private static String getProperty(String key,String value){
         return "{"+key+","+value+"}";
     }

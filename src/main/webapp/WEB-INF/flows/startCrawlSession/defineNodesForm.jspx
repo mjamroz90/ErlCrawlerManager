@@ -13,26 +13,6 @@
     <div id="defineNodesForm" class="panelComponent">
 
         <form:form modelAttribute="defineNodesForm"  action="${flowExecutionUrl}">
-            <!--
-            <p>
-                <table class="entryTable">
-                   <thead>
-                        <tr>
-                            <th><spring:message code="label_node_name" /></th>
-                            <th></th>
-                        </tr>
-                   </thead>
-                   <tbody>
-                        <c:forEach items="${defineNodesForm.nodeEntryList}" var="nodeEntryList" varStatus="status">
-                            <tr>
-                                <td><form:input path="nodeEntryList[${status.index}].nodeName" readonly="true" /></td>
-                                <td><form:checkbox path="nodeEntryList[${status.index}].used" /></td>
-                            </tr>
-                        </c:forEach>
-                   </tbody>
-                </table>
-            </p>
-            -->
 
             <c:choose>
                 <c:when test="${fn:length(defineNodesForm.nodeEntryList) gt 0}">

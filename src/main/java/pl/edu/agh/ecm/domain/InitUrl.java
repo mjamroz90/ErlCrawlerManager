@@ -1,16 +1,9 @@
 package pl.edu.agh.ecm.domain;
 
 
-import com.mysql.jdbc.TimeUtil;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.URL;
-import org.joda.time.Period;
-import org.springframework.format.annotation.NumberFormat;
 import pl.edu.agh.ecm.web.util.TimeUtils;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -29,7 +22,10 @@ public class InitUrl implements Serializable {
     private String address;
     private Integer width;
     private Integer depth;
+    private Integer subDomainBreadth;
+    private Integer subDomainDepth;
     private Long validityTime;
+    private Long subDomainValidityTime;
     private Policy policy;
 
     public InitUrl(){}
@@ -54,8 +50,6 @@ public class InitUrl implements Serializable {
     }
 
     @Column(name = "address")
-//    @NotEmpty(message = "{validation.NotEmpty.message}")
-//    @URL(message = "{url.validation.message}")
     public String getAddress() {
         return address;
     }
@@ -65,9 +59,6 @@ public class InitUrl implements Serializable {
     }
 
     @Column(name = "width")
-//    @NotNull(message = "{validation.NotEmpty.message}")
-//    @NumberFormat(style = NumberFormat.Style.NUMBER)
-//    @Min(value = 0)
     public Integer getWidth() {
         return width;
     }
@@ -77,9 +68,6 @@ public class InitUrl implements Serializable {
     }
 
     @Column(name = "depth")
-//    @NotNull(message = "{validation.NotEmpty.message}")
-//    @NumberFormat(style = NumberFormat.Style.NUMBER)
-//    @Min(value = 0)
     public Integer getDepth() {
         return depth;
     }
@@ -89,14 +77,39 @@ public class InitUrl implements Serializable {
     }
 
     @Column(name = "validity_time")
-//    @NumberFormat(style = NumberFormat.Style.NUMBER)
-//    @Min(value = 0)
     public Long getValidityTime() {
         return validityTime;
     }
 
     public void setValidityTime(Long validityTime) {
         this.validityTime = validityTime;
+    }
+
+    @Column(name = "subdomain_breadth")
+    public Integer getSubDomainBreadth() {
+        return subDomainBreadth;
+    }
+
+    public void setSubDomainBreadth(Integer subDomainBreadth) {
+        this.subDomainBreadth = subDomainBreadth;
+    }
+
+    @Column(name = "subdomain_depth")
+    public Integer getSubDomainDepth() {
+        return subDomainDepth;
+    }
+
+    public void setSubDomainDepth(Integer subDomainDepth) {
+        this.subDomainDepth = subDomainDepth;
+    }
+
+    @Column(name = "subdomain_validity_time")
+    public Long getSubDomainValidityTime() {
+        return subDomainValidityTime;
+    }
+
+    public void setSubDomainValidityTime(Long subDomainValidityTime) {
+        this.subDomainValidityTime = subDomainValidityTime;
     }
 
     @ManyToOne
@@ -114,10 +127,16 @@ public class InitUrl implements Serializable {
         return TimeUtils.getTimeLongAsString(validityTime);
     }
 
+    @Transient
+    public String getSubDomainValidityTimeAsString(){
+        return TimeUtils.getTimeLongAsString(subDomainValidityTime);
+    }
+
     @Override
     public String toString(){
-        return String.format("address : %s, width : %s, depth : %s, valid before : %s",
-                address,width,depth,getValidityTimeAsString());
+        return String.format("address : %s, width/subdomain-width : %s/%s, depth/subdomain-depth : %s/%s, " +
+                "valid before/subdomain-valid before : %s/%s",
+                address,width,subDomainBreadth,depth,subDomainDepth,getValidityTimeAsString(),getSubDomainValidityTimeAsString());
 
     }
 }

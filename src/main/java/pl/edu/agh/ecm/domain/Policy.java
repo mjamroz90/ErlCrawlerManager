@@ -1,17 +1,8 @@
 package pl.edu.agh.ecm.domain;
 
-import com.mysql.jdbc.TimeUtil;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.URL;
-import org.joda.time.Period;
-import org.springframework.format.annotation.NumberFormat;
 import pl.edu.agh.ecm.web.util.TimeUtils;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +24,8 @@ public class Policy implements Serializable {
     private Long defaultValidityTime;
     private Integer maxProcessCount;
     private Integer bufferSize;
+    private Integer defaultBreadth;
+    private Integer defaultDepth;
     private Set<InitUrl> initUrls = new HashSet<InitUrl>();
 
     public Policy(){}
@@ -66,8 +59,6 @@ public class Policy implements Serializable {
     }
 
     @Column(name = "default_validity_time")
-//    @NumberFormat(style = NumberFormat.Style.NUMBER)
-//    @Min(value = 0)
     public Long getDefaultValidityTime() {
         return defaultValidityTime;
     }
@@ -77,10 +68,6 @@ public class Policy implements Serializable {
     }
 
     @Column(name = "max_process_count")
-//    @NotNull(message = "{validation.NotEmpty.message}")
-//    @NumberFormat(style = NumberFormat.Style.NUMBER)
-//    @Max(value = 250)
-//    @Min(value = 1)
     public Integer getMaxProcessCount() {
         return maxProcessCount;
     }
@@ -90,16 +77,30 @@ public class Policy implements Serializable {
     }
 
     @Column(name = "buffer_size")
-//    @NotNull(message = "{validation.NotEmpty.message}")
-//    @NumberFormat(style = NumberFormat.Style.NUMBER)
-//    @Max(value = 20000)
-//    @Min(value = 1)
     public Integer getBufferSize() {
         return bufferSize;
     }
 
     public void setBufferSize(Integer bufferSize) {
         this.bufferSize = bufferSize;
+    }
+
+    @Column(name = "default_breadth")
+    public Integer getDefaultBreadth() {
+        return defaultBreadth;
+    }
+
+    public void setDefaultBreadth(Integer defaultBreadth) {
+        this.defaultBreadth = defaultBreadth;
+    }
+
+    @Column(name = "default_depth")
+    public Integer getDefaultDepth() {
+        return defaultDepth;
+    }
+
+    public void setDefaultDepth(Integer defaultDepth) {
+        this.defaultDepth = defaultDepth;
     }
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "policy")
@@ -119,4 +120,5 @@ public class Policy implements Serializable {
     public String getDefaultValidityTimeAsString(){
         return TimeUtils.getTimeLongAsString(defaultValidityTime);
     }
+
 }

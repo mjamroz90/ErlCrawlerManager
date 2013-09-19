@@ -192,9 +192,7 @@ public class CrawlSessionActions extends MultiAction {
 
         InitUrlForm initUrlForm = crawlSessionForm.getNewInitUrl();
         crawlSessionForm.getInitUrlFormList().add(
-                new InitUrlForm(initUrlForm.getAddress(),initUrlForm.getWidth(),
-                        initUrlForm.getDepth(),initUrlForm.getValidityDate()
-                ));
+                initUrlForm.copy());
     }
 
     public void putNodesIntoSession(DefineNodesForm defineNodesForm,RequestContext context){
@@ -255,14 +253,14 @@ public class CrawlSessionActions extends MultiAction {
 
         for (Node node : nodeList){
             String nodeName = node.toString();
-            String[][] startSessionresult = null;
+            String[][] startSessionResult = null;
             if (nodeName.equals(crawlSession.getDomainManagerNode().toString())){
-                startSessionresult = crawlerConnector.startSessionOnNode(nodeName,domainManagerConf);
+                startSessionResult = crawlerConnector.startSessionOnNode(nodeName,domainManagerConf);
             }
             else{
-                startSessionresult = crawlerConnector.startSessionOnNode(nodeName,ordinaryConf);
+                startSessionResult = crawlerConnector.startSessionOnNode(nodeName,ordinaryConf);
             }
-            StartAppsResultOnNode resultOnNode = ActionUtils.getStartSchedulerResultOnNode(nodeName,startSessionresult);
+            StartAppsResultOnNode resultOnNode = ActionUtils.getStartSchedulerResultOnNode(nodeName,startSessionResult);
             result.addStartAppsResultOnNode(resultOnNode);
         }
         result.setSessionStartStatus();
@@ -302,6 +300,8 @@ public class CrawlSessionActions extends MultiAction {
                 SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
         Policy sessionPolicy = new Policy(policyForm.getMaxProcessCount(),
                 policyForm.getBufferSize(),currentUser);
+        sessionPolicy.setDefaultBreadth(policyForm.getDefaultBreadth());
+        sessionPolicy.setDefaultDepth(policyForm.getDefaultDepth());
 
         Long time = TimeUtils.getTimePeriodAsLong(policyForm.getDefaultValidityDate());
         sessionPolicy.setDefaultValidityTime(time);
@@ -322,8 +322,11 @@ public class CrawlSessionActions extends MultiAction {
         initUrl.setAddress(initUrlForm.getAddress());
         initUrl.setWidth(initUrlForm.getWidth());
         initUrl.setDepth(initUrlForm.getDepth());
+        initUrl.setSubDomainBreadth(initUrlForm.getSubDomainBreadth());
+        initUrl.setSubDomainDepth(initUrlForm.getSubDomainDepth());
         Long time = TimeUtils.getTimePeriodAsLong(initUrlForm.getValidityDate());
         initUrl.setValidityTime(time);
+        initUrl.setSubDomainValidityTime(TimeUtils.getTimePeriodAsLong(initUrlForm.getSubDomainValidityDate()));
         return initUrl;
     }
 

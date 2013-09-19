@@ -53,7 +53,7 @@
     <beans profile="dev">
         <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" >
             <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-            <property name="url" value="jdbc:mysql://localhost:3306/ErlCrawlerManager"/>
+            <property name="url" value="jdbc:mysql://localhost:50050/ErlCrawlerManager"/>
             <property name="username" value="michal.jamroz"/>
             <property name="password" value="Ala123456"/>
         </bean>

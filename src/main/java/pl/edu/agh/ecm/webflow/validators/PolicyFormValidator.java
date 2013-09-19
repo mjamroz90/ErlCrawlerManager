@@ -35,6 +35,14 @@ public class PolicyFormValidator {
             messageContext.addMessage(getMessageError("policy.defaultValidityDate","validation.NotEmpty.message",null));
             foundError = true;
         }
+        if (policyForm.getDefaultBreadth() == null){
+            messageContext.addMessage(getMessageError("policy.defaultBreadth","validation.NotEmpty.message",null));
+            foundError = true;
+        }
+        if (policyForm.getDefaultDepth() == null){
+            messageContext.addMessage(getMessageError("policy.defaultDepth","validation.NotEmpty.message",null));
+            foundError = true;
+        }
         if (policyForm.getMaxProcessCount() == null){
             messageContext.addMessage(getMessageError("policy.maxProcessCount","validation.NotEmpty.message",null));
         }

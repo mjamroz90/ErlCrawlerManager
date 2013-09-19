@@ -20,6 +20,7 @@
         $(function(){
             $('#validityDate').timepicker(pickerObject);
             $('#defaultValidityDate').timepicker(pickerObject);
+            $('#subDomainValidityDate').timepicker(pickerObject);
         });
     </script>
 
@@ -59,6 +60,27 @@
                     <form:errors path="defaultValidityDate" cssClass="error"/>
                 </div>
             </div>
+
+            <div>
+                <label for="defaultBreadth">
+                    <spring:message code="label_session_defaultBreadth" /><span class="required">*</span>
+                </label>
+                <form:input path="defaultBreadth" id="defaultBreadth"/>
+                <div>
+                    <form:errors path="defaultBreadth" cssClass="error"/>
+                </div>
+            </div>
+
+            <div>
+                <label for="defaultDepth">
+                    <spring:message code="label_session_defaultDepth" /><span class="required">*</span>
+                </label>
+                <form:input path="defaultDepth" id="defaultDepth"/>
+                <div>
+                    <form:errors path="defaultDepth" cssClass="error"/>
+                </div>
+            </div>
+
             <div class="center">
                 <c:if test="${empty resumedSession}">
 

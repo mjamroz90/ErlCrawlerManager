@@ -69,6 +69,16 @@
             </div>
 
             <div>
+                <form:label path="subDomainBreadth">
+                    <spring:message code="label_session_subDomainBreadth" /><span class="required">*</span>
+                </form:label>
+                <form:input path="subDomainBreadth"/>
+                <div>
+                    <form:errors path="subDomainBreadth" cssClass="errors" />
+                </div>
+            </div>
+
+            <div>
                 <form:label path="depth">
                     <spring:message code="label_session_depth"/><span class="required">*</span>
                 </form:label>
@@ -79,6 +89,17 @@
             </div>
 
             <div>
+                <form:label path="subDomainDepth">
+                    <spring:message code="label_session_subDomainDepth" /><span class="required">*</span>
+                </form:label>
+                <form:input path="subDomainDepth"/>
+                <div>
+                    <form:errors path="subDomainDepth" cssClass="errors" />
+                </div>
+            </div>
+
+
+            <div>
                 <label for="validityDate">
                     <spring:message code="label_session_valid_after" /><span class="required">*</span>
                 </label>
@@ -87,6 +108,17 @@
                     <form:errors path="validityDate" cssClass="error"/>
                 </div>
             </div>
+
+            <div>
+                <form:label path="subDomainValidityDate">
+                    <spring:message code="label_session_subDomainValidityDate" /><span class="required">*</span>
+                </form:label>
+                <form:input path="subDomainValidityDate" id="subDomainValidityDate" />
+                <div>
+                    <form:errors path="subDomainValidityDate" cssClass="errors" />
+                </div>
+            </div>
+
             <div class="center">
                 <!--
                 <button id="addButton" type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" name="_eventId_addInitUrl">

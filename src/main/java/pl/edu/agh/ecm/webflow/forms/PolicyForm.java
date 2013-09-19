@@ -24,6 +24,8 @@ public class PolicyForm implements Serializable {
     private Period defaultValidityDate;
     private Integer maxProcessCount;
     private Integer bufferSize;
+    private Integer defaultBreadth;
+    private Integer defaultDepth;
 
     @NotNull(message = "{validation.NotEmpty.message}")
     public Period getDefaultValidityDate() {
@@ -56,5 +58,27 @@ public class PolicyForm implements Serializable {
 
     public void setBufferSize(Integer bufferSize) {
         this.bufferSize = bufferSize;
+    }
+
+    @NotNull(message = "{validation.NotEmpty.message}")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Min(value = 1)
+    public Integer getDefaultBreadth() {
+        return defaultBreadth;
+    }
+
+    public void setDefaultBreadth(Integer defaultBreadth) {
+        this.defaultBreadth = defaultBreadth;
+    }
+
+    @NotNull(message = "{validation.NotEmpty.message}")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Min(value = 1)
+    public Integer getDefaultDepth() {
+        return defaultDepth;
+    }
+
+    public void setDefaultDepth(Integer defaultDepth) {
+        this.defaultDepth = defaultDepth;
     }
 }

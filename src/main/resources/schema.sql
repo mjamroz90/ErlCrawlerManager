@@ -44,11 +44,13 @@ CREATE  TABLE IF NOT EXISTS `ecm_stop_session_permissions` (
 -- Table `erlang_crawler_managementDB`.`ecm_policies`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `ecm_policies` (
-  `ID` INT NOT NULL AUTO_INCREMENT ,  
-  `default_validity_time` BIGINT NULL ,
-  `created_by` INT NULL ,
-  `buffer_size` INT NOT NULL ,
-  `max_process_count` INT NOT NULL ,  
+  ID INT NOT NULL AUTO_INCREMENT ,
+  default_validity_time BIGINT NULL ,
+  default_depth INT NULL,
+  default_breadth INT NULL,
+  created_by INT NULL ,
+  buffer_size INT NOT NULL ,
+  max_process_count INT NOT NULL ,
   PRIMARY KEY (`ID`) ,
   CONSTRAINT `FK_policies_users`
     FOREIGN KEY (`created_by` )
@@ -112,12 +114,15 @@ CREATE  TABLE IF NOT EXISTS `ecm_sessions_nodes` (
 -- Table `erlang_crawler_managementDB`.`ecm_init_urls`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `ecm_init_urls` (
-  `ID` INT NOT NULL AUTO_INCREMENT ,
-  `address` VARCHAR(100) NOT NULL ,
-  `width` INT NOT NULL ,
-  `depth` INT NOT NULL ,
-  `policy_id` INT NOT NULL ,
-  `validity_time` BIGINT NOT NULL ,
+  ID INT NOT NULL AUTO_INCREMENT ,
+  address VARCHAR(100) NOT NULL ,
+  width INT NOT NULL ,
+  depth INT NOT NULL ,
+  subdomain_breadth INT NULL,
+  subdomain_depth INT NULL,
+  subdomain_validity_time INT NULL,
+  policy_id INT NOT NULL ,
+  validity_time BIGINT NOT NULL ,
   PRIMARY KEY (`ID`) ,  
   CONSTRAINT `FK_initurls_policies`
     FOREIGN KEY (`policy_id` )
