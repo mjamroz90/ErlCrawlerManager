@@ -36,7 +36,12 @@ public class PolicyServiceImplTest extends AbstractServiceImplTest {
     public void initPolicies(){
         user = userService.save(user,null);
         Policy policy = new Policy(10,250,user);
+        policy.setDefaultBreadth(2);
+        policy.setDefaultDepth(5);
         InitUrl initUrl1 = new InitUrl("http://www.google.pl",2,3,2400L);
+        initUrl1.setSubDomainBreadth(2);
+        initUrl1.setSubDomainDepth(3);
+        initUrl1.setSubDomainValidityTime(2500L);
         initUrl1.setPolicy(policy);
         InitUrl initUrl2 = new InitUrl("http://www.amazon.com",3,4,245L);
         initUrl2.setPolicy(policy);
