@@ -106,8 +106,10 @@ public class CrawlSessionActions extends MultiAction {
                 crawlSessionService.delete(crawlSession);
             }
             else{
-                CrawlSession originalSession = (CrawlSession)requestContext.getFlowScope().get("originalCrawlSesion");
-                crawlSessionService.save(originalSession);
+                CrawlSession originalSession = (CrawlSession)requestContext.getFlowScope().get("originalCrawlSession");
+                if (originalSession != null){
+                    crawlSessionService.save(originalSession);
+                }
             }
             return error();
        }

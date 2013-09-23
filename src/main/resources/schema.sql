@@ -120,7 +120,7 @@ CREATE  TABLE IF NOT EXISTS `ecm_init_urls` (
   depth INT NOT NULL ,
   subdomain_breadth INT NULL,
   subdomain_depth INT NULL,
-  subdomain_validity_time INT NULL,
+  subdomain_validity_time BIGINT NULL,
   policy_id INT NOT NULL ,
   validity_time BIGINT NOT NULL ,
   PRIMARY KEY (`ID`) ,  

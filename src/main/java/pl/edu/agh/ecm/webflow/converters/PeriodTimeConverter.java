@@ -1,9 +1,6 @@
 package pl.edu.agh.ecm.webflow.converters;
 
-import org.joda.time.DateTime;
 import org.joda.time.Period;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.binding.convert.converters.StringToObject;
@@ -35,7 +32,6 @@ public class PeriodTimeConverter extends StringToObject{
 
     @Override
     protected String toString(Object o) throws Exception {
-        String date = "";
         Period periodTime = (Period)o;
         return periodFormatter.print(periodTime);
     }
