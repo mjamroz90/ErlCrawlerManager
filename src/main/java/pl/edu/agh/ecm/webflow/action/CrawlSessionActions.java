@@ -344,6 +344,8 @@ public class CrawlSessionActions extends MultiAction {
         policyForm.setBufferSize(crawlSession.getPolicy().getBufferSize());
         policyForm.setDefaultValidityDate(TimeUtils.getTimeLongAsPeriod(crawlSession.getPolicy().getDefaultValidityTime()));
         policyForm.setMaxProcessCount(crawlSession.getPolicy().getMaxProcessCount());
+        policyForm.setDefaultBreadth(crawlSession.getPolicy().getDefaultBreadth());
+        policyForm.setDefaultDepth(crawlSession.getPolicy().getDefaultDepth());
 
         List<InitUrlForm> initUrlFormList = new ArrayList<InitUrlForm>();
         for (InitUrl initUrl : crawlSession.getPolicy().getInitUrls()){
@@ -352,6 +354,9 @@ public class CrawlSessionActions extends MultiAction {
             initUrlForm.setDepth(initUrl.getDepth());
             initUrlForm.setWidth(initUrl.getWidth());
             initUrlForm.setValidityDate(TimeUtils.getTimeLongAsPeriod(initUrl.getValidityTime()));
+            initUrlForm.setSubDomainBreadth(initUrl.getSubDomainBreadth());
+            initUrlForm.setSubDomainDepth(initUrl.getSubDomainDepth());
+            initUrl.setSubDomainValidityTime(initUrl.getSubDomainValidityTime());
 
             initUrlFormList.add(initUrlForm);
         }

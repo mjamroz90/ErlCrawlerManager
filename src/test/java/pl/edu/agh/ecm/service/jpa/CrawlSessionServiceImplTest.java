@@ -54,6 +54,9 @@ public class CrawlSessionServiceImplTest extends AbstractServiceImplTest {
         user = userService.save(user,null);
 
         policy = new Policy(25,250,user);
+        policy.setDefaultBreadth(2);
+        policy.setDefaultDepth(3);
+        policy.setDefaultValidityTime(231313L);
         node1 = nodeService.save(node1);
         node2 = nodeService.save(node2);
         CrawlSession crawlSession = new CrawlSession(node1,node2,policy,user);
