@@ -356,7 +356,7 @@ public class CrawlSessionActions extends MultiAction {
             initUrlForm.setValidityDate(TimeUtils.getTimeLongAsPeriod(initUrl.getValidityTime()));
             initUrlForm.setSubDomainBreadth(initUrl.getSubDomainBreadth());
             initUrlForm.setSubDomainDepth(initUrl.getSubDomainDepth());
-            initUrl.setSubDomainValidityTime(initUrl.getSubDomainValidityTime());
+            initUrlForm.setSubDomainValidityDate(TimeUtils.getTimeLongAsPeriod(initUrl.getSubDomainValidityTime()));
 
             initUrlFormList.add(initUrlForm);
         }
