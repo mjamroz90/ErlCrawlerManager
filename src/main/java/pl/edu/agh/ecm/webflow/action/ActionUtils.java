@@ -202,7 +202,7 @@ public class ActionUtils {
         buffer.append(",");
         buffer.append(getProperty("subdomain_depth",initUrl.getSubDomainDepth().toString()));
         buffer.append(",");
-        buffer.append(getProperty("subdomain_validity_time",initUrl.getValidityTime().toString()));
+        buffer.append(getProperty("subdomain_validity_time",initUrl.getSubDomainValidityTime().toString()));
         buffer.append("]"); //[{init_url,val},{width,val},{depth,val},{validity_time,val}]
         return buffer.toString();
     }
